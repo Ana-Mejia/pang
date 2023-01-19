@@ -1,0 +1,207 @@
+{% extends 'admin_sistema/base.html' %}
+
+{% load static %}
+
+{% block head %}    
+    <!-- Bootstrap -->
+    <link href="{% static 'vendors/bootstrap/dist/css/bootstrap-slider.min.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+    <!-- INTROJS -->
+    <link href="{% static 'vendors/introjs/css/introjs.min.css' %}" rel="stylesheet"/>
+    <!-- switch personalizado -->
+    <!-- <link rel="stylesheet" href="../vendors/pangeos/build/css/switch.css" type="text/css"> -->
+
+    <link href="{% static 'vendors/sweetalert/dist/sweetalert2.min.css' %}" rel="stylesheet"/>
+
+    <!--MAPS  -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <link href="{% static 'vendors/pangeos/css/pangeos.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/pangeos/css/pangeos-mapas.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" role="main" style="background-color: #FFF;">
+    <div class="row justify-content-center">
+        <div class="col-8 col-sm-12 col-md-8 col-xl-6 col-lg-6">
+            <div class="x_panel" style="height: 100vh;">
+                <div class="x_content">
+                    <br />
+                    <div id="wrapper_formulario">
+                    </div>
+                    <h2>Solicitar registro</h2>
+                    <form id="saveForm" class="form-horizontal form-label-left"
+                        action="{% url 'admin_sistema:addAdmin' %}" 
+                        adm_action="{% url 'admin_sistema:addAdmin' %}" 
+                        inv_action="{% url 'admin_sistema:addInvestigador' %}" 
+                        method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12 col-lg-12 col-xl-12 col-md-12 col-sm-12 form-group row">
+                                {{form.perfil}}
+                            </div>
+                        </div>
+                        <div id="form-wrapper">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback">
+                                    {{form.nombre}}
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback">
+                                    {{form.appaterno}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback">
+                                    {{form.apmaterno}}
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback">
+                                    {{form.edad}}
+                                    <span class="fa fa-birthday-cake form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback data-admin">
+                                    {{form.curp}}
+                                    <span class="fa fa-list-alt form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback">
+                                    <label class="control-label">Te identificas como: </label>
+                                    {{form.sexo}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group row">
+                                    {{form.escolaridad}}
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group row">
+                                    {{form.institucion}}
+                                </div>
+                            </div>
+                            <div id="div-email" class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group has-feedback data-investigador">
+                                    {{form.email}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group">
+                                    {{form.password}}
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback">
+                                    {{form.password_confirm}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                                    <label for="captcha">Ingresa los caracteres mostrados</label>
+                                    <img src="{% static 'captcha/c.png' %}" alt="CAPTCHA" class="captcha-image" id="img_captcha">
+                                    <i class="fa fa-redo refresh-captcha"> Refrescar captcha</i> 
+                                    <input type="text" id="captcha" name="captcha_challenge" pattern="[A-Z0-9]{4}" placeholder="Captcha">
+                                </div>
+                            </div>
+                            <div class="item form-group col-sm-12 col-md-12 form-group row">
+                                <div class="col-md-6 col-sm-6 offset-md-3">
+                                    <button class="btn btn-danger" id="cancelRegistro" type="button">Cancelar</button>
+                                    <button type="submit" class="btn btn-success" id="enviar">Solicitar registro</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- FIN DE COLUMNA -->
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+    <!-- jQuery -->
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'vendors/fastclick/lib/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'vendors/nprogress/nprogress.js' %}"></script>
+    <!-- Chart.js -->
+    <script src="{% static 'vendors/Chart.js/dist/Chart.min.js' %}"></script>
+    <!-- gauge.js -->
+    <script src="{% static 'vendors/gauge.js/dist/gauge.min.js' %}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+    <!-- iCheck -->
+    <script src="{% static 'vendors/iCheck/icheck.min.js' %}"></script>
+    <!-- Skycons -->
+    <script src="{% static 'vendors/skycons/skycons.js' %}"></script>
+    <!-- Flot -->
+    <script src="{% static 'vendors/Flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.resize.js' %}"></script>
+    <!-- Flot plugins -->
+    <script src="{% static 'vendors/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>
+    <script src="{% static 'vendors/flot-spline/js/jquery.flot.spline.min.js' %}"></script>
+    <script src="{% static 'vendors/flot.curvedlines/curvedLines.js' %}"></script>
+    <!-- DateJS -->
+    <script src="{% static 'vendors/DateJS/build/date.js' %}"></script>
+    <!-- JQVMap -->
+    <script src="{% static 'vendors/jqvmap/dist/jquery.vmap.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+    <!-- jQuery autocomplete -->
+    <script src="{% static 'vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js' %}"></script>
+
+    <!-- jQuery multiselect -->
+    <script type="text/javascript" src="{% static 'vendors/pangeos/build/js/jquery-multiple-select/bootstrap-multiselect.js' %}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'vendors/pangeos/build/js/custom.min.js' %}"></script>
+
+    <script src="{% static 'vendors/sweetalert/dist/sweetalert2.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos-registro.js' %}"></script>
+
+    <script>
+        $(document).ready(function(){
+            console.log(" - Active");
+            $("[href]").removeClass("active");
+            $("[href='/sistema/form_registro/']").addClass("active");
+            $('input[type=text]').addClass('form-control has-feedback-left form-control-sm');
+            $('input[type=password]').addClass('form-control has-feedback-left form-control-sm');
+            $('input[type=email]').addClass('form-control has-feedback-left form-control-sm');
+            $('input[type=number').addClass('form-control has-feedback-left form-control-sm');
+            $('select').addClass('form-control form-control-sm');
+            $('#id_edad').on('keypress', onlyNumberKey);
+
+            $("#cancelRegistro").click(function(){
+                window.location.href='/';
+            });
+        });
+        
+        var captcha_back = "{{ chars }}";
+        captcha_back = captcha_back.replace(/&#x27;|'|,| |\s|\[|\]/g,"");
+
+        $(".refresh-captcha").click(function(){
+            var settings = {
+                "url": "{% url 'admin_sistema:get_image' %}",
+                "method": "GET",
+                "timeout": 0,
+            };
+            
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                captcha_back = response;
+                document.getElementById("img_captcha").src = "{% static 'captcha/c.png' %}" + "?" + Date();
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends 'admin_sistema/base.html' %}
+
+{% load static %}
+
+{% block head %}    
+    <!-- Bootstrap -->
+    <link href="{% static 'vendors/bootstrap/dist/css/bootstrap-slider.min.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+    <!-- INTROJS -->
+    <link href="{% static 'vendors/introjs/css/introjs.min.css' %}" rel="stylesheet"/>
+    <!-- switch personalizado -->
+    <!-- <link rel="stylesheet" href="../vendors/pangeos/build/css/switch.css" type="text/css"> -->
+
+    <link href="{% static 'vendors/sweetalert/dist/sweetalert2.min.css' %}" rel="stylesheet"/>
+
+    <!--MAPS  -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <link href="{% static 'vendors/pangeos/css/pangeos.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/pangeos/css/pangeos-mapas.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" role="main" >
+    <section class="seccion_odd section-first" id="quienes_somos">
+        <div class="row">
+            <div class="wrapper_text">
+                <div><h3>UBICACIÓN</h3></div>
+                <div class="col-1 colxm-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                <div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                    <p>Instituto Nacional de Psiquiatría: Calzada México Xochimilco No. 101, Colonia San Lorenzo Huipulco, Delegación Tlalpan, C.P. 14370</p>
+
+                    <p><strong>La entrada al Instituto para el público en general es por la lateral de Periférico.<br/>
+                    Servicio de Transporte Colectivo METRO: </strong></p>
+
+                    <p>Línea 2 Cuatro Caminos-Tasqueña: En la Estación Tasqueña transbordar el Tren Ligero y bajarse en la Estación Huipulco.</p>
+
+                    <p><strong>Vía Periférico:</strong><br/>
+                        Colectivo Cuemanco - Canal de Chalco. / Tacubaya.<br/><br/>
+
+                        Colectivo: Metro CU - Santa Martha.<br/><br/>
+
+                        RTP: Metro Constitución de 1917 - Toreo.<br/><br/>
+                    </p>
+
+                    <p><strong>Vía Tlalpan:</strong><br/>
+
+                        Colectivo Metro Izazaga - Huipulco / Xochimilco.<br/><br/>
+
+                        Colectivo Metro Izazaga - La Noria, Santiago.<br/><br/>
+
+                        RTP Izazaga - Santiago.<br/><br/>
+
+                        Camión colectivo Tasqueña - Reclusorio Sur.
+                    </p>
+
+                    <p><strong>"Contamos con estacionamiento para el público general ÚNICAMENTE A PARTIR DE LA 14:30 hrs. de lunes a viernes. Las personas con discapacidad o de la tercera edad pueden tener acceso al estacionamiento durante el turno matutino de acuerdo a disponibilidad. Los sábados y domingos no hay restricción de horario."<br/><br/>
+
+                        Estacionamientos alternos cercanos al Instituto Nacional de Psiquiatría:</strong></p>
+                    <p>
+                        <ol type="a">
+                            <li>Plaza situada en la esquina de periférico Tlalpan, acceso por periférico dirección sur y Tlalpan dirección centro </li>
+
+                            <li>Lado izquierdo de la Calzada México-Xochimilco entre la calle Gonzalo Aragón y el Colegio Franco Español </li>
+
+                            <li>Estacionamiento del restaurant Vips Tlalpan situado sobre la calzada de Tlalpan proveniente del centro unos metros antes de llegar a periférico </li>
+
+                            <li>Estacionamiento de tienda soriana situado sobre la calzada de Tlalpan proveniente del centro pasando unos metros después de pasar periférico</li>
+                        </ol>
+                    </p>
+                </div>
+                <div class="col-1 colxm-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+
+
+{% block script %}
+    <!-- jQuery -->
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'vendors/fastclick/lib/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'vendors/nprogress/nprogress.js' %}"></script>
+    <!-- Chart.js -->
+    <script src="{% static 'vendors/Chart.js/dist/Chart.min.js' %}"></script>
+    <!-- gauge.js -->
+    <script src="{% static 'vendors/gauge.js/dist/gauge.min.js' %}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+    <!-- iCheck -->
+    <script src="{% static 'vendors/iCheck/icheck.min.js' %}"></script>
+    <!-- Skycons -->
+    <script src="{% static 'vendors/skycons/skycons.js' %}"></script>
+    <!-- Flot -->
+    <script src="{% static 'vendors/Flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.resize.js' %}"></script>
+    <!-- Flot plugins -->
+    <script src="{% static 'vendors/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>
+    <script src="{% static 'vendors/flot-spline/js/jquery.flot.spline.min.js' %}"></script>
+    <script src="{% static 'vendors/flot.curvedlines/curvedLines.js' %}"></script>
+    <!-- DateJS -->
+    <script src="{% static 'vendors/DateJS/build/date.js' %}"></script>
+    <!-- JQVMap -->
+    <script src="{% static 'vendors/jqvmap/dist/jquery.vmap.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+    <!-- jQuery autocomplete -->
+    <script src="{% static 'vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js' %}"></script>
+
+    <!-- jQuery multiselect -->
+    <script type="text/javascript" src="{% static 'vendors/pangeos/build/js/jquery-multiple-select/bootstrap-multiselect.js' %}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'vendors/pangeos/build/js/custom.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos.js' %}"></script>
+{% endblock %}

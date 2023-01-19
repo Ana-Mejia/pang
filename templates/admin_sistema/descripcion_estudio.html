@@ -1,0 +1,540 @@
+{% extends 'admin_sistema/base.html' %}
+
+{% load static %}
+
+{% block head %}    
+    <!-- Bootstrap -->
+    <link href="{% static 'vendors/bootstrap/dist/css/bootstrap-slider.min.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+    <!-- INTROJS -->
+    <link href="{% static 'vendors/introjs/css/introjs.min.css' %}" rel="stylesheet"/>
+    <!-- switch personalizado -->
+    <!-- <link rel="stylesheet" href="../vendors/pangeos/build/css/switch.css" type="text/css"> -->
+
+    <link href="{% static 'vendors/sweetalert/dist/sweetalert2.min.css' %}" rel="stylesheet"/>
+
+    <!--MAPS  -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <link href="{% static 'vendors/pangeos/css/pangeos.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/pangeos/css/pangeos-mapas.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" role="main" >
+          <section class="seccion_even" id="informacion_sistema">
+              <div class="row">
+                  <div class="wrapper_text">
+                    <div><h3>Descripción de la información utilizada en el proyecto</h3></div>
+                    <div class="col-1 colxm-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                        <p>
+                            RESUMEN
+                        </p>
+                        <p>
+                            <ol type="I">
+								<p>
+									El presente trabajo es una compilación, estandarización e integración de las bases de datos de defunciones, egresos y recursos hospitalarios de infraestructura y humanos registrados y publicados de manera anual por diversas fuentes aquí citadas. Se presenta un periodo de descarga del año 2000 al año 2021, tratándose de una serie completa de la información registrada en México.
+								</p>
+								<p>
+									Se realiza revisión de consistencia y trazabilidad de las variables en cada año para que sean homogéneas en la serie de tiempo.
+								</p>
+								<p>
+									El objetivo principal es lograr una integración, armonización, estandarización, integración y vinculación de grandes bases de datos en México para su análisis y visualización.
+								</p>
+								<p>
+									Cada año se mantendrá actualizada y se integrarán los años posteriores de manera que la serie de tiempo va a ir creciendo.
+								</p>
+								<p>
+									Se lleva a cabo un proceso denominado minería de datos, con el cual, mediante un conjunto de técnicas se exploran grandes bases de datos para identificar errores o patrones en los datos.
+								</p>
+								<p>
+									Se basa en los principios de FAIR (por sus siglas en inglés, hacen que los datos cumplan con ser fáciles de encontrar, accesibles, interoperables y reutilizables [Wikilson et al., 2016]), los cuales brindan una guía para que se puedan administrar datos científicos y que pueda garantizarse su uso.
+								</p>
+								<p>
+									Este repositorio, es parte de un proyecto de CONACYT denominado "Sistema para el análisis espacio-temporal y visualización cuantitativa de la situación general de los principales problemas de salud, los recursos y costos, a partir de la vinculación de grandes bases de datos del sector salud en México". Gracias al apoyo y participación de varias instituciones como la Dirección General de Información en Salud (DGIS) es que se está realizando esta enorme labor.
+								</p>
+								<p>
+									El alcance de este repositorio va más allá de proveer las bases de datos para los análisis que se requerirán en el proyecto antes mencionado. Además de esto, las pondrá al alcance de la comunidad científica, académica y de tomadores de decisiones.
+								</p>
+								<p>
+									La información y acceso a las series de tiempo se encontrará disponible en el repositorio, el cual también puede ser consultado a través de la página de la Unidad de Inteligencia en Salud Pública (UISP):
+								</p>
+								<p>
+									<a href="http://pangeos.mx">http://pangeos.mx</a>
+								</p>
+							</ol>
+                        </p>
+                    </div>
+					<div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                        <p>
+                            ALCANCE
+                        </p>
+                        <p>
+                            <ol type="I">
+                                CLASIFICACIÓN DE TEMAS
+                                <li>    
+									<p>
+                                        Defunciones registradas<br>
+										Características de la defunción<br>
+										Características del certificante<br>
+										Características de las muertes accidentales y violentas
+									</p>
+								</li>
+								<li>
+									<p>
+										Egresos hospitalarios registrados<br>
+										Características del egreso<br>
+										Características del certificante<br>
+									</p>
+								</li>
+								<li>								
+									<p>
+										Recursos hospitalarios registrados<br>
+										Características del recurso<br>
+                                    </p>
+									<p>
+										Recursos humanos registrados<br>
+										Características del recurso<br>
+                                    </p>
+                                </li>
+                            </ol>
+                        </p>
+                    </div>
+					<div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                        <p>
+                            COBERTURA
+                        </p>
+                        <p>
+                            <ol type="I">
+                                <li>
+                                    COBERTURA GEOGRÁFICA
+                                    <p>
+										Nacional, entidad federativa, municipio, localidad y tamaño de localidad.
+									</p>
+                                </li>
+                                <li>
+                                    UNIDAD GEOGRÁFICA
+                                    <p>
+										A través del tiempo ha habido cambios en las áreas geopolíticas del país y estos cambios se ven reflejados en los registros administrativos que se hacen de acuerdo con las áreas geopolíticas actuales.
+									</p>
+                                </li>
+                                <li>
+                                    UNIDAD DE ANÁLISIS
+                                    <p>
+										Unidad de análisis y observación:<br>
+										Defunciones ocurridas y certificadas a nivel individual con cobertura nacional.
+									</p>
+                                </li>
+                            </ol>
+                        </p>
+                    </div>
+					<div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                        <p>
+                            PRODUCTORES
+                        </p>
+                        <p>
+                            <ol type="I">
+                                <li>
+                                    <p>
+										DIF
+									</p>
+								</li>
+                                <li>
+									<p>
+										IMSS
+									</p>
+								</li>
+                                <li>
+									<p>
+										ISSSTE
+									</p>
+								</li>
+                                <li>
+									<p>
+										SSA
+									</p>
+								</li>
+                                <li>
+									<p>
+										INEGI
+									</p>
+                                </li>
+                            </ol>
+                        </p>
+                    </div>
+					<div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+						<p>
+                            FINANCIAMIENTO
+                        </p>
+                        <p>	
+							<ol type="I">
+                                <li>                                    
+                                    <p>
+										Consejo Nacional de Ciencia y Tecnología.
+									</p>
+                                </li>
+                            </ol>
+                        </p>
+                    </div>
+					<div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+						<p>
+                            RECONOCIMIENTOS
+                        </p>
+                        <p>
+							<ol type="I">
+                                <li>
+                                    <p>
+										DIF
+									</p>
+								</li>
+                                <li>
+									<p>
+										IMSS
+									</p>
+								</li>
+                                <li>
+									<p>
+										ISSSTE
+									</p>
+								</li>
+                                <li>
+									<p>
+										SSA
+									</p>
+								</li>
+                                <li>
+									<p>
+										INEGI
+									</p>
+                                </li>
+                            </ol>
+                        </p>
+                    </div>
+					<div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                        <p>
+                            RECOLECCIÓN DE DATOS
+                        </p>
+                        <p>
+                            <ol type="I">
+								<li>
+									FECHAS DE RECOPILACIÓN DE DATOS (DD/MM/AAAA)
+                                </li>
+								<p>
+									<table class="table table-striped table-bordered dataTable no-footer">
+										<thead style="font-weight:bold;">
+											<tr>
+												<td>Fecha inicial</td>
+												<td>Fecha final</td>
+												<td>Fuente</td>
+											</tr>
+										</thead>
+										<tr>
+											<td>01/01/2000</td>
+											<td>01/01/2020</td>
+											<td>SSA</td>
+										</tr>
+										<tr>
+											<td>01/01/2000</td>
+											<td>01/01/2021</td>
+											<td>INEGI</td>
+										</tr>
+									</table>
+								</p>
+								<li>
+									MODO DE RECOPILACIÓN DE DATOS
+                                </li>
+                                <p>
+									Vía internet
+								</p>
+								<li>
+									SUPERVISIÓN
+                                </li>
+                                <p>
+									El equipo de investigadores del proyecto es el encargado de supervisar que las bases de datos anuales esten bien compiladas, estandarizadas e integradas en la serie completa.
+								</p>
+                            </ol>
+                        </p>
+                    </div>
+					<div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                        <p>
+                            PROCESAMIENTO DE DATOS
+                        </p>
+                        <p>
+                            <ol type="I">
+                                <li>
+                                    OPERACIONES DE LIMPIEZA
+                                    <p>
+										El equipo de investigadores del proyecto descarga las bases de datos de defunciones, egresos hospitalarios y recursos CLUES por año.<br>
+										Se estandariza cada una de ellas y se evalúa si hay trazabilidad de variables, para dejar las bases de datos homogéneas.<br>
+										Se procede a integrar las bases en la serie.
+									</p>
+									<p>
+										Para el procesamiento de las bases de datos, se utilizaron técnicas de minería de datos. Se llevó a cabo en varias etapas que a continuación se describen:
+										<ol type="1">
+                                          <li>
+												1. Selección de bases de datos<br>
+												Se seleccionaron las bases de datos que se integrarían al proyecto Defunciones (INEGI), Nacimientos (INEGI), Nacimientos (SINAC), Egresos hospitalarios (SAEH-SSA), Egresos hospitalarios sectorial, Exceso de mortalidad (INSP), Servicios otorgados(SIS), etc.<br>
+												Se utilizaron técnicas de minería de datos para la limpieza y estandarización, también se llevaron a cabo procesos de calidad de acuerdo con las dimensiones de completitud, consistencia, exactitud, duplicidad e integridad para la serie de años de cada una de las bases de datos.<br>
+												Se identificó en que comunidad entrarían cada una de las bases de datos de acuerdo con su clasificación.
+                                          </li>
+                                          <li>
+												2. Recopilación y preparación de los datos<br>
+												Una vez identificadas las bases de datos, se hizo el acopio de los datos existentes a la fecha. En este paso es importante mencionar que cada año se van incorporando nuevas bases de datos de acuerdo a su año de publicación.<br>
+												También se hizo la recopilación y búsqueda de documentación: soporte conceptual y metodológico, proyectos estadísticos, instrumentos de captación formularios, formatos, cuestionarios o guías para la operación del sistema de captura y descripción de archivos de la base de datos o diccionarios de datos de las variables que las conforman.<br>
+												Para este proceso se hizo un análisis de integración de datos (data integration), que consiste en la recopilación de datos desde las diferentes fuentes. Esto se hace a través de un proceso ETL (Extracción(Extract), Transformación(Transform) y Carga(Load)). En este punto se decide si ciertos datos pueden ser descartados.<br>
+												Para la preparación de los datos se hace una limpieza, se quitan redundancias y se buscan patrones. Luego se transforman (estandarizan) en el formato óptimo para el modelado.<br>
+												Cuando existen diferencias en las variables de cada año, se integran a las bases de datos nuevas variables estandarizadas, las cuales se adecuan a las series de tiempo de cada año. En este proceso se estandarizan los catálogos de las variables con el objetivo de re categorizar sus valores y permitir realizar un análisis a través del tiempo y facilitar al usuario la utilización de los datos.
+                                          </li>
+                                          <li>
+												3. Modelado de datos<br>
+												En esta etapa, los datos son sometidos a algoritmos y se crean estadísticas. Si al realizar los cálculos algorítmicos el sistema refleja un problema con los datos, eso significa que no se transformaron bien y tendrá que volverse a realizar la fase de preparación.
+						                  </li>
+										  <li>
+												4. Evaluación<br>
+												Una vez que se han realizado todas las fases anteriores, se evalúa si los resultados obtenidos son coherentes. Se obtienen análisis de los datos y los resultados se comparan con datos oficiales. En esta fase se identifican problemas e incoherencias.<br>
+												Se identifican datos faltantes, problemas de calidad, correlación entre variables, análisis de variables, detección de outliers, series temporales, detección de duplicados, falta de información, inconsistencias, etc.
+                                          </li>
+                                        </ol>
+									</p>
+                                </li>
+                                <li>
+                                    ORGANIZACIÓN Y PREPARACIÓN
+                                    <p>
+										El desarrollo del repositorio se llevó a cabo en varias fases:<br>
+										1. Investigación sobre los Principios FAIR<br<
+										2. Investigación sobre los estándares Dublín Core y IDD para cumplir con los Principios FAIR<br>
+										3. Investigación sobre el servicio Handle.<br>
+										4. Inventario de bases de datos que pudieran subirse junto con sus metadatos.<br>
+									</p>
+									<p>
+										Bases de datos
+										<ol type="1">
+                                          <li>
+												Selección de bases de datos que se integrarían al proyecto Egresos sectorial, SAEH, SINAC, SIS, lesiones urgencias, nacimientos (INEGI) y Defunciones (INEGI).<br>
+												Búsqueda de descriptores o diccionarios de datos.<br>
+												Utilización de técnicas de minería de datos para la limpieza y estandarización, también se llevaron a cabo procesos de calidad de acuerdo a las dimensiones de completitud, consistencia, exactitud, duplicidad e integridad para la serie de años de cada una de las bases de datos.<br>
+												Identificación de la comunidad a la que podría pertenecer cada una de las bases de datos de acuerdo a su clasificación.
+                                          </li>
+                                        </ol>
+									</p>
+									<p>
+										Software
+										<ol type="1">
+                                          <li>
+												Búsqueda de software que cumpla con los principios FAIR.<br>
+												Se creó un proyecto que será referente a cada base de datos. Primero se trabajó en la descripción del metadato, donde fue necesario especificar responsable, fecha, versión e identificación de la operación estadística. Posteriormente, la descripción del proyecto estadístico en donde, además de la descripción se tiene que trabajar en las bases de datos, grupos de variables y materiales de referencia externos.
+												Para la descripción del proyecto estadístico se revisaron los documentos metodológicos referentes a cada base de datos para extraer la información requerida en algunos de los campos.
+												De esta forma se anexó cada operación estadística.
+                                          </li>
+                                        </ol>
+									</p>
+									<p>
+										Servidor Web
+										<ol type="1">
+                                          <li>
+												Debido a la gran cantidad de bases de datos que se manejarían, se configuró un servidor para su uso.
+												Se implementó el repositorio digital para bases de datos.
+                                          </li>
+                                        </ol>
+									</p>
+                                </li>
+                            </ol>
+                        </p>
+                    </div>
+					<div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                        <p>
+                            EVALUACIÓN DE CALIDAD
+                        </p>
+                        <p>
+                            <ol>
+                                ESTIMACIONES DEL ERROR DE MUESTREO
+                                <p>
+                                       La calidad de los datos es muy importante para tener registro de las estadísticas de defunciones, egresos y recursos y nos da a conocer como es la cobertura del registro en el país y si existe capacitación del personal para el correcto llenado de los registros de defunción.
+								</p>
+								<p>
+									El equipo de investigadores del proyecto realizó una auditoría de calidad de los datos en cada base de datos anual utilizada, buscando que se cumplan sus dimensiones:
+									Exactitud - Verifica que los datos sean válidos con las fuentes oficiales y de minimizar errores.
+									Consistencia - Verifica que los datos sean precisos y con el detalle suficiente para cumplir con la consistencia interna en el registro.
+									Cobertura - Verifica que los datos representen la totalidad de las personas.
+									Puntualidad - Verifica que los datos estén actualizados y disponibles.
+									Integridad - Verifica que no existan sesgos en los datos.
+									Trazabilidad - Verifica que tenga las mismas variables que el año anterior.
+								</p>
+								<p>
+									Una vez efectuado esto en la base de datos, se integra a la serie.
+                                </p>
+                            </ol>
+                        </p>
+                    </div>
+					<div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                        <p>
+                            ACCESO A LOS DATOS
+                        </p>
+                        <p>
+                            <ol type="I">
+                                <li>
+                                    CONTACTO
+                                    <p>
+                                        Intituto Nacional de Psiquiatría Ramón de la Fuente Muñiz
+									</p>
+                                </li>
+                                <li>
+                                    DECLARACIÓN DE CONFIDENCIALIDAD
+                                    <p>
+                                        Se trata de bases de datos de fuentes secundarias de acceso abierto, por lo que no contiene datos personales ni sensibles.
+									</p>
+                                </li>
+                                <li>
+                                    CONDICIONES
+                                    <p>
+                                        Acceso directo mediante descarga gratuita de archivos de microdatos.<br>
+										Se solicita citar esta fuente de datos de la siguiente forma:<br>
+										Cordero Oropeza, Martha; Medina Mora, María Elena, Rafful Loera, Claudia; Mendoza Pablo, Alberto; Mendoza Negrete, Melissa; Barrera Delgado, Rogelio; Olvera Aguirre, Carlos; Mejía Pichardo, Ana Laura; Fink Delgado, Antonio. Estimaciones con datos de INEGI. Defunciones registradas 2000 a 2020; SG de CONAPO. Proyecciones Municipales 2000-2015, y Proyecciones de la Población de los Municipios de México y de las Entidades Federativas, 2016-2050.
+										Plataforma de Análisis Geoestadístico en Salud Mental.<br>
+										Elaborado con el Proyecto 48901 Sistema de monitoreo de la atención a los trastornos mentales y del comportamiento debidos al consumo de sustancias. Financiado por PRONACE - CONACYT. 2021. CDMX, México. Disponible en: https://pangeos.mx
+									</p>
+                                </li>
+                                <li>
+                                    REQUISITO DE CITA
+                                    <p>
+                                        Fuente: Cordero Oropeza, Martha; Medina Mora, María Elena, Rafful Loera, Claudia; Mendoza Pablo, Alberto; Mendoza Negrete, Melissa; Barrera Delgado, Rogelio; Olvera Aguirre, Carlos; Mejía Pichardo, Ana Laura; Fink Delgado, Antonio. Estimaciones con datos de INEGI. Defunciones registradas 2000 a 2020; SG de CONAPO. Proyecciones Municipales 2000-2015, y Proyecciones de la Población de los Municipios de México y de las Entidades Federativas, 2016-2050.
+										Plataforma de Análisis Geoestadístico en Salud Mental.<br>
+										Elaborado con el Proyecto 48901 Sistema de monitoreo de la atención a los trastornos mentales y del comportamiento debidos al consumo de sustancias. Financiado por PRONACE - CONACYT. 2021. CDMX, México. Disponible en: https://pangeos.mx
+									</p>
+                                </li>
+                            </ol>
+                        </p>
+                    </div>
+					<div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                        <p>
+                            DESCARGO DE RESPONSABILIDAD Y DERECHOS DE AUTOR
+                        </p>
+                        <p>
+                            <ol type="I">
+                                <li>
+                                    DESCARGO DE RESPONSABILIDAD
+                                    <p>
+                                        El uso de la información contenido en este documento implica la aceptación de las condiciones de uso siguientes:
+									</p>
+									<p>
+										<ol type="1">
+											<li>
+												1. Los datos que aquí se contienen provienen de fuentes secundarias.
+											</li>
+                                        </ol>
+									</p>
+									<p>
+										<ol type="1">
+											<li>
+												2. Se autoriza el uso de la información que se presenta, siempre que se cite la fuente: 
+												"Fuente: Cordero Oropeza, Martha; Medina Mora, María Elena, Rafful Loera, Claudia; Mendoza Pablo, Alberto; Mendoza Negrete, Melissa; Barrera Delgado, Rogelio; Olvera Aguirre, Carlos; Mejía Pichardo, Ana Laura; Fink Delgado, Antonio. Estimaciones con datos de INEGI. Defunciones registradas 2000 a 2020; SG de CONAPO. Proyecciones Municipales 2000-2015, y Proyecciones de la Población de los Municipios de México y de las Entidades Federativas, 2016-2050. Plataforma de Análisis Geoestadístico en Salud Mental. Elaborado con el Proyecto 48901 Sistema de monitoreo de la atención a los trastornos mentales y del comportamiento debidos al consumo de sustancias. Financiado por PRONACE - CONACYT. 2021. CDMX, México. Disponible en: https://pangeos.mx", a fin de permitir a terceros verificar tal información.
+											</li>
+                                        </ol>
+									</p>
+									<p>
+										<ol type="1">
+											<li>
+												3. El INPRFM no será responsable por la interpretación y aplicación que el usuario haga de los resultados obtenidos a través del uso de la información; por lo que cualquier decisión basada en su interpretación excluye al INPRFM de responsabilidad alguna.
+											</li>
+                                        </ol>
+									</p>
+		                        </li>
+                                <li>
+                                    COPYRIGHT
+                                    <p>
+                                        Derechos reservados INPRFM 2022
+									</p>
+		                        </li>
+                            </ol>
+                        </p>
+                    </div>
+					<div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                        <p>
+                            CONTACTOS
+                        </p>
+                        <p>
+							<table class="table table-striped table-bordered dataTable no-footer">
+								<thead style="font-weight:bold;">
+									<tr>
+										<td>Nombre</td>
+										<td>Afiliación</td>
+										<td>Email</td>
+									</tr>
+								</thead>
+								<tr>
+									<td>Martha Cordero Oropeza</td>
+									<td>Instituto Nacional de Psiquiatría</td>
+									<td>martha.cordero@imp.edu.mx</td>
+								</tr>
+								<tr>
+									<td>Rogelio Barrera Delgado</td>
+									<td>N/A</td>
+									<td>mr_r11@hotmail.com</td>
+								</tr>
+							</table>
+                        </p>
+                    </div>
+					
+                    <div class="col-1 colxm-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                  </div>
+              </div>
+          </section>
+</div>
+{% endblock %}
+
+
+
+{% block script %}
+    <!-- jQuery -->
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'vendors/fastclick/lib/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'vendors/nprogress/nprogress.js' %}"></script>
+    <!-- Chart.js -->
+    <script src="{% static 'vendors/Chart.js/dist/Chart.min.js' %}"></script>
+    <!-- gauge.js -->
+    <script src="{% static 'vendors/gauge.js/dist/gauge.min.js' %}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+    <!-- iCheck -->
+    <script src="{% static 'vendors/iCheck/icheck.min.js' %}"></script>
+    <!-- Skycons -->
+    <script src="{% static 'vendors/skycons/skycons.js' %}"></script>
+    <!-- Flot -->
+    <script src="{% static 'vendors/Flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.resize.js' %}"></script>
+    <!-- Flot plugins -->
+    <script src="{% static 'vendors/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>
+    <script src="{% static 'vendors/flot-spline/js/jquery.flot.spline.min.js' %}"></script>
+    <script src="{% static 'vendors/flot.curvedlines/curvedLines.js' %}"></script>
+    <!-- DateJS -->
+    <script src="{% static 'vendors/DateJS/build/date.js' %}"></script>
+    <!-- JQVMap -->
+    <script src="{% static 'vendors/jqvmap/dist/jquery.vmap.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+    <!-- jQuery autocomplete -->
+    <script src="{% static 'vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js' %}"></script>
+
+    <!-- jQuery multiselect -->
+    <script type="text/javascript" src="{% static 'vendors/pangeos/build/js/jquery-multiple-select/bootstrap-multiselect.js' %}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'vendors/pangeos/build/js/custom.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos.js' %}"></script>
+{% endblock %}

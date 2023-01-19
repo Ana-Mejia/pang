@@ -1,0 +1,598 @@
+{% extends 'admin_sistema/base.html' %}
+
+{% load static %}
+
+{% block head %}
+    <style type="text/css">
+      html {
+        overflow: hidden;
+      }
+      body {
+          overflow-y: auto;
+          overflow-x: hidden;
+      }
+      input.form-control, select.form-control {
+          min-width: 232px;
+          max-width: 99%;
+      }
+      .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+          padding: 0px !important;
+      }
+      #form-wrapper {
+          display: none;
+      }
+      .logolink {
+          width: 100%;
+          height: inherit;
+      }
+
+/***************************************************************************************************************
+INICIO ESTILOS DE MENÚ HORIZONTAL
+***************************************************************************************************************/
+/* Add a black background color to the top navigation */
+.topnav {
+  /*background-color: #333;*/
+  /*overflow: hidden;*/
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add an active class to highlight the current page */
+.topnav a.active {
+  background-color: #d82949;
+  color: white;
+  text-decoration: underline;
+  font-weight: bolder;
+}
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+  display: none;
+}
+.lnk-ingresar {
+    float: right;
+    margin-right: 3%;
+}
+.menulist {
+    display:block;
+    padding-left:3px;
+    padding-right:3px;
+    height: fit-content;
+}
+.menulist > ul {
+    position: absolute;
+    display: block;
+    background-color: #ae0b37;
+    z-index: 9999;
+    top: 50px;
+    list-style: none;
+    margin: 0px 0px 0px 0px !important;
+    width: 250px;
+    border-radius: 0px 0px 15px 15px;
+}
+#myTopnav > ul {
+    position: absolute;
+    display: flex;
+    list-style: none;
+}
+.submenulist > a {
+    text-align: left !important;
+    color: #f2f2f2;
+}
+.submenulist > a:hover {
+    background-color: #ae0b37;
+    color: #f2f2f2;
+    text-decoration: underline;
+}
+.submenucontainer {
+  display: none !important;
+}
+.submenuItems:hover > .submenucontainer {
+    display: block !important;
+}
+/***************************************************************************************************************
+FIN DE ESTILOS DE MENÚ HORIZONTAL
+***************************************************************************************************************/
+      .titulosistema {
+            width: 100%;
+            text-align: center;
+      }
+      .titulosistema > h3 {
+            font-size: 1.6em !important;
+            color: #7f3c49 !important;
+      }
+      #controles {
+          width: 325px;
+          height: 100vh;
+          z-index: 9999;
+          position: fixed;
+          float: right;
+          right: -325px;
+          top: 0px;
+          bottom: 0px;
+          background-color: #FFF;
+      }
+      #wrapper_controles {
+          width: 100%;
+          float: right;
+          height: 94%;
+          position: relative;
+          height: 100vh;
+      }
+      #handlerwrapper {
+         height: 10%;
+         cursor: pointer;
+      }
+      #menufilterswrapper {
+          height: 100vh;
+          overflow-y: auto;
+          overflow-x: hidden;
+          width: 100%;
+          display: block;
+          position: absolute;
+          padding: 10px 30px;
+      }
+      #handler {
+          width: 200px;
+          height: 30px;
+          border-radius: 0px 0px 10px 10px;
+          background-color: #FFF;
+          float: right;
+          right: 240px;
+          position: relative;
+          cursor: pointer;
+          z-index: 99;
+          top: 85px;
+          text-align: center;
+          color: #00f;
+          font-weight: bolder;
+          line-height: 30px;
+          margin: auto;
+          -webkit-transform: rotate(90deg); 
+          -moz-transform: rotate(90deg);
+          font-family: 'Arial';
+      }
+      #formcontainer {
+        background-color: #FFF;
+        height: 100vh;
+      }
+      .boxshadoww {
+          -webkit-box-shadow: 5px 5px 10px 1px #6B6B6B;
+          box-shadow: 5px 5px 10px 1px #6B6B6B;
+      }
+      .boxshadowh {
+          -webkit-box-shadow: 5px 5px 4px 1px #6B6B6B;
+          box-shadow: 5px 5px 4px 1px #6B6B6B;
+      }
+      #edoscontainer, #mupioscontainer {
+        width: auto;
+        min-height: 65px;
+        height: 65px;
+        border: 1px solid grey;
+        border-radius: 3px;
+        margin: 5px 0px;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      .closetag {
+        color: #FFF;
+        cursor: pointer;
+        font-weight: bolder;
+        display: table-cell;
+        width: 12px;
+      }
+      .closetagM {
+        color: #777;
+        cursor: pointer;
+        font-weight: bolder;
+        display: table-cell;
+        width: 12px;
+      }
+      .closetagG:hover {
+        color: #F00;
+        text-decoration: underline;
+      }
+      .texttag {
+          cursor: pointer;
+      }
+      .texttagM {
+
+      }
+      .texttagselected {
+          font-weight: bolder;
+          text-decoration: underline;
+      }
+      .btag {
+        display: -webkit-inline-box;
+        padding: 6px; 
+        border-radius: 5px; 
+        margin: 2px;
+      }
+      .sugerenciaMunicipios {
+          display: none;
+          color: #434077;
+          cursor: pointer;
+      }
+      .sugerenciaMunicipios:hover {
+          color: #FF8C00;
+          text-decoration: underline;
+          font-weight: bolder;
+      }
+      #edosviewport, #mupiosviewport {
+        width: auto;
+      }
+      #municipiosopciones {
+          position: absolute;
+          max-height: 300px;
+          min-height: 0px;
+          z-index: 9999;
+          /*top: 178px;
+          left: 901.312px;*/
+          width: 429px;
+          display: block;
+          padding: 2px 5px;
+          font-size: 1.2em;
+          white-space: nowrap;
+          overflow: hidden;
+          background-color: #EEF;
+          display: none;
+      }
+
+      #mapcontainer {
+          width: 100%;
+          height: 100vh;
+          overflow: hidden;
+          /*position: absolute;*/
+          top: 0px;
+          bottom: 0px;
+          left: 0px;
+          right: 0px;
+          /*display: contents;*/
+      }
+      .responsiveimage {
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          display: block; 
+          margin: auto;
+      }
+      .nav_toggle {
+          float: left;
+          margin: 0;
+          width: 70px;
+          display: none;
+          /*display: flex;*/
+          -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+          padding-left: 0;
+          margin-bottom: 0;
+          list-style: none;
+      }
+      .nav_toggle a {
+          padding: 15px 15px 0;
+          margin: 0;
+          cursor: pointer;
+      }
+      .nav_toggle a i {
+          font-size: 26px;
+      }
+      .bk_logo {
+          background-image: url("{% static 'vendors/pangeos/production/images/logo-INPRFM-ch.png' %}");
+          background-size: contain;
+          background-repeat: no-repeat;
+          width: 100%;
+          height: 98px;
+          background-color: #FFF;
+          background-position: center center;
+          background-attachment: inherit;
+      }
+      #verticalmenu {
+          display: none;
+          background-color: white;
+          width: 230px;
+          z-index: 9999;
+          position: relative;
+          float: left;
+          left: -230px;
+          height: 210px;
+          border-radius: 0px 0px 15px 0px;
+      }
+      #menuviewport {
+          width: 100%;
+          padding: 10px 30px;
+          overflow-x: hidden;
+          overflow-y: auto;
+          height: 180px;
+      }
+      .minisubmenu{
+          display: none;
+      }
+      .grey_link {
+          color: silver;
+          font-size: 1em;
+          cursor: pointer;
+          text-align: right;
+      }
+      #wrapper_formulario {
+      		width: 60%;
+      		margin: auto;
+      }
+      .form-control:focus{
+      		border: 2px solid #F00 !important;
+      }
+        .refresh-captcha {
+            color: #008;
+            cursor: pointer;
+            font-size: 0.5em;
+            cursor: pointer;
+            font-size: 0.7em;
+            line-height: 1.3em;
+            text-transform: capitalize;
+        }
+	#list_instituciones {
+		list-style-type:none;
+	}
+	.txt_area {
+		width: 70%;
+	}
+	.opt_area {
+		width: 30%;
+	}
+	.row_area {
+		float: left;
+	}
+      .sublink {
+          cursor: pointer;
+      }
+      .minisubmenuitem {
+          padding-left: 10px;
+      }
+      .required-failed {
+          background-color: #FFC8C8;
+          border: 5px solid red;
+          animation:aBlink 1000ms infinite;
+          -webkit-animation:aBlink 1000ms infinite;
+      }
+      @keyframes aBlink {
+          from { background-color:#FFC8C8; }
+          50%{background-color:#FFFFFF;}
+          to { background-color:#FFC8C8; }
+      }
+
+      @-webkit-keyframes aBlink {
+          from { background-color:#FFC8C8; }
+          50%{background-color:#FFFFFF;}
+          to { background-color:#FFC8C8; }
+      }
+      @media (max-width: 768px){
+          #myTopnav {
+              display: none;
+          }
+          #myToggle {
+              display: block;
+              margin: 0px 0px 0px 0px;
+              float: left;
+              width: 70px;
+              height: 60px;
+              padding: 72px 0px 0px 10px;
+          }
+          #logo1 {
+              display: none;
+          }
+          #verticalmenu {
+              display: block;
+          }
+          .titulosistema > h3 {
+                font-size: 0.9em;
+                color: #7f3c49 !important;
+          }
+      }
+      @media (min-width: 1884px) {
+          .bk_logo {
+              height: 100%;
+          }
+      }
+      @media (min-width: 1024px){
+          .titulosistema > h3 {
+                font-size: 1.2em;
+                color: #7f3c49 !important;
+          }
+      }
+    </style>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" role="main" >
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12">
+            <div class="x_panel" style="height: 100vh;">
+                <div class="x_content">
+                    <br />
+                    <div id="wrapper_formulario">
+                        <form class="form-horizontal form-label-left">
+                            <div class="row">
+                                <div class="col-12 col-lg-12 col-xl-12 col-md-12 col-sm-12 form-group row">
+                                    <select class="form-select form-select-sm" id="tipousuario" required="required">
+                                        <option value="">Seleccionar tipo de usuario</option>
+                                        <option value="a">Administrador</option>
+                                        <option value="i">Investigador</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="form-wrapper">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left form-control-sm required" id="registro_nombre" name="registro_nombre" placeholder="Nombre (s)" required="required" data-name="Nombre">
+                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left form-control-sm required" id="registro_apellido-paterno" name="registro_apellido-paterno" placeholder="Apellido Paterno" required="required"  data-name="Apellido Paterno">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left form-control-sm" id="registro_apellido-materno" name="registro_apellido-materno" placeholder="Apellido Materno"  data-name="Apellido Materno">
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback">
+                                        <input type="number" onkeypress="return onlyNumberKey(event)" class="form-control has-feedback-left form-control-sm required" id="registro_edad" name="registro_edad" placeholder="Edad" required="required"  data-name="Edad">
+                                        <span class="fa fa-birthday-cake form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback data-admin">
+                                        <input type="text" class="form-control has-feedback-left form-control-sm required" id="registro_curp" name="registro_curp" placeholder="CURP"  data-name="CURP" style="text-transform: uppercase;">
+                                        <span class="fa fa-list-alt form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback">
+                                        <label class="control-label">Te identificas como: </label>
+                                        <input type="radio" value="M"  data-name="Sexo" class="form-control flat form-control-sm" name="registro_sexo">Masculino
+                                        <input type="radio" value="F"  data-name="Sexo" class="form-control flat form-control-sm" name="registro_sexo">Femenino
+                                        <input type="radio" value="N"  data-name="Sexo" class="form-control flat form-control-sm" name="registro_sexo">Prefiero no decir
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group row">
+                                        <select class="form-select form-select-sm required" data-name="Escolaridad" name="registro_nivel-de-estudios" required="required">
+                                            <option value="">Escolaridad</option>
+                                            <option value="licenciatura">Licenciatura</option>
+                                            <option value="maestria">Maestría</option>
+                                            <option value="doctorado">Doctorado</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group row">
+                                        <select class="form-select form-select-sm required"  data-name="Institución de estudios" name="registro_institucion-de-estudios" required="required">
+                                            <option value="">Institución de adscripción</option>
+                                            <option value="IPN">IPN</option>
+                                            <option value="UNAM">UNAM</option>
+                                            <option value="UAM">UAM</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group row data-investigador">
+                                        <select class="form-select form-select-sm required"  data-name="Área de estudios" name="registro_areas-de-estudios" required="required">
+                                            <option value="">Área</option>
+                                            <option value="Área A">Área A</option>
+                                            <option value="Área B">Área B</option>
+                                            <option value="Área C">Área C</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group has-feedback data-investigador">
+                                        <input type="email" class="form-control has-feedback-left form-control-sm camp-investigad required" id="registro_email" name="registro_email" placeholder="Email" required="required"  data-name="eMail">
+                                        <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback">
+                                        <input type="password" class="form-control required"  data-name="Password" name="registro_password" id="password1" placeholder="Password">
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group has-feedback">
+                                        <input type="password" class="form-control required"  data-name="Confirmación de password" name="registro_confirmacion-de-password" id="confirmPassord" placeholder="Confirmar Password">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                        <div class="form-group">
+                                            <label for="captcha">Ingresa los caracteres mostrados</label>
+                                            <img src="{% url 'admin_sistema:image_captcha' %}" alt="CAPTCHA" class="captcha-image"><i class="fa fa-redo refresh-captcha"> Refrescar captcha</i> 
+                                            <input type="text" id="captcha" name="captcha_challenge" pattern="[A-Z]{6}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item form-group col-sm-12 col-md-12 form-group row">
+                                    <div class="col-md-6 col-sm-6 offset-md-3">
+                                        <button class="btn btn-danger" type="button">Cancelar</button>
+                                        <button type="button" class="btn btn-success" id="btn-solicitadregistro">Solicitar registro</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- FIN DE COLUMNA -->
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+    <!-- jQuery -->
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'vendors/fastclick/lib/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'vendors/nprogress/nprogress.js' %}"></script>
+    <!-- Chart.js -->
+    <script src="{% static 'vendors/Chart.js/dist/Chart.min.js' %}"></script>
+    <!-- gauge.js -->
+    <script src="{% static 'vendors/gauge.js/dist/gauge.min.js' %}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+    <!-- iCheck -->
+    <script src="{% static 'vendors/iCheck/icheck.min.js' %}"></script>
+    <!-- Skycons -->
+    <script src="{% static 'vendors/skycons/skycons.js' %}"></script>
+    <!-- Flot -->
+    <script src="{% static 'vendors/Flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.resize.js' %}"></script>
+    <!-- Flot plugins -->
+    <script src="{% static 'vendors/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>
+    <script src="{% static 'vendors/flot-spline/js/jquery.flot.spline.min.js' %}"></script>
+    <script src="{% static 'vendors/flot.curvedlines/curvedLines.js' %}"></script>
+    <!-- DateJS -->
+    <script src="{% static 'vendors/DateJS/build/date.js' %}"></script>
+    <!-- JQVMap -->
+    <script src="{% static 'vendors/jqvmap/dist/jquery.vmap.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+    <!-- jQuery autocomplete -->
+    <script src="{% static 'vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js' %}"></script>
+
+    <!-- jQuery multiselect -->
+    <script type="text/javascript" src="{% static 'vendors/pangeos/build/js/jquery-multiple-select/bootstrap-multiselect.js' %}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'vendors/pangeos/build/js/custom.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos-registro.js' %}"></script>
+
+    <script>
+        var refreshButton = document.querySelector(".refresh-captcha");
+        refreshButton.onclick = function() {
+            /* document.querySelector(".captcha-image").src = 'captcha.php?' + Date.now(); */
+            document.querySelector(".captcha-image").src = "{% url 'admin_sistema:captcha' %}"
+        }
+    </script>
+{% endblock %}

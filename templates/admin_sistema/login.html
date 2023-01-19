@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        {% load static %}
+        <link rel="icon" href="{% static 'vendors/pangeos/production/images/favicon.ico' %}" type="image/ico" />
+
+        <title>PANGEOS-MX</title>
+
+        <!-- Bootstrap -->
+        <link href="{% static 'vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+        <!-- NProgress -->
+        <link href="{% static 'vendors/nprogress/nprogress.css' %}" rel="stylesheet">
+        <!-- Animate.css -->
+        <link href="{% static 'vendors/animate.css/animate.min.css' %}" rel="stylesheet">
+
+        <!-- Custom Theme Style -->
+        <link href="{% static 'vendors/pangeos/build/css/custom.css' %}" rel="stylesheet">
+
+        <link href="{% static 'vendors/pangeos/css/pangeos-login.css' %}" rel="stylesheet">
+
+    </head>
+
+    <body class="login">
+        <div>
+            <a class="hiddenanchor" id="signup"></a>
+            <a class="hiddenanchor" id="signin"></a>
+
+            <div class="login_wrapper">
+                <div class="animate form login_form">
+                    <section class="login_content">
+                        <form id="loginform" action="{% url 'admin_sistema:login2' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="">
+                                <h1 class="item"><div id="logo-login"></div></h1>
+                            </div>
+                            <div>
+                                <input type="text" id="username" name="username" class="form-control" placeholder="Usuario" required="" />
+                            </div>
+                            <div>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required="" />
+                            </div>
+                            <div class="">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12">
+                                        <button type="submit" class="list-group-item list-group-item-action" id="btnLogin">Ingresar</button>
+                                    </div>
+                                </div>
+                                <div class="login-btn_wrapper">
+                                    <div class="row">
+                                        <div class="col-12 colxm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <a href="{% url 'index' %}" class="" id="btnCancelar" >Cancelar</a>
+                                        </div>
+                                        <div class="col-12 colxm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <a href="{% url 'admin_sistema:recuperar' %}" class="" id="btnRecuperar" >Recuperar contraseña</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </section>
+                    {% if messages %}
+                        {% for message in messages %}
+                        <section>
+                            <div id="serveranswer">
+                                <div class="alert alert-danger alert-dismissible " role="alert">
+                                    <strong>Tu cuenta</strong> no puede ser accesada.
+                                </div>
+                            </div>
+                        </section>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="{% static 'vendors/validator/multifield.js' %}"></script>
+        <script src="{% static 'vendors/validator/validator.js' %}"></script>
+        <script src="{% static 'vendors/pangeos/production/js/owlcarousel/dist/owl.carousel.js' %}"></script>
+        <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos.js' %}"></script>
+        <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos-login.js' %}"></script>
+    </body>
+</html>

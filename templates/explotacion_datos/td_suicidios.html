@@ -1,0 +1,2187 @@
+{% extends 'admin_sistema/base.html' %}
+
+{% load static %}
+
+{% block head %}    
+    <!-- Bootstrap -->
+    <link href="{% static 'vendors/bootstrap/dist/css/bootstrap-slider.min.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+	<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+    <!-- INTROJS -->
+    <link href="{% static 'vendors/introjs/css/introjs.min.css' %}" rel="stylesheet"/>
+	<!-- switch personalizado -->
+    <!-- <link rel="stylesheet" href="../vendors/pangeos/build/css/switch.css" type="text/css"> -->
+
+    <link href="{% static 'vendors/sweetalert/dist/sweetalert2.min.css' %}" rel="stylesheet"/>
+
+    <!--MAPS  -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <link href="{% static 'vendors/pangeos/css/pangeos.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/pangeos/css/pangeos-mapas.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" role="main" >
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12">
+            <div id="dataWrapper">
+                <div id="mainInfo">
+                    <div class="row">
+                        <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <section class="consultarSection" id="prop2">
+                                <div class="x_panel" id="info_indicador">
+                                    <div class="lnk-ayuda2Wrapper">
+                                        <div class="grey_link grey_link_right lnk-ayuda2" id="btn-guiaDescription">
+                                            [?] Ayuda
+                                            <svg viewBox="0 0 70 36">
+                                                <path d="M 6.9739 30.8153 H 63.0244 C 65.5269 30.8152 75.5358 -3.68471 35.4998 2.81531 C -16.1598 11.2025 0.894099 33.9766 26.9922 34.3153 C 104.062 35.3153 54.5169 -6.68469 23.489 9.31527" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="x_content" id="descarga_ficha">
+                                        <div id="titleWrapper" class="titleSection">
+                                            <h5 id="indicadorTitle">Tasa de mortalidad por suicidios</h5>
+                                        </div>
+                                        <hr/>
+                                        <div id="importanceWrapper" class="description-step1">
+                                            <h6 class="titleSection"><strong>Importancia: </strong><span id="importanceTxt" class="txtDescripcion">
+El aumento a nivel mundial de la incidencia de trastornos mentales, consumo de sustancias y violencia se encuentra fuertemente relacionado con un incremento en el Relación entre el número de muertes autoinfligidas, convirtiéndolas en un problema de salud pública emergente. 
+De acuerdo con la OMS (2021), en el mundo, cerca de un millón de personas se quita la vida cada año; y, por cada una de estas, muchas personas más lo intentan. En 2019, el suicidio fue la cuarta causa de muerte entre los jóvenes de 15 a 19 años, las implicaciones de este fenómeno van desde la pérdida importante de años de vida saludable, hasta alteraciones de la dinámica familiar y una carga económica considerable.<br/>
+En México, desde inicio del siglo XXI  la mortalidad por suicidio  se ha incrementado de manera constante. Es urgente diseñar estrategias de prevención y profundizar el conocimiento de esta problemática (Dávila Cervantes, Ochoa Torres & Casique Rodríguez, 2015).
+                                            </span></h6>
+                                        </div>
+                                        <hr/>
+                                        <div id="descriptionWrapper" class="description-step2" >
+                                            <h6 class="titleSection"><strong>Definición: </strong> <span id="descriptionTxt" class="txtDescripcion">
+Da cuenta de la relación que existe entre el número de muertes por suicidio y el total de la población. <br/>
+Se consideran como causa los códigos X60-X84, Y87.0, de acuerdo con la Clasificación Estadística Internacional de Enfermedades y Problemas Relacionados con la Salud (CIE-10).
+                                            </span></h6>
+                                        </div>
+                                        <hr/>
+                                        <div id="disintegrationWrapper" class="description-step3">
+                                            <h6 class="titleSection"><strong>Desagregación: </strong> <span id="desagregationTxt" class="txtDescripcion">
+Geográfica: municipal, entidad y nacional. De los sujetos: sexo, edad y grupo de edad quinquenal
+                                            </span></h6>
+                                        </div>
+                                        <hr/>
+                                        <div id="calcmethodWrapper" class="description-step4">
+                                            <h6 class="titleSection"><strong>Método de cálculo: </strong>
+                                                <span id="methodTxt" class="txtDescripcion">
+                                                    <p>
+                                                        <img src="{% static 'images/ecuaciones/defunciones-suicidios-formula.png' %}" width="35%">
+                                                    </p>
+                                                    <div id="calcmethodDescWrapper">
+Donde:<br/>
+<i>TSUIC<sup>t</sup></i> = Tasa de mortalidad por suicidio, en el año t<br/>
+<i>DefTSUIC<sup>t</sup></i> = Número de defunciones por suicidio, en el año t<br/>
+<i>p<sup>t</sup></i> = Población a mitad del año <br/>
+<i>t</i> = Año de referencia<br/>
+                                                    </div>
+                                                </span>
+                                            </h6>
+                                        </div>
+                                        <hr/>
+                                        <div id="unitWrapper" style="display: none;" class="description-step5.1">
+                                            <h6 class="titleSection"><strong>Unidad de Medida: </strong> <span id="unitTxt" class="txtDescripcion">
+Muertes por 100 000 habitantes
+                                            </span></h6>
+                                        </div>
+                                        <hr/>
+                                        <div id="sourceWrapper" class="description-step5">
+                                            <h6 class="titleSection"><strong>Fuentes de la información estadística: </strong> <span id="fontsTxt" class="txtDescripcion">
+1) Instituto Nacional de Estadística y Geografía y Secretaría de Salud: Estadísticas de Mortalidad.
+2) Consejo Nacional de Población: Proyecciones de la población de México, vigentes.
+                                            </span></h6>
+                                        </div>
+                                        <hr/>
+                                        <div id="diffusionfrequencyWrapper" class="description-step6">
+                                            <h6 class="titleSection"><strong>Frecuencia prevista de difusión de datos: </strong> <span id="difFrequencyTxt" class="txtDescripcion">
+Anual, con dos años de retraso. 
+                                            </span></h6>
+                                        </div>
+                                        <hr/>
+                                        <div id="compilationfrequencyWrapper" class="description-step7">
+                                            <h6 class="titleSection"><strong>Frecuencia prevista de recopilación de datos: </strong> <span id="recFrequencyTxt" class="txtDescripcion">
+Anual.
+                                            </span></h6>
+                                        </div>
+                                        <hr/>
+                                        <div id="updateDateWrapper" style="display: none;" class="description-step7.1">
+                                            <h6 class="titleSection"><strong>Fecha de actualización: </strong> <span id="updateDateTxt" class="txtDescripcion">
+Febrero de 2022
+                                            </span></h6>
+                                        </div>
+                                        <hr/>
+                                        <div id="limitationsWrapper" class="description-step8">
+                                            <h6 class="titleSection"><strong>Limitaciones: </strong><span id="limitationsTxt" class="txtDescripcion">
+Falta de precisión en la especificación de la causa de defunción debido a la interpretación de diagnósticos y a los códigos de clasificación empleados por personal médico y administrativo.<br/>
+Subregistro de afecciones debido a la falta de información de las causas secundarias de defunción.<br/>
+Falta de uniformidad en el registro de la información.
+                                            </span></h6>
+                                        </div>
+                                        <hr/>
+                                        <div id="referencesWrapper" style="display: none;" class="description-step8.1">
+                                            <h6 class="titleSection"><strong>Referencias: </strong> <span id="referencesTxt" class="txtDescripcion">
+Organización Mundial de la Salud. http://www.who.int/mental_health/suicide-prevention/es/<br/>
+http://www.who.int/research/es/<br/>
+Organización Panamericana de la Salud. http://new.paho.org/hq/index.php?option=com_content&task=view&id=2470&Itemid=2003<br/>
+Organización de Cooperación y Desarrollo Económicos. http://www.oecd-ilibrary.org/social-issues-migration-health/health-at-a-glance-2013_health_glance-2013-en<br/>
+Population Reference Bureau. http://www.prb.org/Reports/2011/prb-population-handbook-2011.aspx<br/>
+Dávila Cervantes, Claudio Alberto, María del Pilar Ochoa Torres, and Irene Casique Rodríguez. 2015. “Análisis Del Impacto de La Mortalidad Por Suicidios En México, 2000-2012.” Salud Colectiva 11(4): 471–84.<br/>
+OMS (2021) Suicidio https://www.who.int/es/news-room/fact-sheets/detail/suicide
+                                            </span></h6>
+                                        </div>
+                                        <div id="infoFontsWrapper" style="display: none;" class="description-step8.1">
+                                            <h6 class="titleSection"><strong>Fuentes de información: </strong> <span id="infoFontsTxt" class="txtDescripcion">
+Numerador: Mortalidad<br/>
+- Instituto Nacional de Estadística y Geografía. (2021). Defunciones registradas 2000 a 2020. Disponible en: https://www.inegi.org.mx/programas/mortalidad/#Microdatos<br/>
+
+Denominador: Proyecciones Municipales 2000 -2015<br/>
+Secretaría General del Consejo Nacional de Población. Estimación de la población de los municipios del país, 2000-2015, con base en INEGI, XII Censo General de Población y Vivienda 2000, II Conteo de Población y Vivienda 2005, Censo de Población y Vivienda 2010, la Encuesta Intercensal 2015 y en CONAPO, Conciliación demográfica de México, 1950-2015.<br/>
+Proyecciones Municipales 2015-2021<br/>
+-Secretaría General del Consejo Nacional de Población. (2019). Proyecciones de la Población de los Municipios de México y de las Entidades Federativas, 2016-2050.
+                                            </span></h6>
+                                        </div>
+                                        <hr/>
+                                        <div class="d-flex justify-content-end" id="buton_descarga_ficha">
+                                            <button id="ficha_indicador" style="border: 0px;">Descargar Ficha</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <section class="consultarSection">
+                                <div class="x_panel">
+                                    <div class="lnk-ayuda2Wrapper">
+                                        <div class="grey_link grey_link_right lnk-ayuda2" id="btn-guiaMapa">
+                                            [?] Ayuda
+                                            <svg viewBox="0 0 70 36">
+                                                <path d="M 6.9739 30.8153 H 63.0244 C 65.5269 30.8152 75.5358 -3.68471 35.4998 2.81531 C -16.1598 11.2025 0.894099 33.9766 26.9922 34.3153 C 104.062 35.3153 54.5169 -6.68469 23.489 9.31527" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="x_title">
+                                        <h5 id="graph1Title">Registros de defunciones por suicidio en México</h5>&nbsp;
+                                        <div class="row">
+                                            <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 guiamapa-step1">
+                                                <label>Año de registro*</label>
+                                                <select class="form-control" id="anoregistroselector" >
+                                                    <option value="0" selected>Todos los años de registro</option>
+                                                    {% for an in anio_cubo_nac %} 
+                                                    <option value="{{an.anio}}">{{an.anio}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 guiamapa-step2">
+                                                <label>Sexo</label>
+                                                <select class="form-control" id="sexoregistroselector" >
+                                                    {% for s in sexo %} 
+                                                    <option value="{{s.idcatsexo}}" {% if forloop.first %}selected{% endif %}>{{s.descripcion}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-xm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 guiamapa-step3">
+                                                <!-- <span id="ctrl_edad-label-2">Edad</span> -->
+                                                <p style="padding: 25px 0px 10px 0px;">
+                                                    <input id="ctrl_edad2" type="text" class="span2" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="[{{ edad_min }},{{ edad_max }}]" data-slider-labelledby='ctrl_edad-label-2'/>
+                                                    <span id="ex6CurrentSliderValLabel2">Edad entre los : <span id="ctrl_edad_I2">{{ edad_min }}</span> y los <span id="ctrl_edad_F2">{{ edad_max }}</span> años</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="x_content">
+                                        <div id="geochart-colors" style="width: 100%; height: 100%;" class="guiamapa-step4"></div>
+                                        <div id="googleMaps"><div class="closeMap"></div></div>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                <a href="#" id="btnMostrarImagen" role="link" class="btn btn-primary">Descargar como Imagen</a>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                <a href="#" id="btnMostrarMapa" role="link" class="btn btn-primary">Ampliar a pantalla completa</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="sourceData"><span class="sources">Fuente(s): </span> <span id="">Instituto Nacional de Psiquiatría. Universidad Nacional Autónoma de México</span></div>
+                                    <div id="updatedData"><span class="sources">Datos actualizados al:</span> <span id="updatedDataDate">31/12/2018</span></div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" id="content_distribucion">
+                            <section class="consultarSection" style="flex-direction: column;">
+                                <div class="x_panel">
+                                    <div class="lnk-ayuda2Wrapper">
+                                        <div class="grey_link grey_link_right lnk-ayuda2" id="btn-guiaMapaGrafica">
+                                            [?] Ayuda
+                                            <svg viewBox="0 0 70 36">
+                                                <path d="M 6.9739 30.8153 H 63.0244 C 65.5269 30.8152 75.5358 -3.68471 35.4998 2.81531 C -16.1598 11.2025 0.894099 33.9766 26.9922 34.3153 C 104.062 35.3153 54.5169 -6.68469 23.489 9.31527" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="x_title">
+                                        <h5 id="mainGraphData">Tasa de mortalidad por suicidio, por entidad federativa y sexo México, 2000 a 2020</h5>
+                                        <div class="custom-control custom-switch guiamapagrafica-step1">
+                                            <div class="form-check form-switch">
+                                                <input id="dist_entidad" type="checkbox" data-toggle="toggle" data-size="sm" data-width="125" data-onstyle="success" data-on="Tasa" data-off="Registros"  data-offstyle="warning"  data-style="ios">
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                            <div>
+                                                <div id="mainGrpah" style="width: 100%;height:500px;" class="guiamapagrafica-step2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- add -->
+                                <div class="d-flex justify-content-end">
+                                    <button id="crearimagen_distribucion" style="border: 0px;">Descargar</button>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-12 col-xm-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" id="content_gb">
+                                <section class="consultarSection">
+                                    <div class="x_panel">
+                                        <div class="x_title">
+                                            <h5 id="secondGraphtitle">Defunciones por suicidio por edades</h5>
+                                        </div>
+                                        <div class="x_content">
+                                            <div class="row">
+                                                <div class="col-12 col-xm-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <select class="form-control entidadselect" id="gb_entidadselect">
+                                                        <option value="0">Todas las entidades</option>
+                                                        {% for entidad in entidades %} 
+                                                        <option value="{{entidad.cve_ent}}">{{entidad.entidad}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-xm-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <select class="form-control anyoselect" id="gb_anyoselect">
+                                                        <option value="0">Todos los años de registro</option>
+                                                        {% for anio_cm in anio_cubo_mun %} 
+                                                        <option value="{{anio_cm.anio}}">{{anio_cm.anio}}</option>
+                                                        {% endfor %} 
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div id="echart_line" style="height:350px;"></div>
+                                        </div>
+                                        <div id="sourceData"><span class="sources">Fuente(s):</span> <span id="">Instituto Nacional de Psiquiatría. Universidad Nacional Autónoma de México</span></div>
+                                        <div id="updatedData"><span class="sources">Datos actualizados al:</span> <span class="updatedDataDate">Febrero 2022</span></div>
+                                        <div class="d-flex justify-content-end">
+                                            <button id="crearimagen" style="border: 0px;">Descargar</button>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="col-12 col-xm-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" id="content_gp">
+                                <section class="consultarSection">
+                                    <div class="x_panel">
+                                        <div class="x_title">
+                                            <h5 id="secondGraphtitle">Defunciones por medio de suicido</h5>
+                                        </div>
+                                        <div class="x_content">
+                                            <div class="row">
+                                                <div class="col-12 col-xm-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                                    <select class="form-control entidadselect2" id="gp_entidadselect">
+                                                        <option value="0">Todas las entidades</option>
+                                                        {% for entidad in entidades %} 
+                                                        <option value="{{entidad.cve_ent}}">{{entidad.entidad}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-xm-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                                    <select class="form-control" id="sexoregistroselector2">
+                                                        {% for s in sexo %} 
+                                                        <option value="{{s.idcatsexo}}" {% if forloop.first %}selected{% endif %}>
+                                                            {% if s.idcatsexo == 3 %}
+                                                                Hombres y mujeres
+                                                            {% else %}
+                                                                {{s.descripcion}}
+                                                            {% endif %}
+                                                        </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-xm-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                                    <select class="form-control anyoselect2" id="gp_anyoselect">
+                                                        <option value="0">Todos los años de registro</option>
+                                                        {% for anio_cm in anio_cubo_mun %} 
+                                                        <option value="{{anio_cm.anio}}">{{anio_cm.anio}}</option>
+                                                        {% endfor %} 
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div id="echart_pie" style="height:350px;"></div>
+                                        </div>
+                                        <div id="sourceData"><span class="sources">Fuente(s):</span> <span id="">Instituto Nacional de Psiquiatría. Universidad Nacional Autónoma de México</span></div>
+                                        <div id="updatedData"><span class="sources">Datos actualizados al:</span> <span class="updatedDataDate">Febrero 2022</span></div>
+                                        <div class="d-flex justify-content-end">
+                                            <button id="crearimagen_pastel" style="border: 0px;">Descargar</button>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div id="table-wrapper">
+                            <div id="tablecontrols" class="col-12">
+                                <div class="lnk-ayuda2Wrapper">
+                                    <div class="grey_link grey_link_right lnk-ayuda2" id="btn-guiaTabla">
+                                        [?] Ayuda
+                                        <svg viewBox="0 0 70 36">
+                                            <path d="M 6.9739 30.8153 H 63.0244 C 65.5269 30.8152 75.5358 -3.68471 35.4998 2.81531 C -16.1598 11.2025 0.894099 33.9766 26.9922 34.3153 C 104.062 35.3153 54.5169 -6.68469 23.489 9.31527" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <span id="btn-showtable" class="guiatabla-step1">Mostrar detalle de Datos</span>
+                            <!--<span id="btn-showtable" class="guiatabla-step1"><a id="indicadortabla" style="border: 0px;">Descargar Tabla</a></span>-->
+                            <div id="table-viewport">
+                                <div class="card-box table-responsive">
+                                    <p class="text-muted font-13 m-b-30">
+                                        Distribución geográfica de datos
+                                    </p>
+                                    <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+                                        <div class="row">
+                                            <div class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                                <label>Sexo</label>
+                                                <select class="form-control" id="sexoTabla"  style="font-size: 0.9em;">
+                                                    <option value="3">Todos</option>
+                                                    <option value="0">Desagregado por sexo</option>
+                                                    <option value="2">Mujeres</option>
+                                                    <option value="1">Hombres</option>
+                                                    <option value="-1">No indentificado</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                                <!-- <span id="ctrl_edad-label-2">Edad</span> -->
+                                                <p style="padding: 25px 20px 10px 20px;">
+                                                    <input id="ctrl_edad3" type="text" class="span3" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="[0,109]" data-slider-labelledby='ctrl_edad-label-3'/>
+                                                    <span id="ex6CurrentSliderValLabel3">Edad entre los : <span id="ctrl_edad_I3">0</span> y los <span id="ctrl_edad_F3">109</span> años</span>
+                                            </div>
+                                            <div class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                                <label>Medios</label>
+                                                <select class="form-control" id="medioTabla"  style="font-size: 0.9em;">
+                                                    <option value="0">Todos</option>
+                                                    <option value="6">Desagregado por medio de suicidio</option>
+                                                    <option value="1">Envenenamiento</option>
+                                                    <option value="2">Ahorcamiento</option>
+                                                    <option value="3">Ahogamiento</option>
+                                                    <option value="4">Arma de fuego</option>
+                                                    <option value="5">Otros medios</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                                <label>&nbsp</label>
+                                                <button class="btn btn-primary btn-block" id="filtrar-tabla">Filtrar</button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table id="datatable" class="table table-striped table-bordered dataTable no-footer" style="width:100%" role="grid" aria-describedby="datatable_info">
+                                                    <thead id="thead">
+                                                        <tr role="row" id="thead-tr">
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tbody">
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-7">
+                                                <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
+                                                    <ul class="pagination">
+                                                        <li class="paginate_button active">
+                                                            <a class="pagenumber" href="#" aria-controls="datatable" data-dt-idx="1" tabindex="0">1</a>
+                                                        </li>
+                                                        <li class="paginate_button ">
+                                                            <a class="pagenumber" href="#" aria-controls="datatable" data-dt-idx="2" tabindex="0">2</a>
+                                                        </li>
+                                                        <li class="paginate_button ">
+                                                            <a class="pagenumber" href="#" aria-controls="datatable" data-dt-idx="3" tabindex="0">3</a>
+                                                        </li>
+                                                        <li class="paginate_button ">
+                                                            <a class="pagenumber" href="#" aria-controls="datatable" data-dt-idx="4" tabindex="0">4</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            <a id="indicadortabla" style="border: 0px;"><strong>Descargar Tabla</strong></a>
+                                        </div>
+                                    </div>
+                                    <div id="sourceData"><span class="sources">Fuente(s):</span> <span id="">Instituto Nacional de Psiquiatría. Universidad Nacional Autónoma de México</span></div>
+                                    <div id="updatedData"><span class="sources">Datos actualizados al:</span> <span class="updatedDataDate">Febrero 2022</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="controles">
+        <div id="wrapper_controles">
+            <div id="handler">Mostrar menú</div>
+            <div class="" id="menufilterswrapper">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="grey_link grey_link_left lnk-ayuda2" id="btn-guia">[?] Ayuda</div>
+                            <div class="grey_link grey_link_right" id="btn-closePanel">[X] Cerrar</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 panel-step1" style="margin-bottom:10px">
+                                    <select class="form-control" id="regionselector" style="font-size: 0.9em;">
+                                        <option value="0">-- Seleccionar región</option>
+                                        {% for r in regiones %} 
+                                        <option value="{{r.regionalizacion}}">{{r.regionalizacion}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 panel-step2">
+                                    <select class="form-control h-25 mb-3" id="estadosselector" style="font-size: 0.9em;">
+                                        <option value="0">-- Seleccionar estado</option>
+                                    </select>
+                                    <div id="edoscontainer" class="edosinput panel-step3">
+                                        <div id="edosviewport">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 panel-step4">
+                                    <label class="control-label col-md-3 col-sm-3 ">Municipios</label>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <select id="dropmunicipios" class="form-control h-25" multiple="multiple" style="display: none;">
+
+                                    </select>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div id="mupioscontainer" class="mupiosinput">
+                                        <div id="mupiosviewport">
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-xm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 panel-step5">
+                                    <p>
+                                        <label for="sexoselector">Sexo</label>
+                                        <select class="form-control h-25" id="sexoselector"  style="font-size: 0.9em;">
+                                            <option value="0" selected="selected">-- Seleccionar sexo</option>                                                
+                                            {% for s in sexo %} 
+                                            <option value="{{s.idcatsexo}}">{{s.descripcion}}</option>
+                                            {% endfor %}                                             
+                                        </select>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-xm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 panel-step6">
+                                    <span id="ctrl_edad-label-1">Grupo de edad</span>
+                                    <p style="padding: 5px 20px;">
+                                        <input id="ctrl_edad" type="text" class="span2" value="" data-slider-min="0" data-slider-max="70" data-slider-step="5" data-slider-value="[0,70]" data-slider-labelledby='ctrl_edad-label-1' data-slider-tooltip="hide"/>
+                                        <span id="ex6CurrentSliderValLabel">Edad entre los : <span id="ctrl_edad_I">0</span> y los <span id="ctrl_edad_F">>65</span> años</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-xm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 panel-step7">
+                                    <p>
+                                        <label>Año de registro</label>
+                                        <select class="form-control h-25" id="anoregistroselector_mun"  style="font-size: 0.9em;">
+                                            <option value="0" selected>Todos</option>
+                                            {% for an in anio_cubo_nac %} 
+                                            <option value="{{an.anio}}">{{an.anio}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-xm-12 col-sm-12 col-md-12 col-xl-12 col-lg-12">
+                                    <button type="button" class="btn btn-success btn-block" id="filtroBuscar">Buscar</button>
+                                </div>
+                                <div class="col-12 col-xm-12 col-sm-12 col-md-12 col-xl-12 col-lg-12">
+                                    <button type="button" class="btn-filtros btn btn-warning btn-block" id="filtroLimpiar">Limpiar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+    <script type="text/javascript">
+const imgIndicador = 'defunciones-suicidios-formula.png';
+const indicador = 'td_suicidios';
+
+        var mapObject;
+        var myStyle = [
+            {
+                "featureType": "administrative",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative.land_parcel",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative.neighborhood",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative.province",
+                "stylers": [
+                    {
+                        "color": "#000000"
+                    },
+                    {
+                        "visibility": "off"
+                    },
+                    {
+                        "weight": 8
+                    }
+                ]
+            },
+            {
+                "featureType": "landscape",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "labels.text",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi.park",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "labels",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "stylers": [
+                    {
+                        "color": "#c7f6ff"
+                    },
+                    {
+                        "weight": 8
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels.text",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            }
+        ];
+    </script>
+    <!-- jQuery -->
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap-slider.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <!-- FastClick -->
+    <script src="{% static 'vendors/fastclick/lib/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'vendors/nprogress/nprogress.js' %}"></script>
+    <!-- Chart.js -->
+    <script src="{% static 'vendors/Chart.js/dist/Chart.min.js' %}"></script>
+    <!-- gauge.js -->
+    <script src="{% static 'vendors/gauge.js/dist/gauge.min.js' %}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+    <!-- iCheck -->
+    <script src="{% static 'vendors/iCheck/icheck.min.js' %}"></script>
+    <!-- Skycons -->
+    <script src="{% static 'vendors/skycons/skycons.js' %}"></script>
+    <!-- Flot -->
+    <script src="{% static 'vendors/Flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.resize.js' %}"></script>
+    <!-- Flot plugins -->
+    <script src="{% static 'vendors/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>
+    <script src="{% static 'vendors/flot-spline/js/jquery.flot.spline.min.js' %}"></script>
+    <script src="{% static 'vendors/flot.curvedlines/curvedLines.js' %}"></script>
+    <!-- DateJS -->
+    <script src="{% static 'vendors/DateJS/build/date.js' %}"></script>
+    <!-- JQVMap -->
+    <script src="{% static 'vendors/jqvmap/dist/jquery.vmap.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+    <!-- jQuery autocomplete -->
+    <script src="{% static 'vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js' %}"></script>
+    <!-- ECharts -->
+    <script src="{% static 'vendors/echarts/dist/echarts.min.js' %}"></script>
+    <script src="{% static 'vendors/echarts/map/js/world.js' %}"></script>
+    <!-- jQuery multiselect -->
+    <script type="text/javascript" src="{% static 'vendors/pangeos/build/js/jquery-multiple-select/bootstrap-multiselect.js' %}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'vendors/pangeos/build/js/custom.js' %}"></script>
+    <!-- INTROJS -->
+    <script src="{% static 'vendors/introjs/js/intro.min.js' %}"></script>
+
+    <!--MAPS  -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    
+    <script type="text/javascript" src="{% static 'vendors/html2canvas/html2canvas.js' %}"></script> 
+
+    <script src="{% static 'vendors/sweetalert/dist/sweetalert2.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/pangeos/indicadores/js/script/td_suicidios.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'vendors/pangeos/indicadores/js/ayuda/pangeos-ayuda.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos-descargartabla.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos-pdf.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/geoxml3/js/geoxml3.js' %}"></script>
+    
+    <script type="text/javascript">
+
+        var cdmxkml="5";
+        var layer = [];
+
+        array_kml = [
+            'aguascalientes',
+            'bajacalifornia',
+            'bajacaliforniasur',
+            'campeche',
+            'chiapas',
+            'chihuahua',
+            'cdmx',
+            'coahuila',
+            'colima',
+            'durango',
+            'guanajuato',
+            'guerrero',
+            'hidalgo',
+            'jalisco',
+            'mexico',
+            'michoacan',
+            'morelos',
+            'nayarit',
+            'nuevoleon',
+            'oaxaca',
+            'puebla',
+            'queretaro',
+            'quintanaroo',
+            'sanluispotosi',
+            'sinaloa',
+            'sonora',
+            'tabasco',
+            'tamaulipas',
+            'tlaxcala',
+            'veracruz',
+            'yucatan',
+            'zacatecas'
+        ];
+
+        var addListenersOnPolygon = function(polygon) {
+            google.maps.event.addListener(polygon, 'click', function (event) {
+                // alert(polygon.indexID);
+            });  
+        }
+
+        let mapa_data = [];
+        let mapa_max = 0;
+        let data_distribucion_entidad = [];
+        let anio = ""
+        let anios_array = []
+        let entidades = []
+        let tbDistribucion = []
+
+        $(document).ready(function(){
+            let gTheme = init_echarts();
+
+            
+            /* ******************************************************************************** */
+            /* INICIAL */
+            /* Controles */
+            let regiones = "{{ regiones | safe }}";
+            let sexo = "{{ sexo }}";
+            anio = "{{ anio_cubo_nac }}";
+            anios_array = JSON.parse(JSON.stringify(format_data_python("{{ anios_array | safe }}"))) /* Origin Array */
+            entidades = format_data_python("{{ entidades | safe }}") /* Origin Array */
+            console.log("entidades: ")
+            console.log(entidades)
+
+            let edad_cubo_nac = "{{ edad_cubo_nac | safe }}";
+
+            /* Mapa nacional */
+            mapa_max = "{{ mapa_max }}";
+            mapa_data = format_data_python("{{ mapa | safe }}");
+            //console.log("mapa: "+JSON.stringify(mapa_data));
+
+            /* GRÁFICA: DISTRIBUCIÓN POR ENTIDAD */
+            let distribucion_parametros = format_data_python("{{ distribucion_parametros | safe }}");
+            //console.log("distribucion_parametros: "+JSON.stringify(distribucion_parametros));
+            // Registro
+            let distribucion_orden_estados_registros = format_data_python("{{ distribucion_orden_estados_registros | safe }}");
+            let distribucion_data_registros = format_data_python("{{ distribucion_data_registros | safe }}");
+            // Tasas
+            let distribucion_orden_estados_tasas = format_data_python("{{ distribucion_orden_estados_tasas | safe }}");
+            let distribucion_data_tasas = format_data_python("{{ distribucion_data_tasas | safe }}");
+            // Display distribucion init:
+            let anyos_line = distribucion_parametros['anyos_line'];
+            let anyo_init = distribucion_parametros['value_init'];
+            let anyo_final = distribucion_parametros['value_final'];
+            let entidades_timeline = distribucion_orden_estados_registros;
+            let entidades_timeline_tasas = distribucion_orden_estados_tasas;
+
+            $("#mainGraphData").text(distribucion_parametros['titulo_registros']);
+            display_distribucion(anyo_init,anyo_final,anyos_line,entidades_timeline,distribucion_data_registros,"Registros totales");
+
+
+            /* ******************************************************************************** */
+            /* MAPA NACIONAL */
+            /* - SetData LocalStorage */
+            localStorage.setItem('nac_anyo',$("#anoregistroselector").val());
+            localStorage.setItem('nac_sexo',$("#sexoregistroselector").val());
+            localStorage.setItem('nac_edad',$("#ctrl_edad2").val());
+
+            /* - Al cambiar año */
+            $("#anoregistroselector").change(function() {
+                var anyo = $("#anoregistroselector").val();
+                localStorage.setItem('nac_anyo',anyo);
+                var sexo = localStorage.getItem('nac_sexo');
+                var edad = localStorage.getItem('nac_edad');
+                update_mapa_nacional(anyo,sexo,edad);
+            });
+            /* - Al cambiar sexo */
+            $("#sexoregistroselector").change(function() {
+                var sexo = $("#sexoregistroselector").val();
+                localStorage.setItem('nac_sexo',sexo);
+                var anyo = localStorage.getItem('nac_anyo');
+                var edad = localStorage.getItem('nac_edad');
+                update_mapa_nacional(anyo,sexo,edad);
+            });
+            /* - Al cambiar edad */
+            $("#ctrl_edad2").change(function() {
+                var edad = $("#ctrl_edad2").val();
+                localStorage.setItem('nac_edad',edad2);
+                var anyo = localStorage.getItem('nac_anyo');
+                var sexo = localStorage.getItem('nac_sexo');
+                update_mapa_nacional(anyo,sexo,edad);
+            });
+
+            /* ******************************************************************************** */
+            /* GRÁFICA DIST. POR ENTIDAD TASA/REGISTROS */
+            $('#dist_entidad').change(function() {
+                if($(this).prop('checked')){
+                    $("#mainGraphData").text(distribucion_parametros['titulo_tasas']);
+                    display_distribucion(anyo_init,anyo_final,anyos_line,entidades_timeline_tasas,distribucion_data_tasas,"Tasas totales");
+                }else{
+                    $("#mainGraphData").text(distribucion_parametros['titulo_registros']);
+                    display_distribucion(anyo_init,anyo_final,anyos_line,entidades_timeline,distribucion_data_registros,"Registros totales");
+                }
+            })
+            
+            /* ******************************************************************************** */
+            /* GRAFICA DE BARRAS - EDADES */
+            let g_barras_tasa_edad_hombres = format_data_python("{{ g_barras_tasa_edad_hombres | safe }}");
+            let g_barras_tasa_edad_mujeres = format_data_python("{{ g_barras_tasa_edad_mujeres | safe }}");
+            display_echart_line(g_barras_tasa_edad_hombres,g_barras_tasa_edad_mujeres,gTheme);
+
+            /* - Al cambiar entidad */
+            $("#gb_entidadselect").change(function() {
+                console.log('$("#gb_entidadselect").val():' + $("#gb_entidadselect").val());
+                console.log('$("#gb_anyoselect").val():' + $("#gb_anyoselect").val());
+                update_gb_edad($("#gb_entidadselect").val(),$("#gb_anyoselect").val());
+            });
+            /* - Al cambiar anyo */
+            $("#gb_anyoselect").change(function() {
+                console.log('$("#gb_entidadselect").val():' + $("#gb_entidadselect").val());
+                console.log('$("#gb_anyoselect").val():' + $("#gb_anyoselect").val());
+                update_gb_edad($("#gb_entidadselect").val(),$("#gb_anyoselect").val());
+            });
+            
+
+            /* ******************************************************************************** */
+            /* GRAFICA DE PIE - EDADES */
+            let g_pie_tasa_tipo = format_data_python("{{ g_pie_tasa_tipo | safe }}");
+            display_echart_pie(g_pie_tasa_tipo,gTheme);
+
+            /* - Al cambiar entidad */
+            $("#gp_entidadselect").change(function() {
+                update_gp_edad($("#gp_entidadselect").val(),$("#sexoregistroselector2").val(),$("#gp_anyoselect").val());
+            });
+            /* - Al cambiar sexo */
+            $("#sexoregistroselector2").change(function() {
+                update_gp_edad($("#gp_entidadselect").val(),$("#sexoregistroselector2").val(),$("#gp_anyoselect").val());
+            });
+            /* - Al cambiar anyo */
+            $("#gp_anyoselect").change(function() {
+                update_gp_edad($("#gp_entidadselect").val(),$("#sexoregistroselector2").val(),$("#gp_anyoselect").val());
+            });
+
+
+             /* ******************************************************************************** */
+            /* DISTRIBUCIÓN GEOGRÁFICA */
+            tbDistribucion = format_data_python("{{ tb_distribucion | safe }}")
+            construirDistribucion(tbDistribucion,3,0);
+            /* console.log(tbDistribucion)
+            console.log("tbDistribucion JSON.stringify")
+            console.log(JSON.stringify(tbDistribucion)) */
+
+            $("#filtrar-tabla").on("click", function () {
+                var sexo = $("#sexoTabla").val();
+                var edad = $("#ctrl_edad3").val();
+                var medio = $("#medioTabla").val();
+                console.log(sexo+" - "+edad+" - "+medio);
+                update_table(sexo,edad,medio);
+            });
+            
+            
+            /* ******************************************************************************** */
+            /* CONTROLES - Municipal */
+            idsMunicipios = [];
+
+            /* - Edad */
+            let dst = "{{ grupo_edad_mun_id | safe }}";
+            let dstl= "{{ grupo_edad_mun_des | safe }}";
+
+            $("#slider_mun").attr("data-slider-ticks", dst);
+            $("#slider_mun").attr("data-slider-ticks-labels", dstl);
+
+
+            /* Control Mapa Municipios*/
+            jQuery("#filtroBuscar").click(function(){
+                let edad = $("#ctrl_edad").val();
+                let separador = edad.indexOf(',');
+                var size = edad.length;
+                console.log(JSON.stringify(arrayFiles));
+                console.log("Sexo: " + $("#sexoselector").val());
+                console.log("Edad: " + $("#ctrl_edad").val());
+                console.log("Anyo: " + $("#anoregistroselector_mun").val());
+                if( arrayKML.length == 0 ) {
+                    Swal.fire({
+                        title: '¡Error!',
+                        text: 'Es necesario indicar al menos un municipio. Inténtalo nuevamente.',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    return false;
+                }
+                if( arrayFiles.length > 0 ) {
+                    for (i = 0; i < layer.length; i++) {
+                        if( layer[i] !== null ) {
+                        layer[i].setMap(null);
+                        layer[i]=null;
+                        }
+                    }
+
+                    var settings = {
+                        "url": "{% url 'explotacion_datos:resultados_municipio' %}", /*  "127.0.0.1:8000/explotacion/resultados_municipio/", */
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "data": JSON.stringify({
+                            "municipios": arrayFiles,
+                            "sexo": $("#sexoselector").val(),
+                            "anyo": $("#anoregistroselector_mun").val(),
+                            "min": parseInt(edad.substring(0,separador),10),
+                            "max": parseInt(edad.substring(separador+1,size),10)
+                        }),
+                    };
+
+                    $.ajax(settings).done(function (response) {
+                        console.log(response);
+                        _obj = response;
+                        var r = "C:/Django Proyects/PANGEOS_DOWN_ENE2023/pangeos.com/static/kmls/" /* "var/www/pangeos.com/static/kmls/"; */
+                        jQuery("#filtroLimpiar").css({"display":"block"});
+                        jQuery("#filtroGrafica").css({"display":"block"});
+                        jQuery("#geochart-colors").css({"display":"none"});
+                        jQuery("#googleMaps").css({"display":"block"});
+                        for (var i = 0; i < _obj.length; i++) {
+                            src = r+_obj[i];
+                            if(!isExistsKML(src)){
+                                showKML(src);
+                            }
+                        }                    
+                        jQuery("#btnMostrarImagen").css({"display":"block"});
+                        jQuery("#btnMostrarMapa").css({"display":"block"});
+                        setTimeout(centerMap, 1000);
+                    });
+                }
+            });
+
+            jQuery("#btnMostrarImagen").click(function(){
+                dataMap();
+            });
+
+            jQuery("#btnMostrarMapa").click(function(){
+                cambiaMapa('a');
+            });
+
+            jQuery("#fullScreen").click(function(){
+                cambiaMapa('r');
+            });
+
+            jQuery("#filtroLimpiar").click(function(){
+                limpiarFormulario();
+            });
+
+/*            jQuery(".lnk-ayuda2").click(function(){
+                id = jQuery(this).attr("id");
+                guia = introJs();
+                switch(id){
+                    case 'btn-guia':
+                        _steps = [
+                            {element: ".panel-step1", intro: "Los estados de la república se encuentran agrupados por región."},
+                            {element: ".panel-step2", intro: "Aquí tienes un listado de estados. Al hacer click sobre alguno de ellos se mostrará su nombre en el recuadro de abajo. Puedes elegir mas de uno."},
+                            {element: ".panel-step3", intro: "Aquí se mostarán los estados que has elegido. Cada uno de ellos tiene una tache pequeña a la derecha del nombre y al hacer click sobre de ella se eliminará el estado de la búsqueda. Tienes que elegir el estado haciendo click, para poder encontrar sus municipios."},
+                            {element: ".panel-step4", intro: "Y aquí puedes elegir los municipios del estado elegido en la sección de arriba."},
+                            {element: ".panel-step5", intro: "En este apartado puedes elegir de entre las opciones disponibles para filtrar por sexo."},
+                            {element: ".panel-step6", intro: "Y en este apartado puedes seleccionar las edades mediante un rango de las mismmas."},
+                            {element: ".panel-step7", intro: "Y también puedes filtrar por año de registro."},
+                        ]
+                    break;
+                    case 'btn-guiaDescription':
+                        _steps = [
+                            {element: ".description-step1", intro: "Lorem ipsum descripción 1"},
+                            {element: ".description-step2", intro: "Lorem ipsum descripción 2"},
+                            {element: ".description-step3", intro: "Lorem ipsum descripción 3"},
+                            {element: ".description-step4", intro: "Lorem ipsum descripción 4"},
+                            {element: ".description-step5", intro: "Lorem ipsum descripción 5"},
+                            {element: ".description-step6", intro: "Lorem ipsum descripción 6"},
+                            {element: ".description-step7", intro: "Lorem ipsum descripción 7"},
+                            {element: ".description-step8", intro: "Lorem ipsum descripción 8"},
+                        ];
+                    break;
+                    default:
+                        return false;
+                    break;
+                }
+                guia.setOption('tooltipPosition', 'auto');
+                guia.setOption('positionPrecedence', ['left', 'right', 'bottom', 'top'])
+                guia.setOption('showProgress', false)
+                guia.setOption('showBullets', false)
+                guia.setOption('hidePrev', true)
+                guia.setOption('hideNext', true)
+                guia.setOption('exitOnEsc', true)
+                guia.setOption('exitOnOverlayClick', true)
+                guia.setOption('keyboardNavigation', true)
+                guia.setOption('scrollToElement', true)
+                guia.setOptions({nextLabel: 'Siguiente', prevLabel: 'Anterior', doneLabel: 'Fin'})
+                guia.setOptions({ steps:_steps })
+                guia.oncomplete(function(){
+                    jQuery("body").css({"overflow-y":"auto", "overflow-x":"hidden"});
+                })
+                guia.start();
+            });*/
+            $("#crearimagen").click(function() { 
+                downloadCanvas('content_gb', 'suicidio_edades.png');
+            });
+            $("#crearimagen_pastel").click(function() { 
+                downloadCanvas('content_gp', 'suicidio_medio.png');
+            });
+            $("#crearimagen_distribucion").click(function() { 
+                downloadCanvas('content_distribucion', 'distribucion_entidad.png');
+            });
+			$("#ficha_indicador").click(function() { 
+                pdf_ficha();
+            });
+        });
+
+        google.charts.load('upcoming', {
+            'packages': ['geochart']
+        });
+        google.charts.setOnLoadCallback(drawRegionsMap);
+
+        function downloadCanvas(canvasId, filename) {
+            // Obteniendo la etiqueta la cual se desea convertir en imagen
+            var domElement = document.getElementById(canvasId);
+
+            // Utilizando la función html2canvas para hacer la conversión
+            html2canvas(domElement, {
+                useCORS: true,
+				//backgroundColor: "#ffffff"
+                }).then(canvas => {
+                    dataURL = canvas.toDataURL("image/jpeg", 1.0);
+                    var a = document.createElement('a');
+                    a.href=dataURL.replace("image/jpeg", "image/octet-stream");
+                    a.download = filename;
+                    a.click();
+            });
+        }
+		
+		function drawRegionsMap() {
+            //console.log(mapa_data);
+            var data = google.visualization.arrayToDataTable(mapa_data);
+
+            var options = {
+            region: 'MX', // Mexico
+            resolution: 'provinces',
+            colorAxis: {
+                //      minValue=100,
+                //     maxValue=400,
+                values: [0, mapa_max],
+                colors: ['white', '#54278e']  //Colores mapa entidades #54278e
+            },
+            backgroundColor: '#81d4fa',
+            datalessRegionColor: '#eeeeee',
+            defaultColor: '#f5f5f5',
+            };
+
+            var chart = new google.visualization.GeoChart(document.getElementById('geochart-colors'));
+            chart.draw(data, options);
+        };
+
+        function initMap() {
+            mapObject = new google.maps.Map(document.getElementById('googleMaps'), {
+            mapTypeControlOptions: {
+                mapTypeIds: ['mystyle', google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.TERRAIN]
+            },
+                center: new google.maps.LatLng(24.0701514,-100.9255709),
+                streetViewControl: false,
+                mapTypeControl: false,
+                disableDefaultUI: true,
+                zoomControl: true,
+                zoom: 5,
+                mapTypeId: 'mystyle'
+            });
+
+            mapObject.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, { name: 'My Style' }));
+            var bounds = new google.maps.LatLngBounds();
+        }
+
+        function centerMap(){
+            for (i = 0; i < layer.length; i++) {
+                if( layer[i] !== null ) {
+                    if (typeof bounds === "undefined") {
+                        bounds = layer[i].getDefaultViewport();
+                    } else {
+                        bounds.union(layer[i].getDefaultViewport());
+                    }
+                }
+                mapObject.fitBounds(bounds);
+            }
+            bounds = new google.maps.LatLngBounds();;
+        }
+
+        function isExistsKML(_kml) {
+            for (i = 0; i < layer.length; i++) {
+                if(layer[i] !== null && layer[i].url == _kml ) {
+                    return true;
+                }
+            }
+            return false
+        }
+
+        function showKML(kml) {
+            // var myParser = new geoXML3.parser({map: mapObject});
+            var kmlLayer = new google.maps.KmlLayer({
+                url: kml,
+                map: mapObject
+            });
+
+            google.maps.event.addListener(kmlLayer, 'click', function(kmlEvent) {
+                var text = kmlEvent.featureData.description;
+            });
+
+            // myParser.parse(kml);
+            layer.push(kmlLayer);
+        }
+
+        function limpiarFormulario(){
+            jQuery("#estadosselector").html('<option value="0">-- Seleccionar estado</option>');
+            jQuery("#regionselector").val(0);
+            for (i = 0; i < layer.length; i++) {
+                if( layer[i] !== null ) {
+                layer[i].setMap(null);
+                layer[i]=null;
+                }
+            }
+            municipiosSEL=[];
+            arrayKML=[];
+            arrayFiles=[];
+            layer=[];
+            jQuery(".btag").remove();
+            jQuery("#estadosselector").children("option").css({"display":"block"});
+            jQuery("#geochart-colors").css({"display":"block"});
+            jQuery("#googleMaps").css({"display":"none"});
+            jQuery('#dropmunicipios').html('');
+            jQuery('#dropmunicipios').multiselect('destroy');
+            jQuery("#btnMostrarImagen").css({"display":"none"});
+            jQuery("#btnMostrarMapa").css({"display":"none"});
+        }
+
+        function dataMap() {
+            var c = mapObject.getCenter();
+            var z = mapObject.getZoom();
+            jQuery(".modal-googleMaps").css( { "width": parseFloat(((jQuery("#googleMaps").css("width")).replace("%","")).replace("px",""))+32+"px", "height": parseFloat(((jQuery("#googleMaps").css("height")).replace("%","")).replace("px",""))+32+"px", "display":"none" } );
+                html2canvas( document.querySelector("#googleMaps"),
+                {
+                    useCORS: true
+                }).then(canvas => {
+                    dataURL = canvas.toDataURL("image/jpeg", 1.0);
+                    var a = document.createElement('a');
+                    a.href=dataURL.replace("image/jpeg", "image/octet-stream");
+                    a.download = 'pangeos.jpg';
+                    a.click();
+                jQuery("#modalImageMap").html('');
+                jQuery("#modalImageMap").append(canvas);
+                jQuery("#modalImageMap").css({"display":"none"});
+            });
+        }
+
+
+        function switchMaps(){
+            var gmd=jQuery("#googleMaps").css("display");
+            if(gmd=="none") {
+                jQuery("#geochart-colors").css({"display":"none"});
+                jQuery("#googleMaps").css({"display":"block"});
+            } else {
+                jQuery("#geochart-colors").css({"display":"block"});
+                jQuery("#googleMaps").css({"display":"none"});
+            }
+        }
+
+        function cambiaMapa(s) {
+            switch(s) {
+                case 'a':
+                    jQuery("#controles").css({"right":"-353px"});
+                    jQuery("#fullScreen").css({"display":"block"});
+                    jQuery("#googleMaps").css({"position":"fixed", "display":"block", "width":"100vw", "height":"100vh", "z-index":"99", "left":"0px", "top":"0px"});
+                break;
+                case 'r':
+                    jQuery("#controles").css({"right":"-325px"});
+                    jQuery("#fullScreen").css({"display":"none"});
+                    jQuery("#googleMaps").css({"position":"relative", "display":"block", "width":"100%", "height":"462px", "z-index":"10"});
+                break;
+            }
+            centerMap();
+        }
+
+        function format_data_python(data_python){
+            var data_format = (data_python.replace(/&(l|g|quo)t;/g, function(a,b){
+                return {
+                    l   : '<',
+                    g   : '>',
+                    quo : '"'
+                }[b];
+            }));
+            data_format = data_format.replace(/u'/g, '\'')
+            data_format = data_format.replace(/'/g, '\"')
+            data_format = JSON.parse( data_format );
+            return data_format
+        }
+
+        /* MAPA NACIONAL */
+        function update_mapa_nacional(anyo,sexo,edad){
+            var separador = edad.indexOf(',');
+            var size = edad.length;
+
+            var settings = {
+                "url": "http://10.249.21.180/explotacion/update_mapa_nacional/",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "data": JSON.stringify({
+                    "anyo": parseInt(anyo,10),
+                    "sexo": parseInt(sexo,10),
+                    "edadi": parseInt(edad.substring(0,separador),10),
+                    "edadf": parseInt(edad.substring(separador+1,size),10)
+                }),
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                mapa_data = response.mapa;
+                mapa_max = response.mapa_max;
+                google.charts.load('upcoming', {
+                    'packages': ['geochart']
+                });
+                google.charts.setOnLoadCallback(drawRegionsMap);
+            });
+        }
+
+        //Gráifco de barras
+        function display_distribucion(init,final,anyos,list_xAxis,data_options,title_ejey){
+            var myChart = echarts.init(document.getElementById('mainGrpah'));
+            var data_timeline = getDataTimeLine(init,anyos,final);
+            myChart.registerLocale = 
+                option = {
+                    baseOption: {
+                        // Colores base
+                        color: ['#b0aacc', '#8277af', '#54278e', '#673f9a', '#9999CC', '#7d5ba9', '#c3b4d8', '#663399', '#9966CC', '#dcd2e8'],
+                        toolbox: {
+                            show: true,
+                            orient: 'vertical',
+                            left: '15',
+                            top: '50',
+                            feature: {
+                                dataZoom: {
+                                    yAxisIndex: "none",
+                                    title: { zoom: 'Expandir', back: 'Reestablecer'}
+                                },
+                                dataView: {
+                                    readOnly: false,
+                                    lang: ['Datos Origen', 'Cerrar', 'Actualizar'],
+                                    title: 'Mostrar Datos Origen'
+                                },
+                                magicType: {
+                                    type: ["line", "bar", "stack", "tiled"],
+                                    title: { 
+                                    line: "Gráfico de Líneas", 
+                                    bar: "Gráfico de Barras", 
+                                    stack: "Agrupar", 
+                                    tiled: "Desagrupar" 
+                                    }
+                                },
+                                restore: {
+                                    title: 'Restaurar',
+                                },
+                                saveAsImage: {
+                                    title: 'Guardar como imagen'
+                                }
+                            }
+                        },
+                        timeline: {
+                            axisType: "category",
+                            autoPlay: false,
+                            playInterval: 1000,
+                            data: data_timeline
+                        },
+                        title: {
+                            subtext: "Distribución por Entidad"
+                        },
+                        tooltip: {},
+                        legend: {
+                            left: "right",
+                            data: ["Hombres", "Mujeres"]
+                        },
+                        calculable: true,
+                        grid: {
+                            top: 80,
+                            bottom: 100
+                        },
+                        xAxis: [{
+                            type: "category",
+                            axisLabel: {
+                                interval: 0
+                            },
+                            data: list_xAxis,
+                            splitLine: {
+                                show: false
+                            }
+                        }],
+                        yAxis: [{
+                            type: "value",
+                            name: title_ejey,
+                            max: "dataMax"
+                            //max: 800
+                            //splitNumber: 10
+                        }],
+                        series: [{
+                            name: "Hombres",
+                            type: "bar"
+                        }, {
+                            name: "Mujeres",
+                            type: "bar"
+                        }, {
+                            name: "Total Nacional",
+                            type: "pie",
+                            //center: ["75%", "35%"],
+                            center: ["89%", "18%"],
+                            radius: "20%"
+                        }]
+                    },
+                    options: data_options
+                }
+                option && myChart.setOption(option);
+        }
+
+        function getDataTimeLine(value_init,anyos_line,value_final){
+            let dTL = [];
+            let elem = {
+                value: value_init,
+                tooltip: {
+                    formatter: "{b} (Inicio de la muestra)"
+                },
+                symbol: "diamond",
+                symbolSize: 16
+            };
+            dTL.push(elem);
+
+            anyos_line.forEach(function(d, i) {
+                if( d != value_init && d != value_final )
+                    dTL.push(d);
+            });
+            elem = {
+                value: value_final,
+                tooltip: {
+                    formatter: "{b} (Fin de la muestra)"
+                },
+                symbol: "square",
+                symbolSize: 16
+            };
+            dTL.push(elem);
+            return dTL;
+        }
+
+        /* GRAFICA DE EDADES */
+        function update_gb_edad(entidad,anyo,gt){
+            var settings = {
+                "url": "http://10.249.21.180/explotacion/update_gb_nacional/",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "data": JSON.stringify({
+                    "anio": parseInt(anyo,10),
+                    "ent": parseInt(entidad,10),
+                }),
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                display_echart_line(response.gbarras_edadh,response.gbarras_edadm,gt);
+            });
+        }
+
+        /* GRAFICA DE MEDIOS */
+        function update_gp_edad(entidad,sexo,anyo,gt){
+            var settings = {
+                "url": "http://10.249.21.180/explotacion/update_gp_nacional/",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "data": JSON.stringify({
+                    "anio": parseInt(anyo,10),
+                    "ent": parseInt(entidad,10),
+                    "sexo": parseInt(sexo,10),
+                }),
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                display_echart_pie(response.gpie_tipo,gt);
+            });
+        }
+
+        /* ECHRTS */
+        function init_echarts() {
+            if (typeof (echarts) === 'undefined') { return; }
+            console.log('init_echarts');
+            var theme = {
+                color: [
+                    '#ae0b37', '#232323', '#9a9a9a', '#37ae4a', 
+                    '#4f87c4', '#315b4f', '#FFFF00', '#00FFFF', '#087e65', '#d65721'
+                ],
+                title: {
+                    itemGap: 8,
+                    textStyle: {
+                        fontWeight: 'normal',
+                        color: '#408829'
+                    }
+                },
+                dataRange: {
+                    color: ['#1f610a', '#97b58d']
+                },
+
+                toolbox: {
+                    color: ['#408829', '#408829', '#408829', '#408829']
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    axisPointer: {
+                        type: 'line',
+                        lineStyle: {
+                            color: '#408829',
+                            type: 'dashed'
+                        },
+                        crossStyle: {
+                            color: '#408829'
+                        },
+                        shadowStyle: {
+                            color: 'rgba(200,200,200,0.3)'
+                        }
+                    }
+                },
+                dataZoom: {
+                    dataBackgroundColor: '#eee',
+                    fillerColor: 'rgba(64,136,41,0.2)',
+                    handleColor: '#408829'
+                },
+                grid: {
+                    borderWidth: 0
+                },
+                categoryAxis: {
+                    axisLine: {
+                        lineStyle: {
+                            color: '#408829'
+                        }
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: ['#eee']
+                        }
+                    }
+                },
+                valueAxis: {
+                    axisLine: {
+                        lineStyle: {
+                            color: '#408829'
+                        }
+                    },
+                    splitArea: {
+                        show: true,
+                        areaStyle: {
+                            color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
+                        }
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: ['#eee']
+                        }
+                    }
+                },
+                timeline: {
+                    lineStyle: {
+                        color: '#408829'
+                    },
+                    controlStyle: {
+                        normal: { color: '#408829' },
+                        emphasis: { color: '#408829' }
+                    }
+                },
+                k: {
+                    itemStyle: {
+                        normal: {
+                            color: '#68a54a',
+                            color0: '#a9cba2',
+                            lineStyle: {
+                                width: 1,
+                                color: '#408829',
+                                color0: '#86b379'
+                            }
+                        }
+                    }
+                },
+                map: {
+                    itemStyle: {
+                        normal: {
+                            areaStyle: {
+                                color: '#ddd'
+                            },
+                            label: {
+                                textStyle: {
+                                    color: '#c12e34'
+                                }
+                            }
+                        },
+                        emphasis: {
+                            areaStyle: {
+                                color: '#99d2dd'
+                            },
+                            label: {
+                                textStyle: {
+                                    color: '#c12e34'
+                                }
+                            }
+                        }
+                    }
+                },
+                force: {
+                    itemStyle: {
+                        normal: {
+                            linkStyle: {
+                                strokeColor: '#408829'
+                            }
+                        }
+                    }
+                },
+                chord: {
+                    padding: 4,
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                width: 1,
+                                color: 'rgba(128, 128, 128, 0.5)'
+                            },
+                            chordStyle: {
+                                lineStyle: {
+                                    width: 1,
+                                    color: 'rgba(128, 128, 128, 0.5)'
+                                }
+                            }
+                        },
+                        emphasis: {
+                            lineStyle: {
+                                width: 1,
+                                color: 'rgba(128, 128, 128, 0.5)'
+                            },
+                            chordStyle: {
+                                lineStyle: {
+                                    width: 1,
+                                    color: 'rgba(128, 128, 128, 0.5)'
+                                }
+                            }
+                        }
+                    }
+                },
+                gauge: {
+                    startAngle: 225,
+                    endAngle: -45,
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: [[0.2, '#86b379'], [0.8, '#68a54a'], [1, '#408829']],
+                            width: 8
+                        }
+                    },
+                    axisTick: {
+                        splitNumber: 10,
+                        length: 12,
+                        lineStyle: {
+                            color: 'auto'
+                        }
+                    },
+                    axisLabel: {
+                        textStyle: {
+                            color: 'auto'
+                        }
+                    },
+                    splitLine: {
+                        length: 18,
+                        lineStyle: {
+                            color: 'auto'
+                        }
+                    },
+                    pointer: {
+                        length: '90%',
+                        color: 'auto'
+                    },
+                    title: {
+                        textStyle: {
+                            color: '#333'
+                        }
+                    },
+                    detail: {
+                        textStyle: {
+                            color: 'auto'
+                        }
+                    }
+                },
+                textStyle: {
+                    fontFamily: 'Arial, Verdana, sans-serif'
+                }
+            };
+            return theme;
+        }
+
+        //echart Line (Gráfico de Barras)
+        function display_echart_line(gb_teh,gb_tem,gt){
+            console.log("Display_echart_line");
+            console.log("gb_teh:" + typeof(gb_teh));
+            var echartLine = echarts.init(document.getElementById('echart_line'), gt);
+            echartLine.setOption({
+                // Colores base
+                color: ['#b0aacc', '#8277af', '#54278e', '#673f9a', '#9999CC', '#7d5ba9', '#c3b4d8', '#663399', '#9966CC', '#dcd2e8'],
+                title: {
+                    //text: 'Registros por rangos de edad'
+                    //subtext: 'Hombres y mujeres'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    x: 350,
+                    y: 40,
+                    data: ['Hombres', 'Mujeres']
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                    dataZoom: {
+                        yAxisIndex: "none",
+                        title: { zoom: 'Expandir', back: 'Reestablecer'}
+                    },
+                    dataView: {
+                        readOnly: false,
+                        lang: ['Datos Origen', 'Cerrar', 'Actualizar'],
+                        title: 'Mostrar Datos Origen'
+                    },magicType: {
+                            show: true,
+                            title: {
+                                stack: 'Agrupadas',
+                                tiled: 'Separadas'
+                            },
+                            type: ['stack', 'tiled']
+                        },
+                        restore: {
+                            show: true,
+                            title: "Reestablecer"
+                        },
+                        saveAsImage: {
+                            show: false,
+                            title: "Save Image"
+                        }
+                    }
+                },
+                calculable: true,
+                xAxis: [{
+                    type: 'category',
+                    boundaryGap: true,
+                    data: [{value: '<10', textStyle: {fontSize: 10}}, 
+                            {value: '10-19', textStyle: {fontSize: 10}},
+                            {value: '20-29', textStyle: {fontSize: 10}},
+                            {value: '30-39', textStyle: {fontSize: 10}},
+                            {value: '40-49', textStyle: {fontSize: 10}},
+                            {value: '50-59', textStyle: {fontSize: 10}},
+                            {value: '60-69', textStyle: {fontSize: 10}},
+                            {value: '70-79', textStyle: {fontSize: 10}},
+                            {value: '>79', textStyle: {fontSize: 10}}
+                    ]
+                }],
+                yAxis: [{
+                    type: 'value'
+                    //name: 'Registros'
+                }],
+                series: [{
+                    name: 'Hombres',
+                    type: 'bar',
+                    smooth: true,
+                    itemStyle: {
+                        normal: {
+                            areaStyle: {
+                                type: 'default'
+                            }
+                        }
+                    },
+                    data: gb_teh
+                }, {
+                    name: 'Mujeres',
+                    type: 'bar',
+                    smooth: true,
+                    itemStyle: {
+                        normal: {
+                            areaStyle: {
+                                type: 'default'
+                            }
+                        }
+                    },
+                    data: gb_tem
+                }]
+            });
+        }
+
+	//echart Pie
+	function display_echart_pie(gp_tt, gt) {
+		console.log("foo bar");
+		var echartPie = echarts.init(document.getElementById('echart_pie'), gt);
+		console.log(echartPie);
+        echartPie.setOption({
+            // Colores base
+			color: ['#673f9a', '#b0aacc', '#54278e', '#dcd2e8', '#9999CC', '#7d5ba9', '#c3b4d8', '#663399', '#8277af', '#9966CC'],
+			tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+			textStyle: {
+                color: '#000000'
+				},
+            legend: {
+				textStyle: {
+				color: '#000000'
+				},
+				x: 'center',
+                y: 'bottom',
+                data: ['Envenenamiento', 'Ahorcamiento', 'Ahogamiento', 'Arma de fuego', 'Otro medio']
+            },
+            toolbox: {
+                show: false,
+                feature: {
+                    magicType: {
+                        show: true,
+                        type: ['pie', 'funnel'],
+                        option: {
+                            funnel: {
+                                x: '25%',
+                                width: '50%',
+                                funnelAlign: 'left',
+                                max: 1548
+                            }
+                        }
+                    },
+                    restore: {
+                        show: true,
+                        title: "Restore"
+                    },
+                    saveAsImage: {
+                        show: true,
+                        title: "Save Image"
+                    }
+                }
+            },
+            calculable: true,
+            series: [{
+                name: 'Mortalidad por suicidio',
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '50%'],
+                data: gp_tt
+            }]
+        });
+        var dataStyle = {
+            normal: {
+                label: {
+                    show: false
+                },
+                labelLine: {
+                    show: false
+                }
+            }
+        };
+        var placeHolderStyle = {
+            normal: {
+                color: 'rgba(0,0,0,0)',
+                label: {
+                    show: false
+                },
+                labelLine: {
+                    show: false
+                }
+            },
+            emphasis: {
+                color: 'rgba(0,0,0,0)'
+            }
+        };
+    }    
+
+    function construirDistribucion(distrubucion_data,sexo,medio){
+        sexo = parseInt(sexo)
+        medio = parseInt(medio)
+        let medios = ['Envenenamiento','Ahorcamiento','Ahogamiento','Arma de fuego','Otros medios']
+        let thead = document.getElementById("thead")
+        thead.innerHTML = "";
+        let thm = ""
+        let thh = ""
+
+        /* 0,0 */
+        let theadTr = document.createElement("tr")
+        let th = document.createElement("th")
+        let txt = document.createTextNode("Nacional")
+        th.className = "sorting_asc"
+        th.setAttribute("tabindex","0")
+        th.setAttribute("aria-controls","datatable")
+        th.setAttribute("rowspan","1")
+        th.setAttribute("colspan","1")
+        th.setAttribute("aria-sort","ascending")
+        th.setAttribute("aria-label","Name: activate to sort column descending")
+        th.setAttribute("style","width: 254px;")
+        th.appendChild(txt)
+        theadTr.appendChild(th)
+        
+        /* Fila de años */
+        anios_array.forEach( e => {
+            
+            if( sexo === 0 && medio === 6 ){
+                medios.forEach( m => {
+                    th = document.createElement("th")
+                    th.className = "sorting"
+                    th.setAttribute("tabindex","0")
+                    th.setAttribute("aria-controls","datatable")
+                    th.setAttribute("rowspan","1")
+                    th.setAttribute("colspan","1")
+                    th.setAttribute("aria-label",e+": activate to sort column ascending")
+                    th.setAttribute("style","width: 154px; text-align: center")
+                    txt = document.createTextNode(e)
+                    th.appendChild(txt)
+                    theadTr.appendChild(th)
+                    th = document.createElement("th")
+                    th.className = "sorting"
+                    th.setAttribute("tabindex","0")
+                    th.setAttribute("aria-controls","datatable")
+                    th.setAttribute("rowspan","1")
+                    th.setAttribute("colspan","1")
+                    th.setAttribute("aria-label",e+": activate to sort column ascending")
+                    th.setAttribute("style","width: 154px; text-align: center")
+                    txt = document.createTextNode(e)
+                    th.appendChild(txt)
+                    theadTr.appendChild(th)
+                })
+            }else if( sexo !== 0 && medio === 6 ){
+                medios.forEach( m => {
+                    th = document.createElement("th")
+                    th.className = "sorting"
+                    th.setAttribute("tabindex","0")
+                    th.setAttribute("aria-controls","datatable")
+                    th.setAttribute("rowspan","1")
+                    th.setAttribute("colspan","1")
+                    th.setAttribute("aria-label",e+": activate to sort column ascending")
+                    th.setAttribute("style","width: 154px; text-align: center")
+                    txt = document.createTextNode(e)
+                    th.appendChild(txt)
+                    theadTr.appendChild(th)
+                })
+            }else if( sexo === 0 && medio !== 6 ){
+                th = document.createElement("th")
+                th.className = "sorting"
+                th.setAttribute("tabindex","0")
+                th.setAttribute("aria-controls","datatable")
+                th.setAttribute("rowspan","1")
+                th.setAttribute("colspan","1")
+                th.setAttribute("aria-label",e+": activate to sort column ascending")
+                th.setAttribute("style","width: 154px; text-align: center")
+                txt = document.createTextNode(e)
+                th.appendChild(txt)
+                theadTr.appendChild(th)
+                th = document.createElement("th")
+                th.className = "sorting"
+                th.setAttribute("tabindex","0")
+                th.setAttribute("aria-controls","datatable")
+                th.setAttribute("rowspan","1")
+                th.setAttribute("colspan","1")
+                th.setAttribute("aria-label",e+": activate to sort column ascending")
+                th.setAttribute("style","width: 154px; text-align: center")
+                txt = document.createTextNode(e)
+                th.appendChild(txt)
+                theadTr.appendChild(th)
+            }else{
+                th = document.createElement("th")
+                th.className = "sorting"
+                th.setAttribute("tabindex","0")
+                th.setAttribute("aria-controls","datatable")
+                th.setAttribute("rowspan","1")
+                th.setAttribute("colspan","1")
+                th.setAttribute("aria-label",e+": activate to sort column ascending")
+                th.setAttribute("style","width: 154px; text-align: center")
+                txt = document.createTextNode(e)
+                th.appendChild(txt)
+                theadTr.appendChild(th)
+            }
+        })
+        thead.appendChild(theadTr)
+
+        /* Fila de sexo */
+        if( sexo == 0 ){
+            theadTr = document.createElement("tr")
+            th = document.createElement("th")
+            txt = document.createTextNode("Sexo")
+            th.className = "sorting_asc"
+            th.setAttribute("tabindex","0")
+            th.setAttribute("aria-controls","datatable")
+            th.setAttribute("rowspan","1")
+            th.setAttribute("colspan","1")
+            th.setAttribute("aria-sort","ascending")
+            th.setAttribute("aria-label","Name: activate to sort column descending")
+            th.setAttribute("style","width: 254px; text-align: center")
+            th.appendChild(txt)
+            theadTr.appendChild(th)
+            
+            if( medio == 6 ){
+                anios_array.forEach( e => {
+                    medios.forEach( m => {
+                        thm = document.createElement("th")
+                        thm.className = "sorting"
+                        thm.setAttribute("tabindex","0")
+                        thm.setAttribute("aria-controls","datatable")
+                        thm.setAttribute("rowspan","1")
+                        thm.setAttribute("colspan","1")
+                        thm.setAttribute("aria-label","M: activate to sort column ascending")
+                        thm.setAttribute("style","width: 154px; text-align: center")
+                        txt = document.createTextNode("M")
+                        thm.appendChild(txt)
+                        theadTr.appendChild(thm)
+                    })
+                    medios.forEach( m => {
+                        thh = document.createElement("th")
+                        thh.className = "sorting"
+                        thh.setAttribute("tabindex","0")
+                        thh.setAttribute("aria-controls","datatable")
+                        thh.setAttribute("rowspan","1")
+                        thh.setAttribute("colspan","1")
+                        thh.setAttribute("aria-label","H: activate to sort column ascending")
+                        thh.setAttribute("style","width: 154px; text-align: center")
+                        txt = document.createTextNode("H")
+                        thh.appendChild(txt)
+                        theadTr.appendChild(thh)
+                    })
+                })
+            }else{
+                anios_array.forEach( e => {
+                    thm = document.createElement("th")
+                    thm.className = "sorting"
+                    thm.setAttribute("tabindex","0")
+                    thm.setAttribute("aria-controls","datatable")
+                    thm.setAttribute("rowspan","1")
+                    thm.setAttribute("colspan","1")
+                    thm.setAttribute("aria-label","M: activate to sort column ascending")
+                    thm.setAttribute("style","width: 154px; text-align: center")
+                    txt = document.createTextNode("M")
+                    thm.appendChild(txt)
+                    theadTr.appendChild(thm)
+                    thh = document.createElement("th")
+                    thh.className = "sorting"
+                    thh.setAttribute("tabindex","0")
+                    thh.setAttribute("aria-controls","datatable")
+                    thh.setAttribute("rowspan","1")
+                    thh.setAttribute("colspan","1")
+                    thh.setAttribute("aria-label","H: activate to sort column ascending")
+                    thh.setAttribute("style","width: 154px; text-align: center")
+                    txt = document.createTextNode("H")
+                    thh.appendChild(txt)
+                    theadTr.appendChild(thh)
+                })
+            }
+            thead.appendChild(theadTr)
+        }
+
+        if( medio == 6 ){
+            theadTr = document.createElement("tr")
+            th = document.createElement("th")
+            txt = document.createTextNode("Medio")
+            th.className = "sorting_asc"
+            th.setAttribute("tabindex","0")
+            th.setAttribute("aria-controls","datatable")
+            th.setAttribute("rowspan","1")
+            th.setAttribute("colspan","1")
+            th.setAttribute("aria-sort","ascending")
+            th.setAttribute("aria-label","Name: activate to sort column descending")
+            th.setAttribute("style","width: 254px; text-align: center")
+            th.appendChild(txt)
+            theadTr.appendChild(th)
+
+            anios_array.forEach( e => {
+                medios.forEach( m => {
+                    th = document.createElement("th")
+                    th.className = "sorting"
+                    th.setAttribute("tabindex","0")
+                    th.setAttribute("aria-controls","datatable")
+                    th.setAttribute("rowspan","1")
+                    th.setAttribute("colspan","1")
+                    th.setAttribute("aria-label",e+": activate to sort column ascending")
+                    th.setAttribute("style","width: 154px; text-align: center")
+                    txt = document.createTextNode(m)
+                    th.appendChild(txt)
+                    theadTr.appendChild(th)
+                })
+                medios.forEach( m => {
+                    th = document.createElement("th")
+                    th.className = "sorting"
+                    th.setAttribute("tabindex","0")
+                    th.setAttribute("aria-controls","datatable")
+                    th.setAttribute("rowspan","1")
+                    th.setAttribute("colspan","1")
+                    th.setAttribute("aria-label",e+": activate to sort column ascending")
+                    th.setAttribute("style","width: 154px; text-align: center")
+                    txt = document.createTextNode(m)
+                    th.appendChild(txt)
+                    theadTr.appendChild(th)
+                })
+            })
+            thead.appendChild(theadTr)
+        }
+        
+        /* tbody */
+        console.log("tbody")
+        let tbody = document.getElementById("tbody")
+        tbody.innerHTML = "";
+        let td = ""
+        let count = 1
+        let clase = "odd rowtablepage tp"
+
+        entidades.forEach( entidad => {
+            tr = document.createElement("tr")
+            if( entidad.cve_ent%9 == 0 ){
+                count = count + 1;
+            }
+            tr.className = clase+count.toString()
+            td = document.createElement("td")
+            td.className = "sorting_1"
+            txt = document.createTextNode(entidad.noment)
+            td.appendChild(txt)
+            tr.appendChild(td)
+            anios_array.forEach( a => {
+                distrubucion_data.forEach( d => {
+                    if( d.cve_ent == entidad.cve_ent && d.anio == a ){
+                        if( medio != 6 ){
+                            td = document.createElement("td")
+                            /* txt = document.createTextNode(d.cve_ent+"-"+a+" "+d.suic) */
+                            td.setAttribute("style","text-align: center")
+                            txt = document.createTextNode(d.suic)
+                            td.appendChild(txt)
+                            tr.appendChild(td)
+                        }else{
+                            td = document.createElement("td")
+                            td.setAttribute("style","text-align: center")
+                            txt = document.createTextNode(d.m1)
+                            td.appendChild(txt)
+                            tr.appendChild(td)
+
+                            td = document.createElement("td")
+                            td.setAttribute("style","text-align: center")
+                            txt = document.createTextNode(d.m2)
+                            td.appendChild(txt)
+                            tr.appendChild(td)
+
+                            td = document.createElement("td")
+                            td.setAttribute("style","text-align: center")
+                            txt = document.createTextNode(d.m3)
+                            td.appendChild(txt)
+                            tr.appendChild(td)
+
+                            td = document.createElement("td")
+                            td.setAttribute("style","text-align: center")
+                            txt = document.createTextNode(d.m4)
+                            td.appendChild(txt)
+                            tr.appendChild(td)
+
+                            td = document.createElement("td")
+                            td.setAttribute("style","text-align: center")
+                            txt = document.createTextNode(d.m5)
+                            td.appendChild(txt)
+                            tr.appendChild(td)
+                        }
+                    }
+                })
+            })
+            tbody.appendChild(tr)
+        })
+        downloadTable();
+    }
+
+
+    function update_table(sexo,edad,medio){
+        var separador = edad.indexOf(',');
+        var size = edad.length;
+        var settings = {
+            "url": "http://10.249.21.180/explotacion/update_tb_distribucion/",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({
+                "sexo": parseInt(sexo,10),
+                "medio": parseInt(medio,10),
+                "edadi": parseInt(edad.substring(0,separador),10),
+                "edadf": parseInt(edad.substring(separador+1,size),10)
+            }),
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log("update_tb_distribucion");
+            console.log(response);
+            construirDistribucion(response,sexo,medio);
+        });
+    }
+    </script>
+    <script defer async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA09vQhZhG6svDBJaik7Xs3vO0vmSvqCYE&callback=initMap"></script>
+{% endblock %}

@@ -1,0 +1,178 @@
+<div class="row" style="height: 98px; background-color: #ae0b37; ">
+    <div class="col-12 col-sm-12 col-md-2 col-xl-2 col-lg-2">
+        <div class="navbar nav_title bk_logo" id="logo1" style="border: 0;">
+            <a href="{% url 'index' %}" class="logolink">
+            </a>
+        </div>
+        <div class="nav_toggle" id="myToggle">
+            <a id="menuToggle"><i class="fa fa-bars"></i></a>
+        </div>
+        <div class="bk_logo" id="logo2" style="border: 0;">
+            <a href="{% url 'index' %}" class="logolink">
+            </a>
+        </div>
+        <div class="" id="verticalmenu">
+            <div id="menuviewport">
+                        <div><a href="{% url 'index' %}">Inicio</a></div>
+                        <hr/>
+                        <div><a href="{% url 'admin_sistema:form_registro' %}">Registro</a></div>
+                        <hr/>
+                        <div class="sublink">Consultar
+                            <div class="minisubmenu">
+                                <div class="minisubmenuitem">
+                                    <div class="sublink2">Mortalidad
+                                        <div class="minisubmenu2">
+                                            <div class="minisubmenuitem">
+                                                <a href="tm_mortalidad-trastornos.html">Trastornos por uso de substancias</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="tm_mortalidad-alcohol.html">Alcohol</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="tm_mortalidad-drogas.html">Drogas</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="tm_mortalidad-homicidio.html">Homicidio</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="tm_mortalidad-lesiones.html">Lesiones autoinfligidas</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="tm_mortalidad-accidente.html">Accidentes de tránsito</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="suicidios.html">Suicidios</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="minisubmenuitem">
+                                    <div class="sublink2">Recursos
+                                        <div class="minisubmenu2">
+                                            <div class="minisubmenuitem">
+                                                <a href="recursos-psiquiatras.html">Psiquiátras</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="recursos-psicologos.html">Psicólogos</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="recursos-equipos.html">Equipos de salud mental</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="recursos-unidades.html">Unidades de salud mental y adicciones</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="recursos-camas.html">Camas psiquiátricas</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="minisubmenuitem">
+                                    <div class="sublink2">Egresos
+                                        <div class="minisubmenu2">
+                                            <div class="minisubmenuitem">
+                                                <a href="egresos-trastornos.html">Trastornos por uso de substancias</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="egresos-alcohol.html">Alcohol</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="egresos-drogas.html">Drogas</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="egresos-homicidio.html">Homicidio</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="egresos-lesiones.html">Lesiones autoinfligidas</a>
+                                            </div>
+                                            <div class="minisubmenuitem">
+                                                <a href="egresos-accidente.html">Accidentes de tránsito</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="sublink">Esquemas
+                            <div class="minisubmenu">
+                                <div class="minisubmenuitem"><a href="servicios.html">Esquema de clasificación de servicios de Salud Mental</a></div>
+                                <div class="minisubmenuitem"><a href="salud_mental.html">Fuentes de Información en Salud Mental y Adicciones</a></div>
+                                <div class="minisubmenuitem"><a href="organizacion_servicios.html">Organización de los Servicios de Salud en México</a></div>
+								<div class="minisubmenuitem"><a href="indicadores.html">Indicadores de Salud Mental</a></div>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="sublink">¿Quiénes somos?
+                            <div class="minisubmenu">
+                                <div class="minisubmenuitem"><a href="equipo.html">Equipo</a></div>
+                                <div class="minisubmenuitem"><a href="instituciones_participantes.html">Instituciones participantes</a></div>
+                                <div class="minisubmenuitem"><a href="antecedentes.html">Antecedentes</a></div>
+                                <div class="minisubmenuitem"><a href="ubicacion.html">Ubicación</a></div>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="sublink">Acerca de ...
+                            <div class="minisubmenu">
+                                <div class="minisubmenuitem"><a href="informacion_sistema.html">Información del sistema</a></div>
+                                <div class="minisubmenuitem"><a href="agradecimientos_especiales.html">Agradecimientos especiales</a></div>
+                                <div class="minisubmenuitem"><a href="{% url 'admin_sistema:aviso' %}">Aviso de privacidad</a></div>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div><a href="{% url 'admin_sistema:login' %}">Ingresar {{ name }}</a></div>
+                    </div>
+        </div>
+    </div>
+    <div class="col-md-10 col-xl-10 col-lg-10">
+         <div class="topnav" id="myTopnav">
+           <ul>
+               <li class="menulist"><a href="{% url 'index' %}" class="active">Inicio</a></li>
+               <li class="menulist"><a href="{% url 'admin_sistema:form_registro' %}">Registro</a></li>
+               <li class="menulist submenuItems">
+                   <a href="#">Consultar</a>
+                   <ul class="submenucontainer">
+                       <li class="submenulist"><a href="index_mapa_filtros.html">Tasa de mortalidad por accidentes de tráfico de vehículo de motor</a></li>
+                       <li class="submenulist"><a href="index_mapa_filtros.html">Tasa de mortalidad por suicidios</a></li>
+                       <li class="submenulist"><a href="index_mapa_filtros.html">Tasa de mortalidad por trastornos mentales y por uso de sustancias</a></li>
+                   </ul>
+               </li>
+               <li class="menulist submenuItems">
+                   <a href="quienes_somos.html">¿Quiénes somos?</a>
+                   <ul class="submenucontainer">
+                       <li class="submenulist"><a href="mision_vision.html">Misión y visión</a></li>
+                       <li class="submenulist"><a href="integridad_etica.html">Integridad ética</a></li>
+                       <li class="submenulist"><a href="mensajes_director.html">Mensaje del director</a></li>
+                       <li class="submenulist"><a href="gobierno_direccion.html">Gobierno y dirección</a></li>
+                       <li class="submenulist"><a href="antecedentes.html">Antecedentes</a></li>
+                       <li class="submenulist"><a href="fundador_instituto.html">Fundador del instituto</a></li>
+                       <li class="submenulist"><a href="financiamiento.html">Financiamiento</a></li>
+                       <li class="submenulist"><a href="ubicacion.html">Ubicación</a></li>
+                   </ul>
+               </li>
+               <li class="menulist submenuItems">
+                 <a href="">Acerca de ...</a>
+                   <ul class="submenucontainer">
+                       <li class="submenulist"><a href="informacion_sistema.html">Información del sistema</a></li>
+                       <li class="submenulist"><a href="agradecimientos_especiales.html">Agradecimientos especiales</a></li>
+                       <li class="submenulist"><a href="aviso_privacidad.html">Aviso de privacidad</a></li>
+                   </ul>
+               </li>
+            </ul>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+            </a>
+            {% if user.is_authenticated %}
+                <span class="lnk-ingresar"><a href="{% url 'admin_sistema:logout' %}">Salir</a></span>
+                <div class="user-login">                
+                    <span><i class="fa fa-user"></i> &nbsp; {{ name }}</span>
+                </div>
+            {% else %}
+                <span class="lnk-ingresar"><a href="{% url 'admin_sistema:login' %}">Ingresar</a></span>
+            {% endif %}
+        </div>
+    </div>
+ </div>
+ <div class="titulosistema">
+     <h3>Plataforma de Análisis Geoestadístico en Salud Mental - <strong>PANGEOS-MX</strong></h3>
+ </div>

@@ -1,0 +1,135 @@
+{% extends 'admin_sistema/base.html' %}
+
+{% load static %}
+
+{% block head %}    
+    <!-- Bootstrap -->
+    <link href="{% static 'vendors/bootstrap/dist/css/bootstrap-slider.min.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+  <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+    <!-- INTROJS -->
+    <link href="{% static 'vendors/introjs/css/introjs.min.css' %}" rel="stylesheet"/>
+  <!-- switch personalizado -->
+    <!-- <link rel="stylesheet" href="../vendors/pangeos/build/css/switch.css" type="text/css"> -->
+
+    <link href="{% static 'vendors/sweetalert/dist/sweetalert2.min.css' %}" rel="stylesheet"/>
+
+    <!--MAPS  -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <link href="{% static 'vendors/pangeos/css/pangeos.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/pangeos/css/pangeos-mapas.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" role="main" >
+          <div class="titulosistema">
+              <!-- <h3>Plataforma de Análisis Geoestadístico en Salud Mental - <strong>PANGEOS-MX</strong></h3> -->
+          </div>
+          <section class="seccion_odd section-first">
+              <div class="row">
+                  <div class="wrapper_text">
+                    <div><h3>Aviso de privacidad</h3></div>
+                    <div class="col-1 colxm-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                      <!-- Inicia aviso de privacidad -->
+                        <div id="privacidad">
+                            <p>Instituto Nacional de Psiquiatría Juan Ramón de la Fuente ubicado en Calzada México Xochimilco No. 101, colonia San Lorenzo Huipulco, Tlalpan. C.P. 14370 Ciudad de México; es responsable de recabar sus datos personales, del uso que se le d&eacute; a los mismos y su protecci&oacute;n.</p>
+                            <p>Su informaci&oacute;n personal ser&aacute; utilizada para proveer los servicios y productos que ha solicitado e informarle sobre cambios en los mismos. Para las finalidades antes mencionadas, requerimos obtener los siguientes datos personales:</p>
+                            <ul>
+                                <li>Nombre.</li>
+                                <li>Apellidos.</li>
+                                <li>Correo electr&oacute;nico</li>
+                                <li>CURP</li>
+                                <li>Edad</li>
+                                <li>Género</li>
+                                <li>Escolaridad.</li>
+                                <li>Institución del último grado de estudios.</li>
+                                <li>Área de estudios.</li>
+                            </ul>
+                            <p>considerado como sensible seg&uacute;n la Ley Federal de Protecci&oacute;n de Datos Personales en Posesi&oacute;n de los Particulares.</p>
+                            <p>Para las finalidades se&ntilde;aladas en el presente aviso de privacidad, podemos recabar sus datos personales de distintas formas:</p>
+                            <ul>
+                                <li>Cuando usted nos los proporciona directamente al dar de alta su cuenta en el sitio.</li>
+                                <li>Cuando visita nuestro sitio de Internet o utiliza nuestros servicios en l&iacute;nea, mediante cookies.</li>
+                                <li>Y cuando obtenemos informaci&oacute;n a trav&eacute;s de otras fuentes que est&aacute;n permitidas por la ley.</li>
+                            </ul>
+                            <p>Los datos que obtenemos por este medio pueden ser, entre otros:</p>
+                            <ul>
+                                <li>Nombre.</li>
+                                <li>Apellidos.</li>
+                                <li>Correo electr&oacute;nico</li>
+                                <li>CURP</li>
+                                <li>Edad</li>
+                                <li>Género</li>
+                                <li>Escolaridad.</li>
+                                <li>Institución del último grado de estudios.</li>
+                                <li>Área de estudios.</li>
+                            </ul>
+                            <p>Usted tiene derecho de acceder, rectificar y cancelar sus datos personales, as&iacute; como de oponerse al tratamiento de los mismos o revocar el consentimiento que para tal fin nos haya otorgado, a trav&eacute;s de la liga ubicada en el pie de cualquier p&aacute;gina dentro de <a href="https://demoinp.gaipp.mx/production/">PANGEOS</a> com&eacute;ntandonos expl&iacute;citamente qu&eacute; datos requiere rectificar o cancelar. O puede solicitar informaci&oacute;n mand&aacute;ndonos un correo electr&oacute;nico a <a href="mailto:informes@inpjrdf.com">informes@inpjrdf.com</a> y también puede solicitar los cambios o información comunicándose con nosotros al teléfono 55 5555 5555 extensión 0123.</p>
+                            <p>La fecha de la &uacute;ltima actualizaci&oacute;n al presente aviso de privacidad: 19 de Abril de 2022.</p>
+                        </div>
+                      <!-- Termina aviso de privacidad -->
+                    </div>
+                    <div class="col-1 colxm-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                  </div>
+              </div>
+          </section>
+</div>
+{% endblock %}
+
+
+
+{% block script %}
+    <!-- jQuery -->
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'vendors/fastclick/lib/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'vendors/nprogress/nprogress.js' %}"></script>
+    <!-- Chart.js -->
+    <script src="{% static 'vendors/Chart.js/dist/Chart.min.js' %}"></script>
+    <!-- gauge.js -->
+    <script src="{% static 'vendors/gauge.js/dist/gauge.min.js' %}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+    <!-- iCheck -->
+    <script src="{% static 'vendors/iCheck/icheck.min.js' %}"></script>
+    <!-- Skycons -->
+    <script src="{% static 'vendors/skycons/skycons.js' %}"></script>
+    <!-- Flot -->
+    <script src="{% static 'vendors/Flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.resize.js' %}"></script>
+    <!-- Flot plugins -->
+    <script src="{% static 'vendors/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>
+    <script src="{% static 'vendors/flot-spline/js/jquery.flot.spline.min.js' %}"></script>
+    <script src="{% static 'vendors/flot.curvedlines/curvedLines.js' %}"></script>
+    <!-- DateJS -->
+    <script src="{% static 'vendors/DateJS/build/date.js' %}"></script>
+    <!-- JQVMap -->
+    <script src="{% static 'vendors/jqvmap/dist/jquery.vmap.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+    <!-- jQuery autocomplete -->
+    <script src="{% static 'vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js' %}"></script>
+
+    <!-- jQuery multiselect -->
+    <script type="text/javascript" src="{% static 'vendors/pangeos/build/js/jquery-multiple-select/bootstrap-multiselect.js' %}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'vendors/pangeos/build/js/custom.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos.js' %}"></script>
+
+{% endblock %}

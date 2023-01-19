@@ -1,0 +1,123 @@
+{% extends 'admin_sistema/base.html' %}
+
+{% load static %}
+
+{% block head %}
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+
+    <link href="{% static 'src/css/Spacetree.css' %}" rel="stylesheet" />
+    <link href="{% static 'src/css/baseINP.css' %}" rel="stylesheet">
+    <link href="{% static 'src/css/Spacetree.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/pangeos/css/pangeos.css' %}" rel="stylesheet">
+
+	<!-- JIT Library File -->
+	<script src="{% static 'src/js/jit.js' %}"></script>
+	<!-- Example File -->
+	<script src="{% static 'src/js/servicios.js' %}"></script>
+
+    
+{% endblock %}
+
+
+{% block content %}
+        <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" role="main" >
+          <section class="seccion_odd section-first" id="servicios">
+				<div class="row">
+				  <div class="wrapper_text">
+					<table>
+								<tr>
+									<td>
+										<span id="titulo"><br>Orientación</span>
+									</td>
+									<td></td><td></td>
+									<td>
+										<a href="#" id="reset" onclick="window.location.reload();"><br><br>Reestablecer</a>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="#" id="TestBtn" class="test">Mostrar en pantalla completa</a>
+										<div id="testDiv">
+										</div>
+									</td>
+									<td></td>
+									<td>
+										<h3 style="margin-bottom: 0px;">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											Esquema de clasificación de servicios de Salud Mental
+										</h3>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="r-left">Horizontal </label>
+									</td>
+									<td>
+										<input type="radio" id="r-left" name="orientation" checked="checked" value="left" />
+									</td>
+										<input type="hidden" id="s-normal" name="selection" checked="checked" value="normal" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="r-top">Vertical </label>
+									</td>
+									<td>
+										<input type="radio" id="r-top" name="orientation" value="top" />
+									</td>
+								</tr>
+							</table>
+				  </div>
+                  <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12">
+												
+						<div class="row"id="center-container">
+							
+							<div id="infovis" style="height: 420px;"></div>    
+							<div id="log"></div>
+						</div>
+                    </div>
+                  
+              </div>
+          </section>
+        </div>
+
+
+       <!-- /page content -->
+      </div>
+    </div>
+{% endblock %}
+
+
+
+{% block script %}
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    	init();
+		alto= screen.height - 275;
+		alto_iframe = screen.height - 120;
+		ancho= screen.width - 10;
+		document.getElementById("infovis").style.height = alto+"px";
+		//alert(altura);
+		
+		$(function () {
+            $("#TestBtn").click(function () {
+                opendialog("{% url 'admin_sistema:servicios_fs' %}");
+            });
+
+            function opendialog(page) {
+                var $dialog = $('#testDiv')
+                    .html('<iframe style="border: 0px; " src="' + page + '" width="100%" height="99%"></iframe>')
+                    .dialog({
+                        tautoOpen: false,
+                        dialogClass: 'dialog_fixed,ui-widget-header',
+                        modal: true,
+						width: ancho,
+                        height: alto_iframe,
+                        minWidth: 400,
+                        minHeight: 650,
+                        draggable: true
+                    });
+                $dialog.dialog('open');
+            }
+        });
+	</script>
+{% endblock %}

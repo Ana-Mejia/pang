@@ -1,0 +1,81 @@
+#equipo {
+	width: 80%;
+    margin: auto;
+    margin-top: 50px;
+}
+.bloque-integrante {
+	margin-bottom: 50px;
+    border-radius: 110px 15px 35px 0px;
+    box-shadow: 5px 5px 5px 5px #dfdfdf;
+	background: #af5770;
+	min-height: 250px;
+	background: #5d4f9c;
+	background: -moz-linear-gradient(top,  #5d4f9c 0%, #776fd6 50%, #7b74c9 51%, #b4b0e5 100%);
+	background: -webkit-linear-gradient(top,  #5d4f9c 0%,#776fd6 50%,#7b74c9 51%,#b4b0e5 100%);
+	background: linear-gradient(to bottom,  #5d4f9c 0%,#776fd6 50%,#7b74c9 51%,#b4b0e5 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d4f9c', endColorstr='#b4b0e5',GradientType=0 );
+
+/*	background: -moz-linear-gradient(top,  #af5770 0%, #af3a5b 49%, #b10135 51%, #af3155 100%);
+	background: -webkit-linear-gradient(top,  #af5770 0%,#af3a5b 49%,#b10135 51%,#af3155 100%);
+	background: linear-gradient(to bottom,  #af5770 0%,#af3a5b 49%,#b10135 51%,#af3155 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#af5770', endColorstr='#af3155',GradientType=0 );*/
+}
+
+.bloque-integrante img {
+	border-radius: 140px;
+    width: 100%;
+    position: relative;
+    left: -10px;
+    border: 10px solid white;
+}
+
+.bloque-integrante .img-integrante {
+	width: 100%;
+	height: 100%;
+	display: block;
+	min-width: 110px;
+	max-width: 270px;
+}
+
+.bloque-integrante h3, .bloque-integrante span {
+	color: #FFF;
+}
+
+.bloque-integrante .info-integrante {
+	margin: 0px 15px;
+}
+
+@media (max-width:  991px) {
+	.img-integrante img {
+		border-radius: 305px;
+		left: 0px;
+	}
+
+	.bloque-integrante .img-integrante {
+		margin: auto;
+		max-width: 600px;
+	}
+
+	.bloque-integrante {
+		border-radius: 305px 305px 35px 35px;
+		padding-bottom: 50px;
+	}
+
+	.nospacecol {
+		padding: 0px !important;
+	}
+}
+
+@media (min-width: 1200px) {
+	.bloque-integrante {
+		border-radius: 135px 15px 35px 0px;
+		padding-bottom: 50px;
+	}
+}
+
+/*@media (min-width: 1450px) {
+	.img-integrante img {
+		border-radius: 305px;
+		left: 0px;
+	}
+}*/

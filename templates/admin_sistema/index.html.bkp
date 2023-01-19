@@ -1,0 +1,87 @@
+{% extends 'admin_sistema/base.html' %}
+
+    {% load static %}
+
+    {% block content %}
+    <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" role="main" >
+        <section class="seccion_odd section-first">
+            <div class="row">
+                <div id="info1" class="infopleca text-center seccion_wrapper">
+                    <div class="infoborder"></div>
+                    <p class="infotext"><strong>Es una Plataforma de Análisis Geoestadístico en Salud Mental</strong> la cual 
+                    <i>reúne en un solo sitio toda la información disponible sobre infraestructura, atención ambulatoria y hospitalaria destinada
+                    a la salud mental y de mortalidad debida a trastornos mentales y de uso de sustancias de 2000 y 2019</i> 
+                    con el fin de retroalimentar la toma de decisiones de políticas públicas en México.</p>
+                </div>
+            </div>
+        </section>
+        <section class="seccion_even">
+            <div class="row">
+                <div id="imagenfondo"></div>
+                <div id="plecacontainer">
+                    <div id="plecacollection">
+                        <div class="plecahome pleca-odd">
+                            <span class="pleca-circle"></span>
+                            <h4 class="pleca-title">Sistematiza</h4>
+                            <p class="recuadrolight">Las bases de datos del Sistema Nacional de Información en Salud relacionada con la salud mental.</p>
+                        </div>
+                        <div class="plecahome pleca-even">
+                            <span class="pleca-circle"></span>
+                            <h4 class="pleca-title">Analiza</h4>
+                            <p class="recuadrodark">Información de recursos humanos, mortalidad, morbilidad y servicios de salud disponibles para la atención a personas con problemas de salud mental.</p>
+                        </div>
+                        <div class="plecahome pleca-odd">
+                            <span class="pleca-circle"></span>
+                            <h4 class="pleca-title">Estima</h4>
+                            <p class="recuadrolight">Indicadores de mortalidad, utilización de servicios, cobertura y disponibilidad de recursos humanos y físicos para la atención a la salud mental.</p>
+                        </div>
+                        <div class="plecahome pleca-even">
+                            <span class="pleca-circle"></span>
+                            <h4 class="pleca-title">Monitorea</h4>
+                            <p class="recuadrodark">El avance de las políticas públicas para la atención a los problemas de salud mental de 2000 a 2019.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="seccion_odd">
+            <div class="row">
+                <div class="seccion_wrapper">
+                    <div class="col-12 col-sm-12 col-md-12 col-xl-4 col-lg-4">
+                        <div id="seccion2-img"></div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-xl-4 col-lg-4">
+                        <div id="seccion2-img-circular" class="circle-info"></div>
+                        <p class="infotext text-center">El Instituto tiene como antecedente el Centro Mexicano de Estudios en Farmacodependencia (CEMEF), creado en 1972 con el fin de atender los aspectos preventivos, curativos y de rehabilitación, relacionados con la farmacodependencia. Sin embargo, debido a la necesidad de ampliar sus funciones y en respuesta a las gestiones su fundador, el Dr. Ramón de la Fuente Muñiz, en junio de 1978 se creó el Centro Mexicano de Estudios en Salud Mental (CEMESAM), con la finalidad de incluir la salud mental.</p>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-xl-4 col-lg-4">
+                        <h2 class="infotitle2 text-right"><strong>Instituto Nacional de Psiquiatría <br>Ramón de la Fuente Muñiz</strong></h2>
+                        <p class="infotext text-right">El Instituto Nacional de Psiquiatría Ramón de la Fuente Muñiz es una institución de atención médica, enseñanza e investigación científica perteneciente a la Secretaría de Salud de México cuya especialidad es la psiquiatría.<br><br>&nbsp;</p>
+                        <div id="seccion2-img-info"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="seccion_even">
+            <div class="row">
+                <div class="col-1 col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                    <h3>Ubicación del Instituto</h3>
+                </div>
+                <div class="col-1 col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+            </div>
+            <div class="row">
+                <div class="col-1 col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                    <h4>Calzada México Xochimilco No. 101, colonia San Lorenzo Huipulco, Tlalpan. C.P. 14370 Ciudad de México.</h4>
+                </div>
+                <div class="col-1 col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3765.7639850615487!2d-99.1546907!3d19.2926272!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce005641628993%3A0x6c4cdf6ecd7f4e63!2sInstituto%20Nacional%20de%20Psiquiatr%C3%ADa%20Dr.%20Ram%C3%B3n%20de%20la%20Fuente%20Mu%C3%B1iz!5e0!3m2!1ses-419!2smx!4v1624758024909!5m2!1ses-419!2smx" width="90%" height="450" style="border:0;" allowfullscreen="" loading="lazy" class="maps"></iframe>
+                </div>
+            </div>
+        </section>
+    </div>
+    {% endblock %}

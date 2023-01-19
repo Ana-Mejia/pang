@@ -1,0 +1,32 @@
+        #serveranswer { display: none; }
+        #loginform {
+            background-color: #fcfcfc !important;
+            padding: 15px !important;
+            border-radius: 20px !important;
+            -webkit-box-shadow: 5px 5px 5px 5px #3c3266;
+            box-shadow: 5px 5px 5px 5px #3c3266;
+            border: 2px solid #5D4F9C;
+        }
+        #loginform h1:after, #loginform h1:before {
+            content: "" !important;
+            height: 0px !important;
+            width: 0px !important;
+        }
+        #btnLogin {
+            font-size: 1.1em;
+            font-weight: bolder;
+            text-decoration: underline;
+        }
+        .login-btn_wrapper {
+            margin: 15px auto 30px auto;
+        }
+        #logo-login {
+          background-image: url(/static/images/logo-pangeos-ch.jpg);
+          background-size: contain;
+          background-repeat: no-repeat;
+          width: 100%;
+          height: 98px;
+          background-color: #FFF;
+          background-position: center center;
+          background-attachment: inherit;
+        }

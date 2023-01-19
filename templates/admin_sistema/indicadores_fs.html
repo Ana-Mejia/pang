@@ -1,0 +1,87 @@
+{% load static %}
+
+{% block head %}
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <link href="{% static 'src/css/Spacetree.css' %}" rel="stylesheet" />
+    <link href="{% static 'src/css/baseINP.css' %}" rel="stylesheet">
+    <link href="{% static 'src/css/Spacetree.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/pangeos/css/pangeos.css' %}" rel="stylesheet">
+
+	<!-- JIT Library File -->
+	<script src="{% static 'src/js/jit.js' %}"></script>
+	<!-- Example File -->
+	<script src="{% static 'src/js/indicadores.js' %}"></script>
+    
+{% endblock %}
+
+
+{% block content %}
+
+        <!-- page content -->
+        <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" role="main" >
+          <section class="seccion_odd section-first" id="servicios">
+				<div class="row">
+				  <div class="wrapper_text">
+					<table>
+								<tr>
+									<td>
+										<span id="titulo"><br>Orientación</span>
+									</td>
+									<td></td><td></td>
+									<td>
+										<a href="#" id="reset" onclick="window.location.reload();"><br><br>Reestablecer</a>
+									</td>
+									<td></td>
+									<td>
+										<h3 style="margin-bottom: 0px;">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											Indicadores de Salud Mental
+										</h3>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="r-left">Horizontal </label>
+									</td>
+									<td>
+										<input type="radio" id="r-left" name="orientation" checked="checked" value="left" />
+									</td>
+										<input type="hidden" id="s-normal" name="selection" checked="checked" value="normal" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="r-top">Vertical </label>
+									</td>
+									<td>
+										<input type="radio" id="r-top" name="orientation" value="top" />
+									</td>
+								</tr>
+							</table>
+				  </div>
+                  <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12">
+												
+						<div class="row"id="center-container">
+							
+							<div id="infovis" style="height: 600px;"></div>    
+							<div id="log"></div>
+						</div>
+                    </div>
+                  
+              </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+
+
+{% block script %}
+    <script>
+    	init();
+			alto= screen.height - 275;
+			document.getElementById("infovis").style.height = alto+"px";
+	</script>
+{% endblock %}

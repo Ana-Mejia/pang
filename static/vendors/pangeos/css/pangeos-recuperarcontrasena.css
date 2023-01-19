@@ -1,0 +1,31 @@
+        #serveranswer { display: none; }
+        #loginform {
+            background-color: #fcfcfc !important;
+            padding: 15px !important;
+            border-radius: 20px !important;
+            -webkit-box-shadow: 5px 5px 5px 5px #540019;
+            box-shadow: 5px 5px 5px 5px #540019;
+            border: 2px solid #FF014C;
+        }
+        #loginform h1:after, #loginform h1:before {
+            content: "" !important;
+            height: 0px !important;
+            width: 0px !important;
+        }
+        #btnLogin {
+            font-size: 1.1em;
+            font-weight: bolder;
+            text-decoration: underline;
+        }
+        .login-btn_wrapper {
+            margin: 15px auto 30px auto;
+        }
+        .refresh-captcha {
+            color: #008;
+            cursor: pointer;
+            font-size: 0.5em;
+            cursor: pointer;
+            font-size: 0.7em;
+            line-height: 1.3em;
+            text-transform: capitalize;
+        }

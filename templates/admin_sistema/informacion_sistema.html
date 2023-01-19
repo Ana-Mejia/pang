@@ -1,0 +1,137 @@
+{% extends 'admin_sistema/base.html' %}
+
+{% load static %}
+
+{% block head %}    
+    <!-- Bootstrap -->
+    <link href="{% static 'vendors/bootstrap/dist/css/bootstrap-slider.min.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+    <!-- INTROJS -->
+    <link href="{% static 'vendors/introjs/css/introjs.min.css' %}" rel="stylesheet"/>
+    <!-- switch personalizado -->
+    <!-- <link rel="stylesheet" href="../vendors/pangeos/build/css/switch.css" type="text/css"> -->
+
+    <link href="{% static 'vendors/sweetalert/dist/sweetalert2.min.css' %}" rel="stylesheet"/>
+
+    <!--MAPS  -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <link href="{% static 'vendors/pangeos/css/pangeos.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/pangeos/css/pangeos-mapas.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" role="main" >
+          <section class="seccion_even" id="informacion_sistema">
+              <div class="row">
+                  <div class="wrapper_text">
+                    <div><h3>Información del sistema</h3></div>
+                    <div class="col-1 colxm-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                        <p>
+                            La elaboración de PANGEOS-MX se desarrolló en dos etapas.
+                        </p>
+                        <p>
+                            <ol type="I">
+                                <li>
+                                    Estudio transversal retrospectivo a través del análisis de fuentes secundarias de datos de morbilidad y mortalidad, uso de servicios e infraestructura disponible para la atención a trastornos mentales, uso de sustancias y lesiones.
+                                    <p>
+                                        Esta fase implicó la la descarga, limpieza y estandarización de la información pública de aproximadamente 80 bases de datos históricas contenidas en los distintos subsistemas de información en salud.
+                                    </p>
+                                    <p>
+                                        <a href="http://pangeos.mx/production/salud_mental.html">http://pangeos.mx/production/salud_mental.html</a>
+                                    </p>
+                                    <p>
+                                        Este procesamiento se llevó a cabo por cada uno de los componentes:
+                                    </p>
+                                    <p>
+                                        <ol type="1">
+                                          <li>
+                                              Mortalidad: Se analizó un total de 12.5 millones de registros provenientes del ceriticado de defunción con información de 61 variables, se seleccionaron XXX registros de interés.
+                                          </li>
+                                          <li>
+                                              Egresos hospitalarios: Se fusionaron 21 bases de datos generales de egresos hospitalarios, con 11 bases de datos que concentran todas las afecciones detectadas durante la hostitalización y con 11 bases de datos que describen los procedimientos médicos realizados durante la estancia hospitalaria de las personas. En total se procesoaron más de 100 millones de registros con poco más de 100 variables.. Se seleccionaron XXX registros  
+                                          </li>
+                                          <li>
+                                              Uso de servicios. Se integró la información de los servicios otorgados en las unidades de salud a lo largo de los últimos 10 años para lo cual se seleccionaron los servicios otorgados en el primer nivel de atención y se clasificaron según su objetivo.
+                                              <p>
+                                                  <a href="https://demoinp.gaipp.mx/production/servicios.html">https://demoinp.gaipp.mx/production/servicios.html</a>
+                                              </p>
+                                          </li>
+                                          <li>
+                                              Infraestructura. Se fusionaron las bases de datos correspondientes a recursos humanos e infraestructura disponibles en las unidades con la información dque facilita la caracterización y selecciónd e unidades de atención a la salud mental y consumo de sustancias.
+                                              <p>
+                                                  https://demoinp.gaipp.mx/production/organizacion_servicios.html 
+                                              </p>
+                                          </li>
+                                        </ol>
+                                    </p>
+                                </li>
+                                <li>
+                                    Estudio exploratorio con entrevista a informantes claves en la captura de información de los usuarios de los y revisión de expedientes. A través d el cual se pretende confirmar el análisis y la interpretación de la información contenida en PANGEOS-MX.
+                                </li>
+                            </ol>
+                        </p>
+                    </div>
+                    <div class="col-1 colxm-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                  </div>
+              </div>
+          </section>
+</div>
+{% endblock %}
+
+
+
+{% block script %}
+    <!-- jQuery -->
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'vendors/fastclick/lib/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'vendors/nprogress/nprogress.js' %}"></script>
+    <!-- Chart.js -->
+    <script src="{% static 'vendors/Chart.js/dist/Chart.min.js' %}"></script>
+    <!-- gauge.js -->
+    <script src="{% static 'vendors/gauge.js/dist/gauge.min.js' %}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+    <!-- iCheck -->
+    <script src="{% static 'vendors/iCheck/icheck.min.js' %}"></script>
+    <!-- Skycons -->
+    <script src="{% static 'vendors/skycons/skycons.js' %}"></script>
+    <!-- Flot -->
+    <script src="{% static 'vendors/Flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.resize.js' %}"></script>
+    <!-- Flot plugins -->
+    <script src="{% static 'vendors/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>
+    <script src="{% static 'vendors/flot-spline/js/jquery.flot.spline.min.js' %}"></script>
+    <script src="{% static 'vendors/flot.curvedlines/curvedLines.js' %}"></script>
+    <!-- DateJS -->
+    <script src="{% static 'vendors/DateJS/build/date.js' %}"></script>
+    <!-- JQVMap -->
+    <script src="{% static 'vendors/jqvmap/dist/jquery.vmap.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+    <!-- jQuery autocomplete -->
+    <script src="{% static 'vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js' %}"></script>
+
+    <!-- jQuery multiselect -->
+    <script type="text/javascript" src="{% static 'vendors/pangeos/build/js/jquery-multiple-select/bootstrap-multiselect.js' %}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'vendors/pangeos/build/js/custom.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos.js' %}"></script>
+{% endblock %}

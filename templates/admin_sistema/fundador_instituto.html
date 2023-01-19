@@ -1,0 +1,628 @@
+{% extends 'admin_sistema/base.html' %}
+
+{% load static %}
+
+{% block head %}
+<style type="text/css">
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+        padding: 0px !important;
+    }
+    section {
+      margin: 40px auto;
+    }
+    .logolink {
+        width: 100%;
+        height: inherit;
+    }
+
+/***************************************************************************************************************
+INICIO ESTILOS DE MENÚ HORIZONTAL
+***************************************************************************************************************/
+/* Add a black background color to the top navigation */
+.topnav {
+/*background-color: #333;*/
+/*overflow: hidden;*/
+position: absolute;
+bottom: 0px;
+width: 100%;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+float: left;
+display: block;
+color: #f2f2f2;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+font-size: 17px;
+border-radius: 10px 10px 0px 0px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+background-color: #ddd;
+color: black;
+}
+
+/* Add an active class to highlight the current page */
+.topnav a.active {
+background-color: #d82949;
+color: white;
+text-decoration: underline;
+font-weight: bolder;
+}
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+display: none;
+}
+.lnk-ingresar {
+  float: right;
+  margin-right: 3%;
+}
+.menulist {
+  display:block;
+  padding-left:3px;
+  padding-right:3px;
+  height: fit-content;
+}
+.menulist > ul {
+  position: absolute;
+  display: block;
+  background-color: #ae0b37;
+  z-index: 9999;
+  top: 50px;
+  list-style: none;
+  margin: 0px 0px 0px 0px !important;
+  width: 250px;
+  border-radius: 0px 0px 15px 15px;
+}
+#myTopnav > ul {
+  position: absolute;
+  display: flex;
+  list-style: none;
+}
+.submenulist > a {
+  text-align: left !important;
+  color: #f2f2f2;
+}
+.submenulist > a:hover {
+  background-color: #ae0b37;
+  color: #f2f2f2;
+  text-decoration: underline;
+}
+.submenucontainer {
+display: none !important;
+}
+.submenuItems:hover > .submenucontainer {
+  display: block !important;
+}
+/***************************************************************************************************************
+FIN DE ESTILOS DE MENÚ HORIZONTAL
+***************************************************************************************************************/
+    #controles {
+        width: 325px;
+        height: 100vh;
+        z-index: 9999;
+        position: fixed;
+        float: right;
+        right: -325px;
+        top: 0px;
+        bottom: 0px;
+        background-color: #FFF;
+    }
+    #wrapper_controles {
+        width: 100%;
+        float: right;
+        height: 94%;
+        position: relative;
+        height: 100vh;
+    }
+    #handlerwrapper {
+       height: 10%;
+       cursor: pointer;
+    }
+    #menufilterswrapper {
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: 100%;
+        display: block;
+        position: absolute;
+        padding: 10px 30px;
+    }
+    #handler {
+        width: 200px;
+        height: 30px;
+        border-radius: 0px 0px 10px 10px;
+        background-color: #FFF;
+        float: right;
+        right: 240px;
+        position: relative;
+        cursor: pointer;
+        z-index: 99;
+        top: 85px;
+        text-align: center;
+        color: #00f;
+        font-weight: bolder;
+        line-height: 30px;
+        margin: auto;
+        -webkit-transform: rotate(90deg); 
+        -moz-transform: rotate(90deg);
+        font-family: 'Arial';
+    }
+    #formcontainer {
+      background-color: #FFF;
+      height: 100vh;
+    }
+    .boxshadoww {
+        -webkit-box-shadow: 5px 5px 10px 1px #6B6B6B;
+        box-shadow: 5px 5px 10px 1px #6B6B6B;
+    }
+    .boxshadowh {
+        -webkit-box-shadow: 5px 5px 4px 1px #6B6B6B;
+        box-shadow: 5px 5px 4px 1px #6B6B6B;
+    }
+    #edoscontainer, #mupioscontainer {
+      width: auto;
+      min-height: 65px;
+      height: 65px;
+      border: 1px solid grey;
+      border-radius: 3px;
+      margin: 5px 0px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    .closetag {
+      color: #FFF;
+      cursor: pointer;
+      font-weight: bolder;
+      display: table-cell;
+      width: 12px;
+    }
+    .closetagM {
+      color: #777;
+      cursor: pointer;
+      font-weight: bolder;
+      display: table-cell;
+      width: 12px;
+    }
+    .closetagG:hover {
+      color: #F00;
+      text-decoration: underline;
+    }
+    .texttag {
+        cursor: pointer;
+    }
+    .texttagM {
+
+    }
+    .texttagselected {
+        font-weight: bolder;
+        text-decoration: underline;
+    }
+    .btag {
+      display: -webkit-inline-box;
+      padding: 6px; 
+      border-radius: 5px; 
+      margin: 2px;
+    }
+    .sugerenciaMunicipios {
+        display: none;
+        color: #434077;
+        cursor: pointer;
+    }
+    .sugerenciaMunicipios:hover {
+        color: #FF8C00;
+        text-decoration: underline;
+        font-weight: bolder;
+    }
+    #edosviewport, #mupiosviewport {
+      width: auto;
+    }
+    #municipiosopciones {
+        position: absolute;
+        max-height: 300px;
+        min-height: 0px;
+        z-index: 9999;
+        /*top: 178px;
+        left: 901.312px;*/
+        width: 429px;
+        display: block;
+        padding: 2px 5px;
+        font-size: 1.2em;
+        white-space: nowrap;
+        overflow: hidden;
+        background-color: #EEF;
+        display: none;
+    }
+
+    #mapcontainer {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        /*position: absolute;*/
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        /*display: contents;*/
+    }
+    .responsiveimage {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        display: block; 
+        margin: auto;
+    }
+    .nav_toggle {
+        float: left;
+        margin: 0;
+        width: 70px;
+        display: none;
+        /*display: flex;*/
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+    .nav_toggle a {
+        padding: 15px 15px 0;
+        margin: 0;
+        cursor: pointer;
+    }
+    .nav_toggle a i {
+        font-size: 26px;
+    }
+    .bk_logo {
+        background-image: url("{% static 'vendors/pangeos/production/images/logo-INPRFM-ch.png' %}");
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 98px;
+        background-color: #FFF;
+        background-position: center center;
+        background-attachment: inherit;
+    }
+    #verticalmenu {
+        display: none;
+        background-color: white;
+        width: 230px;
+        z-index: 9999;
+        position: relative;
+        float: left;
+        left: -230px;
+        height: 210px;
+        border-radius: 0px 0px 15px 0px;
+    }
+    #menuviewport {
+        width: 100%;
+        padding: 10px 30px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 180px;
+    }
+    .minisubmenu{
+        display: none;
+    }
+    .grey_link {
+        color: silver;
+        font-size: 1em;
+        cursor: pointer;
+        text-align: right;
+    }
+    .section-first {
+      margin-top: 0px !important;
+    }
+    .seccion_odd {
+          background-color: #FFF;
+    }
+    .seccion_even {
+          background-color: #f9f9f9;
+    }
+    #imagenfondo {
+        background: url("{% static 'vendors/pangeos/build/images/inpjrf.jpg' %}") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        width: 100vw;
+        min-height: 500px;
+    }
+    #plecacontainer {
+          position: relative;
+          display: block;
+          min-height: 286pX;
+          width: 100vw;
+          margin-top: -200px;
+    }
+    #plecacollection {
+          width: 100vw;
+          text-align: center;
+    }
+    .titulosistema {
+          width: 100%;
+          text-align: center;
+    }
+    .titulosistema > h3 {
+          font-size: 1.6em !important;
+          color: #7f3c49 !important;
+    }
+    .text-center {
+        text-align: center;
+    }
+    .text-right {
+        text-align: right;
+    }
+    .infopleca {
+        margin: auto;
+        width: 60%;
+    }
+    .plecahome {
+          min-height: 176px;
+          position: relative;
+          max-height: 300px;
+          display: inline-block;
+          margin: -2px;
+          height: 300px;
+          max-width: 216px;
+          min-width: 116px;
+          padding: 15px;
+          vertical-align: bottom;
+    }
+    .pleca-odd {
+          background-color: #a98e93;
+    }
+    .pleca-even {
+        background-color: #7f3c49;
+    }
+    .pleca-circle {
+          height: 50px;
+          width: 50px;
+          background-image: none;
+          margin: 27px auto 0;
+          background-color: #ffffff;
+          display: block;
+          line-height: 0;
+          border-width: 0px;
+          border-radius: 50%;
+    }
+    .pleca-title {
+          font-size: 1.25rem;
+          margin: 30px 0 0;
+          word-wrap: break-word;
+          position: relative;
+          text-align: center;
+          line-height: 1.2;
+          font-size: 1.25rem;
+          margin-top: 20px;
+          margin-bottom: 20px;
+          text-transform: uppercase;
+          font-weight: 600;
+          color: #ffffff;
+    }
+    .infotitle {
+          color: #7f3c49;
+          font-weight: 700;
+          line-height: 1.2;
+          font-size: 2.25rem;
+    }
+    .infoborder {
+          border-color: #a32139;
+          border-right-width: 0;
+          border-left-width: 0;
+          border-bottom-width: 0;
+          width: 71px;
+          height: 3px;
+          transform-origin: left center;
+          margin: 30px auto 0;
+    }
+    .infotext {
+          color: #333333 !important;
+          font-weight: 400;
+          line-height: 1.6;
+          font-size: 1rem;
+          word-wrap: break-word;
+          font-style: italic;
+          text-align: center;
+    }
+    .seccion_wrapper {
+          width: 60%;
+          margin: auto;
+          padding: 60px 0px;
+    }
+    .circle-info{
+          width: 244px;
+          height: 244px;
+          background: #FFF url("{% static 'vendors/pangeos/build/images/psi.png' %}") no-repeat center center;
+          background-position: 50% 50%;
+          margin: 24px auto 0 -126px;
+          border-color: #a32139;
+          border-radius: 50% !important;
+          border-width: 16px;
+          border-style: solid;
+          background-size: 70%;
+    }
+    #seccion2-img {
+        background: url("{% static 'vendors/pangeos/build/images/inpjrf2.jpg' %}") no-repeat center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        min-height: 500px;
+    }
+    #seccion2-img-info {
+        background: url("{% static 'vendors/pangeos/build/images/inpjrf3.jpg' %}") no-repeat 33% 0px;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        min-height: 250px;
+        position: relative;
+    }
+    #footer-wrapper {
+        background-color: #232323;
+        width: 100vw;
+        height: 80px;
+        color: #9f9f9f;
+        text-align: center;
+        padding: 2%;
+        font-size: 1em;
+        bottom: 0px;
+        position: fixed;
+    }
+    #footer-wrapper > div > a {
+        color: #9f9f9f !important;
+    }
+    .maps {
+        border: 0;
+        margin: auto;
+        position: relative;
+        display: block;
+        border-radius: 10px;
+    }
+    .wrapper_text {
+        width: 90vw;
+        margin: auto;
+        text-align: justify;
+    }
+    .sublink {
+        cursor: pointer;
+    }
+    .minisubmenuitem {
+        padding-left: 10px;
+    }
+    @media (min-width: 1024px){
+        .seccion_wrapper {
+            width: 90%;
+        }
+        .titulosistema > h3 {
+              font-size: 1.2em;
+              color: #7f3c49 !important;
+        }
+    }
+    @media (max-width: 768px){
+        #myTopnav {
+            display: none;
+        }
+        #myToggle {
+            display: block;
+            margin: 0px 0px 0px 0px;
+            float: left;
+            width: 70px;
+            height: 60px;
+            padding: 72px 0px 0px 10px;
+        }
+        #logo1 {
+            display: none;
+        }
+        #verticalmenu {
+            display: block;
+        }
+        .circle-info {
+            margin: 24px auto;
+        }
+        .titulosistema > h3 {
+              font-size: 0.9em;
+              color: #7f3c49 !important;
+        }
+        /*.plecahome {
+            max-width: 360px;
+            max-height: 250px;
+        }*/
+    }
+    @media (min-width: 1884px) {
+        .bk_logo {
+            height: 100%;
+        }
+    }
+    @media (max-width: 858px) {
+        .plecahome {
+            max-width: 360px;
+            max-height: 250px;
+        }
+    }
+  </style>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" role="main" >
+    <section class="seccion_odd section-first" id="quienes_somos">
+        <div class="row">
+            <div class="wrapper_text">
+                <div><h3>FUNDADOR DEL INSTITUTO</h3></div>
+                <div class="col-1 colxm-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                <div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                    <p><strong>Dr. Ramón de la Fuente (1921 - 2006)</strong></p>
+
+                    <p>En 1979 fundó el Instituto Mexicano de Psiquiatría, hoy Instituto Nacional de Psiquiatría Ramón de la Fuente, el cual dirigió hasta 1998, y en cuyo seno se han llevado a cabo cientos de investigaciones científicas que han impulsado el desarrollo de esta rama de la medicina en nuestro país y le han dado un lugar de distinción en el ámbito internacional. En el Instituto se ha formado un número considerable de investigadores y clínicos de alto nivel. Esta labor de promoción de la investigación ha contribuido de manera significativa a que la psiquiatría en nuestro país, antes una de las ramas más atrasadas de la medicina, ocupe ahora un lugar primordial.
+                    Su interés en consolidar las relaciones de la psicología y la medicina, le llevó, en colaboración con el doctor Alfonso Millán, a la creación y desarrollo del Departamento de Psicología Médica, Psiquiatría y Salud Mental de la Facultad de Medicina, los cuales han jugado un papel decisivo en la enseñanza de la medicina dándole una dimensión psicológica y humanística. Vinculado estrechamente con la vida de la UNAM, el Doctor de la Fuente fue miembro del Consejo Técnico de la Facultad de Medicina, miembro de varias comisiones universitarias y miembro de la Junta de Gobierno de 1968 a 1974. En 1983 fue nombrado Profesor Emérito de nuestra casa de estudios. En febrero de 1985, el Consejo Universitario de la UNAM lo designó Doctor Honoris Causa. En 1990, le fue otorgado el Premio Universidad Nacional en el área de Docencia en Ciencias Naturales. La Universidad Autónoma de Puebla también le otorgó el grado de Doctor Honoris Causa en 1996.</p>
+
+                    <p>El Doctor de la Fuente fue el fundador e impulsor de diversos organismos e instituciones que han señalado avances decisivos en el campo de la psiquiatría; entre ellos la Asociación Psiquiátrica Mexicana, que agrupa actualmente a la mayor parte de los profesionales en este campo y al Consejo Mexicano de Psiquiatría, cuya función es certificar la capacidad técnica de quienes ejercen la psiquiatría.</p>
+
+                    <p>El Doctor de la Fuente fue reconocido dentro y fuera del país por sus actividades académicas y profesionales. Ingresó a El Colegio Nacional en 1972. Fue presidente de la Academia Nacional de Medicina en el año de 1973 y en 1992 fue nombrado Miembro Honorario. Fue vicepresidente de la Asociación Psiquiátrica de América Latina y de la Asociación Mundial de Psiquiatría. Presidió numerosas reuniones y congresos internacionales. Fue miembro de la Junta Internacional de Fiscalización de Estupefacientes y Sustancias Psicotrópicas de la Organización de las Naciones Unidas y miembro del Comité de Expertos de la Organización Mundial de la Salud, en el área de la Salud Mental.
+                    En el área editorial fundó varias de las publicaciones científicas más prestigiosas en su campo, como Psiquiatría, Revista Mexicana de Psicología, Psiquiatría y Psicoanálisis y Salud Mental. También dirigió la Colección de Psicología, Psiquiatría y Psicoanálisis del Fondo de Cultura Económica y fue miembro de su Junta de Gobierno.</p>
+
+                    <p>En 1988, el Consejo de Salubridad General le otorgó la condecoración “Eduardo Liceaga” y la Sociedad Médica de México la medalla “Dr. Gustavo Baz Prada”. En 1991, la Academia Nacional de Medicina lo distinguió con la primera Conferencia Magistral “Dr. Ignacio Chávez”. En 1993, recibió del Presidente de la República, la medalla en reconocimiento a sus contribuciones a la medicina mexicana en la enseñanza, la asistencia y la investigación. En 1994, la American Psychiatric Association le otorgó la Presea “Simón Bolívar”. En 1996, en homenaje a su trayectoria y a sus aportaciones, se impuso su nombre a un auditorio de la Facultad de Medicina de la UNAM. En octubre de 2000, recibió del Presidente de la República el Reconocimiento al Mérito Médico como una distinción por “sus aportaciones invaluables a la investigación científica en el campo de la medicina, y su labor en la creación de un México con instituciones de salud más sólidas”; y la Secretaría de Salud le otorgó el Premio a la Excelencia Médica por sus contribuciones fundamentales al desarrollo de la Psiquiatría en nuestro país en el siglo XX. En 2003, la Fundación Mexicana para la Salud le otorgó el Premio “Elías Sourasky” en Desarrollo Institucional en Salud, y la Secretaría de Salud, con motivo de la celebración del 60º Aniversario de su creación, le otorgó el Reconocimiento en la Categoría de Desarrollo de Instituciones de Salud. En octubre de 2004, la Facultad de Medicina de la UNAM le rindió un homenaje en el que fue galardonado con la medalla “Dr. Ignacio Chávez”. En 2006 el Consejo de Salubridad General le otorgó el Premio “Dr. Guillermo Soberón Acevedo” de Desarrollo de Instituciones de Salud, en reconocimiento a su trabajo sobresaliente a favor de la salud de la población mexicana.</p>
+                </div>
+                <div class="col-1 colxm-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+
+
+{% block script %}
+    <!-- jQuery -->
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'vendors/fastclick/lib/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'vendors/nprogress/nprogress.js' %}"></script>
+    <!-- Chart.js -->
+    <script src="{% static 'vendors/Chart.js/dist/Chart.min.js' %}"></script>
+    <!-- gauge.js -->
+    <script src="{% static 'vendors/gauge.js/dist/gauge.min.js' %}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+    <!-- iCheck -->
+    <script src="{% static 'vendors/iCheck/icheck.min.js' %}"></script>
+    <!-- Skycons -->
+    <script src="{% static 'vendors/skycons/skycons.js' %}"></script>
+    <!-- Flot -->
+    <script src="{% static 'vendors/Flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.resize.js' %}"></script>
+    <!-- Flot plugins -->
+    <script src="{% static 'vendors/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>
+    <script src="{% static 'vendors/flot-spline/js/jquery.flot.spline.min.js' %}"></script>
+    <script src="{% static 'vendors/flot.curvedlines/curvedLines.js' %}"></script>
+    <!-- DateJS -->
+    <script src="{% static 'vendors/DateJS/build/date.js' %}"></script>
+    <!-- JQVMap -->
+    <script src="{% static 'vendors/jqvmap/dist/jquery.vmap.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+    <!-- jQuery autocomplete -->
+    <script src="{% static 'vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js' %}"></script>
+
+    <!-- jQuery multiselect -->
+    <script type="text/javascript" src="{% static 'vendors/pangeos/build/js/jquery-multiple-select/bootstrap-multiselect.js' %}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'vendors/pangeos/build/js/custom.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,338 @@
+{% extends 'admin_sistema/base.html' %}
+
+{% load static %}
+
+{% block head %}
+
+<style type="text/css">
+  #equipo {
+  width: 80%;
+    margin: auto;
+    margin-top: 50px;
+}
+.bloque-integrante {
+  margin-bottom: 50px;
+    border-radius: 110px 15px 35px 0px;
+    box-shadow: 5px 5px 5px 5px #dfdfdf;
+  background: #af5770;
+  min-height: 250px;
+background: #5d4f9c;
+background: -moz-linear-gradient(top,  #5d4f9c 0%, #776fd6 50%, #7b74c9 51%, #b4b0e5 100%);
+background: -webkit-linear-gradient(top,  #5d4f9c 0%,#776fd6 50%,#7b74c9 51%,#b4b0e5 100%);
+background: linear-gradient(to bottom,  #5d4f9c 0%,#776fd6 50%,#7b74c9 51%,#b4b0e5 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d4f9c', endColorstr='#b4b0e5',GradientType=0 );
+
+/*  background: -moz-linear-gradient(top,  #af5770 0%, #af3a5b 49%, #b10135 51%, #af3155 100%);
+  background: -webkit-linear-gradient(top,  #af5770 0%,#af3a5b 49%,#b10135 51%,#af3155 100%);
+  background: linear-gradient(to bottom,  #af5770 0%,#af3a5b 49%,#b10135 51%,#af3155 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#af5770', endColorstr='#af3155',GradientType=0 );*/
+}
+
+.bloque-integrante img {
+  border-radius: 140px;
+    width: 100%;
+    position: relative;
+    left: -10px;
+    border: 10px solid white;
+}
+
+.bloque-integrante .img-integrante {
+  width: 100%;
+  height: 100%;
+  display: block;
+  min-width: 110px;
+  max-width: 270px;
+}
+
+.bloque-integrante h3, .bloque-integrante span {
+  color: #FFF;
+}
+
+.bloque-integrante .info-integrante {
+  margin: 0px 15px;
+}
+
+@media (max-width:  991px) {
+  .img-integrante img {
+    border-radius: 305px;
+    left: 0px;
+  }
+
+  .bloque-integrante .img-integrante {
+    margin: auto;
+    max-width: 600px;
+  }
+
+  .bloque-integrante {
+    border-radius: 305px 305px 35px 35px;
+    padding-bottom: 50px;
+  }
+
+  .nospacecol {
+    padding: 0px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .bloque-integrante {
+    border-radius: 135px 15px 35px 0px;
+    padding-bottom: 50px;
+  }
+}
+</style>
+
+{% endblock %}
+
+
+
+{% block content %}
+        <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" role="main" >
+          <section class="seccion_odd section-first" id="quienes_somos">
+              <div class="row">
+                  <div class="wrapper_text">
+                    <div><h3>¿QUIÉNES SOMOS?</h3></div>
+                    <div class="col-1 colxm-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+<p>Somos un grupo de investigadores expertos en salud mental, epidemiología y desarrollo de sistemas reunidos con el objetivo de analizar el comportamiento histórico de los problemas relacionados con la salud mental, consumo de sustancias y lesiones en México, así como la respuesta del sistema de salud a esta problemática.</p>
+                        <p>
+                            <h2>INTEGRANTES:</h2>
+                            <section id="equipo">
+                                <div class="row bloque-integrante">
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 nospacecol">
+                                        <div class="img-integrante">
+                                          <img src="{% static 'images/equipo/mariaelena.jpg' %}">
+                                        </div>
+                                      </div>
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                        <div class="info-integrante">
+                                            <h3>María Elena Teresa Medina-Mora Icaza.</h3>
+                                            <span>
+                                              <p>
+                                                  Doctora en Psicología Social en la Universidad Nacional Autónoma de México (UNAM), miembro del Colegio Nacional. Directora de la Facultad de Psicología, UNAM, Investigadora Emérita de la Comisión Coordinadora de los Institutos Nacionales de Salud y Hospitales de Alta Especialidad y del  Sistema Nacional de Investigadores y afiliada al Centro de Investigación en Salud Mental Global del Instituto Nacional de Psiquiatría Ramón de la Fuente Muñiz. Es profesora de las Facultades de Medicina y Psicología  en la UNAM.
+                                              </p>
+                                              <p>
+                                                  En 2019 recibió el Doctorado Honoris Causa de la Universidad Nacional Autónoma de México (2019), entre otras distinciones destacan: el Reconocimiento “LLILLAS BENSON  Mexico Center” de la   Universidad de Texas Austin en 2018, el Premio a la excelencia en liderazgo internacional otorgado por el Instituto Nacional de Abuso de Drogas de los Estados Unidos (NIDA) en 2011, el “National Award of Excellence in Research by a Senior Investigator”, reconocimiento otorgado por el “National Hispanic Science Network en 2007, el Premio Nacional de Salud Pública Gerardo Varela del Consejo de Salubridad General en 1986
+                                              </p>
+                                            </span>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="row bloque-integrante">
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 nospacecol">
+                                        <div class="img-integrante">
+                                          <img src="{% static 'images/equipo/nofoto.jpg' %}">
+                                        </div>
+                                      </div>
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                        <div class="info-integrante">
+                                            <h3>Dr. Rafael Lozano Ascencio.</h3>
+                                            <span>
+                                                <p>
+                                                    Médico Cirujano por la Universidad Nacional Autónoma de México (UNAM).  Maestría en Medicina Social por la Universidad Autónoma Metropolitana. Ha sido reconocido internacionalmente por sus investigaciones en epidemiología y carga global de la enfermedad y ciencia de datos de salud. Se ha desempeñado como investigador en Ciencias Médicas F en el Instituto Nacional de Salud Pública. Actualmente es Profesor de tiempo completo y Director de Sistemas de Salud adscrito al Instituto para la Métrica de la Salud (IHME). Departamento de Ciencias de la Métrica de la Salud, Escuela de Medicina, Universidad de Washington.
+                                                </p>
+                                            </span>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="row bloque-integrante">
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 nospacecol">
+                                        <div class="img-integrante">
+                                          <img src="{% static 'images/equipo/martha.jpg' %}">
+                                        </div>
+                                      </div>
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                        <div class="info-integrante">
+                                            <h3>Martha Cordero Oropeza.</h3>
+                                            <span>
+                                                <p>
+                                                      Psicóloga egresada de la FES Zaragoza (UNAM), Maestra en Ciencias de la Salud, con campo de estudios principal en Salud Mental Pública por la Facultad de Medicina (UNAM). Ha publicado artículos sobre alcoholismo y uso de servicios de salud. Su línea de investigación es evaluación de programas y servicios de salud mental. 
+                                                </p>
+                                                <p>
+                                                      Actualmente es colaboradora en el Centro de Investigación en Salud Mental Global, en el Instituto Nacional de Psiquiatría Ramón de la Fuente Muñiz y docente en la Escuela de Trabajo Social de la Universidad Nacional Autónoma de México.
+                                                </p>
+                                            </span>
+                                        </div>
+                                      </div>
+                                </div>
+                                <!-- <div class="row bloque-integrante">
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 nospacecol">
+                                        <div class="img-integrante">
+                                          <img src="images/equipo/rogelio.jpg">
+                                        </div>
+                                      </div>
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                        <div class="info-integrante">
+                                            <h3>Lorem ipsum.</h3>
+                                            <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus doloremque veniam recusandae autem debitis mollitia suscipit nobis facilis explicabo, a, exercitationem dicta fugit, laboriosam vitae.</span>
+                                        </div>
+                                      </div>
+                                </div> -->
+                                <div class="row bloque-integrante">
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 nospacecol">
+                                        <div class="img-integrante">
+                                          <img src="{% static 'images/equipo/claudia.jpg' %}">
+                                        </div>
+                                      </div>
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                        <div class="info-integrante">
+                                            <h3>Claudia Rafful Loera.</h3>
+                                            <span>
+                                                <p>
+                                                    Licenciada en Psicología (Universidad de las Américas, Puebla), Maestra en Ciencias en Uso Indebido de Sustancias (University of Sussex) y Doctora en Salud Pública (Programa conjunto de la University of California, San Diego y San Diego State University). Pertenece al SIN nivel I (2019). Publicaciones en revistas indizadas, nacionales 1, internacionales 29, capítulos de libros 8. Citas: Google 749 citas e índice Scopus con factor H de 11 con 359 citas (27 de febrero de 2019). Actualmente es Profesora Asociada C en la Facultad de Psicología de la UNAM.
+                                                </p>
+                                            </span>
+                                        </div>
+                                      </div>
+                                </div>
+                                <!-- <div class="row bloque-integrante">
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 nospacecol">
+                                        <div class="img-integrante">
+                                          <img src="images/equipo/ana.jpg">
+                                        </div>
+                                      </div>
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                        <div class="info-integrante">
+                                            <h3>Lorem ipsum.</h3>
+                                            <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus doloremque veniam recusandae autem debitis mollitia suscipit nobis facilis explicabo, a, exercitationem dicta fugit, laboriosam vitae.</span>
+                                        </div>
+                                      </div>
+                                </div> -->
+                                <!-- <div class="row bloque-integrante">
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 nospacecol">
+                                        <div class="img-integrante">
+                                          <img src="images/equipo/alberto.jpg">
+                                        </div>
+                                      </div>
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                        <div class="info-integrante">
+                                            <h3>Lorem ipsum.</h3>
+                                            <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus doloremque veniam recusandae autem debitis mollitia suscipit nobis facilis explicabo, a, exercitationem dicta fugit, laboriosam vitae.</span>
+                                        </div>
+                                      </div>
+                                </div> -->
+                                <!-- <div class="row bloque-integrante">
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 nospacecol">
+                                        <div class="img-integrante">
+                                          <img src="images/equipo/nofoto.jpg">
+                                        </div>
+                                      </div>
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                        <div class="info-integrante">
+                                            <h3>Lorem ipsum.</h3>
+                                            <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus doloremque veniam recusandae autem debitis mollitia suscipit nobis facilis explicabo, a, exercitationem dicta fugit, laboriosam vitae.</span>
+                                        </div>
+                                      </div>
+                                </div> -->
+                                <div class="row bloque-integrante">
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 nospacecol">
+                                        <div class="img-integrante">
+                                          <img src="{% static 'images/equipo/melisa.jpg' %}">
+                                        </div>
+                                      </div>
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                        <div class="info-integrante">
+                                            <h3>Melissa Aline Mendoza Negrete.</h3>
+                                            <span>
+                                                <p>
+                                                    Licenciada en Psicología (Universidad Nacional Autónoma de México) con diplomado en Ciencias de la Salud. Ha participado en proyectos de investigación relacionados con el transdiagnóstico de la psicopatología alimentaria y con consumo de cristal en la Ciudad de México.
+                                                </p>
+                                                <p>
+                                                    Actualmente es investigadora en el Centro de Investigación en Salud Mental Global, en el Instituto Nacional de Psiquiatría Ramón de la Fuente Muñiz
+                                                </p>
+                                            </span>
+                                        </div>
+                                      </div>
+                                </div>
+                                <!-- <div class="row bloque-integrante">
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 nospacecol">
+                                        <div class="img-integrante">
+                                          <img src="images/equipo/antonio.jpg">
+                                        </div>
+                                      </div>
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                        <div class="info-integrante">
+                                            <h3>Lorem ipsum.</h3>
+                                            <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus doloremque veniam recusandae autem debitis mollitia suscipit nobis facilis explicabo, a, exercitationem dicta fugit, laboriosam vitae.</span>
+                                        </div>
+                                      </div>
+                                </div> -->
+                            </section>
+                          
+                        </p>
+                    </div>
+                    <div class="col-1 colxm-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                  </div>
+              </div>
+          </section>
+          <footer>
+              <div class="row">
+                    <div id="footer-wrapper">
+                        <div class="col-1 col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                        <div class="col-11 col-xs-11 col-sm-11 col-md-11 col-lg-5 col-xl-5">2021 - Instituto Nacional de Psiquiatría Ramón de la Fuente Muñiz</div>
+                        <div class="col-11 col-xs-11 col-sm-11 col-md-11 col-lg-5 col-xl-5"><a href="aviso_privacidad.html">Aviso de privacidad</a></div>
+                        <div class="col-1 col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    </div>
+              </div>
+          </footer>
+        </div>
+
+
+       <!-- /page content -->
+      </div>
+    </div>
+{% endblock %}
+
+
+
+{% block script %}
+
+
+    <!-- jQuery -->
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'vendors/fastclick/lib/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'vendors/nprogress/nprogress.js' %}"></script>
+    <!-- Chart.js -->
+    <script src="{% static 'vendors/Chart.js/dist/Chart.min.js' %}"></script>
+    <!-- gauge.js -->
+    <script src="{% static 'vendors/gauge.js/dist/gauge.min.js' %}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+    <!-- iCheck -->
+    <script src="{% static 'vendors/iCheck/icheck.min.js' %}"></script>
+    <!-- Skycons -->
+    <script src="{% static 'vendors/skycons/skycons.js' %}"></script>
+    <!-- Flot -->
+    <script src="{% static 'vendors/Flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.resize.js' %}"></script>
+    <!-- Flot plugins -->
+    <script src="{% static 'vendors/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>
+    <script src="{% static 'vendors/flot-spline/js/jquery.flot.spline.min.js' %}"></script>
+    <script src="{% static 'vendors/flot.curvedlines/curvedLines.js' %}"></script>
+    <!-- DateJS -->
+    <script src="{% static 'vendors/DateJS/build/date.js' %}"></script>
+    <!-- JQVMap -->
+    <script src="{% static 'vendors/jqvmap/dist/jquery.vmap.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+  <!-- jQuery autocomplete -->
+  <script src="{% static 'vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js' %}"></script>
+
+  <!-- jQuery multiselect -->
+  <script type="text/javascript" src="{% static 'vendors/pangeos/build/js/jquery-multiple-select/bootstrap-multiselect.js' %}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'vendors/pangeos/build/js/custom.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos.js' %}"></script>
+
+{% endblock %}
+

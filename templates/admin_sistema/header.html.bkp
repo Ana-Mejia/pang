@@ -1,0 +1,103 @@
+<div class="row" style="height: 98px; background-color: #ae0b37; ">
+    <div class="col-12 col-sm-12 col-md-2 col-xl-2 col-lg-2">
+        <div class="navbar nav_title bk_logo" id="logo1" style="border: 0;">
+            <a href="{% url 'index' %}" class="logolink">
+            </a>
+        </div>
+        <div class="nav_toggle" id="myToggle">
+            <a id="menuToggle"><i class="fa fa-bars"></i></a>
+        </div>
+        <div class="bk_logo" id="logo2" style="border: 0;">
+            <a href="{% url 'index' %}" class="logolink">
+            </a>
+        </div>
+        <div class="" id="verticalmenu">
+            <div id="menuviewport">
+                <div><a href="{% url 'index' %}">Inicio</a></div>
+                <div><a href="{% url 'admin_sistema:form_registro' %}">Registro</a></div>
+                <div><a href="#">Consultar</a></div>
+                <div class="minisubmenu">
+                    <div class="minisubmenuitem"><a href="{% url 'explotacion_datos:tm_accidentes' %}">Tasa de mortalidad por accidentes de tráfico de vehículo de motor</a></div>
+                    <div class="minisubmenuitem"><a href="{% url 'explotacion_datos:tm_suicidios' %}">Tasa de mortalidad por suicidios</a></div>
+                    <div class="minisubmenuitem"><a href="{% url 'explotacion_datos:tm_trastornos' %}">Tasa de mortalidad por trastornos mentales y por uso de sustancias</a></div>
+                    <!-- <div class="minisubmenuitem"><a href="index_mapa_filtros.html">Tasa de mortalidad por homicidios</a></div> -->
+                </div>
+                <div><a href="{% url 'admin_sistema:login' %}">Ingresar {{ name }}</a></div>
+                <div><a href="{% url 'admin_sistema:quienes' %}'">¿Quiénes somos?</a></div>
+                <div class="minisubmenu">
+                    <div class="minisubmenuitem"><a href="{% url 'admin_sistema:mision' %}">Misión y visión</a></div>
+                    <div class="minisubmenuitem"><a href="{% url 'admin_sistema:integridad' %}">Integridad ética</a></div>
+                    <div class="minisubmenuitem"><a href="{% url 'admin_sistema:director' %}">Mensaje del director</a></div>
+                    <div class="minisubmenuitem"><a href="{% url 'admin_sistema:gobierno' %}">Gobierno y dirección</a></div>
+                    <div class="minisubmenuitem"><a href="{% url 'admin_sistema:antecedentes' %}">Antecedentes</a></div>
+                    <div class="minisubmenuitem"><a href="{% url 'admin_sistema:fundador' %}">Fundador del instituto</a></div>
+                    <div class="minisubmenuitem"><a href="{% url 'admin_sistema:financiamiento' %}">Financiamiento</a></div>
+                    <div class="minisubmenuitem"><a href="{% url 'admin_sistema:ubicacion' %}">Ubicación</a></div>
+                </div>
+                <div class="sublink">Acerca de ...</div>
+                <div class="minisubmenu">
+                    <div class="minisubmenuitem"><a href="{% url 'admin_sistema:informacion' %}">Información del sistema</a></div>
+                    <div class="minisubmenuitem"><a href="{% url 'admin_sistema:agradecimientos' %}">Agradecimientos especiales</a></div>
+                    <div class="minisubmenuitem"><a href="{% url 'admin_sistema:aviso' %}">Aviso de privacidad</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10 col-xl-10 col-lg-10">
+        <div class="topnav" id="myTopnav">
+            <ul>
+                <li class="menulist"><a href="{% url 'index' %}" class="active">Inicio</a></li>
+                <li class="menulist"><a href="{% url 'admin_sistema:form_registro' %}">Registro</a></li>
+                <li class="menulist submenuItems elem-admin">
+                    <a href="#">Administración</a>
+                    <ul class="submenucontainer">
+                        <li class="submenulist"><a href="{% url 'admin_sistema:solicitudes' %}">Solictudes</a></li>
+                    </ul>
+                </li>
+                <li class="menulist submenuItems">
+                    <a href="#">Consultar</a>
+                    <ul class="submenucontainer">
+                        <li class="submenulist"><a href="{% url 'explotacion_datos:tm_accidentes' %}">Tasa de mortalidad por accidentes de tráfico de vehículo de motor</a></li>
+                        <li class="submenulist"><a href="{% url 'explotacion_datos:tm_suicidios' %}">Tasa de mortalidad por suicidios</a></li>
+                        <li class="submenulist"><a href="{% url 'explotacion_datos:tm_trastornos' %}">Tasa de mortalidad por trastornos mentales y por uso de sustancias</a></li>
+                    </ul>
+                </li>
+                <li class="menulist submenuItems">
+                    <a href="{% url 'admin_sistema:quienes' %}">¿Quiénes somos?</a>
+                    <ul class="submenucontainer">
+                        <li class="submenulist"><a href="{% url 'admin_sistema:mision' %}">Misión y visión</a></li>
+                        <li class="submenulist"><a href="{% url 'admin_sistema:integridad' %}">Integridad ética</a></li>
+                        <li class="submenulist"><a href="{% url 'admin_sistema:director' %}">Mensaje del director</a></li>
+                        <li class="submenulist"><a href="{% url 'admin_sistema:gobierno' %}">Gobierno y dirección</a></li>
+                        <li class="submenulist"><a href="{% url 'admin_sistema:antecedentes' %}">Antecedentes</a></li>
+                        <li class="submenulist"><a href="{% url 'admin_sistema:fundador' %}">Fundador del instituto</a></li>
+                        <li class="submenulist"><a href="{% url 'admin_sistema:financiamiento' %}">Financiamiento</a></li>
+                        <li class="submenulist"><a href="{% url 'admin_sistema:ubicacion' %}">Ubicación</a></li>
+                    </ul>
+                </li>
+                <li class="menulist submenuItems">
+                    <a href="">Acerca de ...</a>
+                    <ul class="submenucontainer">
+                        <li class="submenulist"><a href="{% url 'admin_sistema:informacion' %}">Información del sistema</a></li>
+                        <li class="submenulist"><a href="{% url 'admin_sistema:agradecimientos' %}">Agradecimientos especiales</a></li>
+                        <li class="submenulist"><a href="{% url 'admin_sistema:aviso' %}">Aviso de privacidad</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+            {% if user.is_authenticated %}
+                <span class="lnk-ingresar"><a id="a_salir" href="{% url 'admin_sistema:logout' %}">Salir</a></span>
+                <div class="user-login">                
+                    <span><i class="fa fa-user"></i> &nbsp; <span id="span_name"> {{ name }} </span></span>
+                </div>
+            {% else %}
+                <span class="lnk-ingresar"><a href="{% url 'admin_sistema:login' %}">Ingresar</a></span>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="titulosistema">
+    <h3>Plataforma de Análisis Geoestadístico en Salud Mental - <strong>PANGEOS-MX</strong></h3>
+</div>

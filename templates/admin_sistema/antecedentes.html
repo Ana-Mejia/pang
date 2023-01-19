@@ -1,0 +1,110 @@
+{% extends 'admin_sistema/base.html' %}
+
+{% load static %}
+
+{% block head %}    
+    <!-- Bootstrap -->
+    <link href="{% static 'vendors/bootstrap/dist/css/bootstrap-slider.min.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+    <!-- INTROJS -->
+    <link href="{% static 'vendors/introjs/css/introjs.min.css' %}" rel="stylesheet"/>
+    <!-- switch personalizado -->
+    <!-- <link rel="stylesheet" href="../vendors/pangeos/build/css/switch.css" type="text/css"> -->
+
+    <link href="{% static 'vendors/sweetalert/dist/sweetalert2.min.css' %}" rel="stylesheet"/>
+
+    <!--MAPS  -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <link href="{% static 'vendors/pangeos/css/pangeos.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/pangeos/css/pangeos-mapas.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" role="main" >
+    <section class="seccion_odd section-first" id="quienes_somos">
+        <div class="row">
+            <div class="wrapper_text">
+                <div><h3>ANTECEDENTES</h3></div>
+                <div class="col-1 colxm-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                <div class="col-10- col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-12">
+                    <p>El Instituto Nacional de Psiquiatría Ramón de la Fuente Muñiz fue concebido por su fundador como una institución capaz de transformar nuestra manera de entender la enfermedad mental a partir de la investigación, de la traducción de los hallazgos científicos en programas, en mejores prácticas para la prevención de la enfermedad, en la atención de las personas que enferman y en recomendaciones para las políticas públicas; una parte importante de este esfuerzo ha sido la formación de profesionales de la salud mental.
+
+                    <p>El Instituto tiene como antecedente el Centro Mexicano de Estudios en Farmacodependencia (CEMEF), creado en 1972 con el fin de atender los aspectos preventivos, curativos y de rehabilitación, relacionados con la farmacodependencia.
+                    Debido a la necesidad de ampliar sus funciones y en respuesta a las gestiones del Dr. Ramón de la Fuente Muñiz, en junio de 1978 el Ejecutivo Federal creó el Centro Mexicano de Estudios en Salud Mental (CEMESAM), en sustitución del anterior, con la finalidad de ampliar su ámbito de competencia al importante aspecto de la salud mental.</p>
+
+                    <p>En diciembre de 1979, se publicó en el Diario Oficial de la Federación el Decreto Presidencial de creación del Instituto Mexicano de Psiquiatría, considerando que era necesario sustituir al CEMESAM, por un organismo que se avocara en forma más amplia y con mejores recursos al estudio de problemas de los desordenes mentales y de Salud Mental, con la finalidad de generar soluciones adecuadas. En la primera etapa de “gestación” bajo la dirección de su Fundador, se fortaleció a la psiquiatría biológica, manteniendo su vocación humanista y sin perder la perspectiva social. En palabras de su Director, se buscó “mediante los métodos de la investigación científica; abordar los desórdenes del pensamiento, el afecto y la conducta en su sustrato neural y molecular, sin soslayar su dimensión social,… para alterar favorablemente el curso de algunas de las enfermedades y desórdenes más frecuentes.” (Ramón de la Fuente, 2006).</p>
+
+                    <p>El reto más importante de esos años, fue hacer posible la investigación en salud mental en México, y crear un espacio en donde pudiera llevarse a cabo.</p>
+
+                    <p>“En 1979, junto con un grupo de colegas y alumnos, pensamos que había llegado el momento de fundar un instituto de investigación y de formación de personal en todos los niveles. Desarrollamos el Instituto con laboratorios de investigación básica y clínica, así como un área de estudios epidemiológicos; y sólo después construimos el hospital. Temía que las demandas de la clínica absorbieran los recursos. Sabía que la clave para mantener el Instituto a la vanguardia estaba en la investigación” (Ramón de la Fuente, 2006).</p>
+
+                    <p>En 1988, se publica en el Diario Oficial de la Federación el decreto del Instituto Mexicano de Psiquiatría que le da un instrumento jurídico y el doctor Ramón de la Fuente, es nombrado como su Director General por dos períodos (1988-1998). El Instituto después cambiaría su nombre por Instituto Nacional de Psiquiatría Ramón de la Fuente Muñiz en honor a su Fundador el 26 de mayo de 2000.</p>
+
+                    <p>Las palabras del doctor de la Fuente, en ocasión de la primera reunión de Investigación y Enseñanza el 11 de Agosto de 1982 fueron: “Comenzaré por mencionar dos ideas generales que orientaron nuestros trabajos. Una, es que los desórdenes mentales y la salud mental sólo pueden ser abordados, tanto en su estudio como en su manejo y prevención, dentro de un marco conceptual que permita tomar en cuenta sus componentes biológicos y psicológicos, así como sus raíces y consecuencias sociales. Otra es que deben abordarse en forma prioritaria, los problemas que afectan más grave y extensamente a la población del país”.</p>
+
+                    <p>En la segunda etapa 1998-2008 se continuaron los programas establecidos y se consolidó la atención médica. Este proyecto estuvo, a cargo del doctor Gerhard Heinze, un clínico sobresaliente quien entendió que la vanguardia podría mantenerse si el Instituto era capaz de ofrecer servicios de excelencia y formar a los médicos que llevasen los modelos de atención desarrollados y evaluados en el Instituto, a servicios en las que se integrarían al terminar su educación formal Durante esta etapa sobresale la creación de clínicas especializadas en diferentes desórdenes y se construye un edificio para albergarlas. Se procuró el equilibrio entre la atención de la demanda y la investigación y la enseñanza, a fin de darle a cada una su lugar.</p>
+
+                    <p>En octubre de 2018 culminó una tercera etapa del INPRFM, de manera brillante y con calificaciones de excelencia, a cargo de la Dra. María Elena Medina-Mora Icaza (2008-2018). Los buenos resultados, cuantitativos y cualitativos se dan en todos los órdenes, sin excepción. Creció la investigación en sus tres direcciones, aumentóel número de investigadores, la productividad y el desarrollo profesional. Se fortaleció el área de servicios clínicos y se obtuvo la certificación por cinco años. Crecieron los programas de enseñanza, educación continua y capacitación, así como la revista Salud Mental, el repositorio y los acervos bibliográficos. Además, se participó en un número creciente de proyectos a través de convenios e intercambios con otros centros de investigación e instituciones académicas nacionales e internacionales. Lo anterior, bajo una administración ordenada, austera y eficaz, evaluada y aprobada por diversos organismos de supervisión, vigilancia y control, así como por sus órganos de gobierno.</p>
+                </div>
+                <div class="col-1 colxm-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+
+
+{% block script %}
+    <!-- jQuery -->
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'vendors/fastclick/lib/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'vendors/nprogress/nprogress.js' %}"></script>
+    <!-- Chart.js -->
+    <script src="{% static 'vendors/Chart.js/dist/Chart.min.js' %}"></script>
+    <!-- gauge.js -->
+    <script src="{% static 'vendors/gauge.js/dist/gauge.min.js' %}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+    <!-- iCheck -->
+    <script src="{% static 'vendors/iCheck/icheck.min.js' %}"></script>
+    <!-- Skycons -->
+    <script src="{% static 'vendors/skycons/skycons.js' %}"></script>
+    <!-- Flot -->
+    <script src="{% static 'vendors/Flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.resize.js' %}"></script>
+    <!-- Flot plugins -->
+    <script src="{% static 'vendors/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>
+    <script src="{% static 'vendors/flot-spline/js/jquery.flot.spline.min.js' %}"></script>
+    <script src="{% static 'vendors/flot.curvedlines/curvedLines.js' %}"></script>
+    <!-- DateJS -->
+    <script src="{% static 'vendors/DateJS/build/date.js' %}"></script>
+    <!-- JQVMap -->
+    <script src="{% static 'vendors/jqvmap/dist/jquery.vmap.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+    <!-- jQuery autocomplete -->
+    <script src="{% static 'vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js' %}"></script>
+
+    <!-- jQuery multiselect -->
+    <script type="text/javascript" src="{% static 'vendors/pangeos/build/js/jquery-multiple-select/bootstrap-multiselect.js' %}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'vendors/pangeos/build/js/custom.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/pangeos/pangeos.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,29 @@
+      @media (min-width: 1024px){
+          .titulosistema > h3 {
+                font-size: 1.2em;
+                color: #7f3c49 !important;
+          }
+      }
+      @media (max-width: 768px){
+          #myTopnav {
+              display: none;
+          }
+          #myToggle {
+              display: block;
+              margin: 0px 0px 0px 0px;
+              float: left;
+              width: 70px;
+              height: 60px;
+              padding: 72px 0px 0px 10px;
+          }
+          #logo1 {
+              display: none;
+          }
+          .circle-info {
+              margin: 24px auto;
+          }
+          .titulosistema > h3 {
+                font-size: 0.9em;
+                color: #7f3c49 !important;
+          }
+      }
