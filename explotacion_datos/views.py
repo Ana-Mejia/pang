@@ -18,6 +18,397 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from explotacion_datos.models import *
+from explotacion_datos.querys import *
+
+def mortalidad(request, indicador):
+    ID_SEXO_HOMBRE = 1                      # ID_CAT_SEXO: 1, DESCRIPCION: HOMBRE
+    ID_SEXO_MUJER = 2                       # ID_CAT_SEXO: 2, DESCRIPCION: MUJER
+    ID_SEXO_TOTAL = 3                       # ID_CAT_SEXO: 3, DESCRIPCION: TOTAL
+    SEXO_DESCRIPCION_TOTAL = "Total"        # ID_CAT_SEXO: 3, DESCRIPCION: TOTAL
+    contexto = dict()
+    data_distribucion = dict()
+
+    anio_cubo_nac = getCuboNacYears()
+    anio_init = anio_cubo_nac.first()['anio']
+    anio_final = anio_cubo_nac.last()['anio']
+
+
+    # MAPA NACIONAL --------------------------------------------------------------------
+    # Edades
+    edad_cubo_nac = getCuboNacAges()
+    edad_min = edad_cubo_nac.first()['edad']
+    edad_max = edad_cubo_nac.last()['edad']
+
+    sexo_default = getIdCatSexo(SEXO_DESCRIPCION_TOTAL)
+    mapa = []
+    max = 0
+    mapa.append(['Entidad', 'Registros'])
+    obj_cubo_nac = getCuboNac_Entidad_SumIndicador_porSexo(sexo_default,indicador)
+    for cn in obj_cubo_nac:
+        cve_ent = cn['cve_ent']
+        obj_entidad = getCatEntidades_IsoEntidadAbreviatura(cve_ent)
+        m_elem = []
+        m = {}
+        m['v'] = obj_entidad['iso3166']
+        m['f'] = obj_entidad['entidad']
+        m_elem.append(m)        
+        m_elem.append(cn['total'])
+        if cn['total'] > max:
+            max = cn['total']
+        mapa.append(m_elem)
+
+    # MAPA MUNICIPAL --------------------------------------------------------------------
+    # Años
+    anio_cubo_mun = getCuboMunQuinq()
+    # Edades
+    edad_min_mun = 0
+    edad_max_mun = 65
+
+
+    # GRAFICAS DE DISTRIBUCION   -------------------------------------------------------
+    # - Parametros: Años TimeLine
+    anios_array = []
+    for a in anio_cubo_nac:
+        anios_array.append(str(a['anio']))
+    
+    distribucion_parametros = {
+        "value_init": str(anio_init),
+        "anyos_line": anios_array,
+        "value_final": str(anio_final),
+        "titulo_registros": "Registros de mortalidad por "+getTagIndicador(indicador)+", por entidad federativa y sexo en México, "+str(anio_init)+" a "+str(anio_final),
+        "titulo_tasas": "Tasas de mortalidad por "+getTagIndicador(indicador)+", por entidad federativa y sexo en México, "+str(anio_init)+" a "+str(anio_final)
+    }
+    
+
+    # REGISTROS: Consulta por año y orden respecto a Hombres
+    # - Obtener orden del primer año
+    count = 0
+    orden_estados_registros = []
+    orden_entidades_cve_ent = []
+    obj_cubo_nac = getCuboNac_Entidad_Total_porAnioSexo(anio_init, 1, indicador)
+    for e in obj_cubo_nac:
+        obj_entidad = getCatEntidades_IsoEntidadAbreviatura(e['cve_ent'])
+        # Guardar orden de entidades
+        orden_entidades_cve_ent.append(e['cve_ent'])
+        if count % 2 == 0:
+            orden_estados_registros.append(obj_entidad['abreviatura'])
+        else:
+            orden_estados_registros.append("\\n"+obj_entidad['abreviatura'])
+        count = count + 1
+
+
+    # - Obtener data
+    options = []
+    totalH = 0
+    totalM = 0
+    for a in anios_array:
+        totalH = 0
+        totalM = 0
+        
+        s = {}
+        s2 = {}
+        s2['text'] = getTagIndicador(indicador) + " año " + str(a)
+        s['title'] = s2
+        s3 = []
+
+        s4 = {}
+        data = []
+        for ent in orden_entidades_cve_ent:
+            obj_cubo_nac = getCuboNac_Entidad_Total_porAnioSexoEntidad(a, ID_SEXO_HOMBRE, ent, indicador)
+            for e in obj_cubo_nac:
+                l = {}
+                obj_entidad = getCatEntidades_IsoEntidadAbreviatura(ent)
+                l['name'] = obj_entidad['entidad']
+                l['value'] = e['total']
+                totalH = totalH + e['total']
+                data.append(l)                
+        s4['data'] = data
+        s3.append(s4)
+        
+        s4 = {}
+        data = []
+        for ae in orden_entidades_cve_ent:
+            obj_cubo_nac = getCuboNac_Entidad_Total_porAnioSexoEntidad(a, ID_SEXO_MUJER, ae, indicador) 
+            for e in obj_cubo_nac:
+                l = {}
+                obj_entidad = getCatEntidades_IsoEntidadAbreviatura(ae)
+                l['name'] = obj_entidad['entidad']
+                l['value'] = e['total']
+                totalM = totalM + e['total']
+                data.append(l)
+        s4['data'] = data
+        #print("dataM",data)
+        s3.append(s4)
+        
+        s4 = {}
+        data = []
+        l = {}
+        l['name'] = "Hombres"
+        l['value'] = totalH
+        data.append(l)
+        l = {}
+        l['name'] = "Mujeres"
+        l['value'] = totalM
+        data.append(l)
+        
+        s4['data'] = data
+        s3.append(s4)
+
+        s['series'] = s3
+        options.append(s)
+    print("options")
+    print(options)
+
+    # TASA: : Consulta por año y orden respecto a Hombres
+    # - Obtener orden del primer año
+    count = 0
+    orden_estados_tasas = []
+    orden_entidades_cve_ent = []
+
+    data = []
+    obj_cubo_nac = getCuboNac_Entidad_TotalPoblacion_porAnioSexo(anio_init, ID_SEXO_HOMBRE, indicador)
+    for e in obj_cubo_nac:
+        l = {}
+        obj_entidad = getCatEntidades_IsoEntidadAbreviatura(e['cve_ent'])
+        l['cve_ent'] = e['cve_ent']
+        l['value'] = round((e['total']/e['pob'])*100000,1)
+        l['abreviatura'] = obj_entidad['abreviatura']
+        data.append(l)
+
+    ordenados = sorted(data, key=lambda x : x['value'],reverse=True)
+
+    count = 0
+    for ord in ordenados:
+        orden_entidades_cve_ent.append(ord['cve_ent'])
+        # Guardar orden de entidades
+        if count % 2 == 0:
+            orden_estados_tasas.append(ord['abreviatura'])
+        else:
+            orden_estados_tasas.append("\\n"+ord['abreviatura'])
+        count = count + 1
+    
+    optionsT = []
+    
+    totalH = 0
+    totalM = 0
+    for b in anios_array:
+        totalH = 0
+        totalM = 0
+        
+        s = {}
+        s2 = {}
+        s2['text'] = getTagIndicador(indicador) + " año " + str(b)
+        s['title'] = s2
+
+        s3 = []
+        s4 = {}
+        data = []
+        for ent in orden_entidades_cve_ent:
+            obj_cubo_nac = getCuboNac_Entidad_TotalPoblacion_porAnioSexoEntidad(b, ID_SEXO_HOMBRE, ent, indicador)
+            for e in obj_cubo_nac:
+                l = {}
+                obj_entidad = getCatEntidades_IsoEntidadAbreviatura(e['cve_ent'])
+                l['name'] = obj_entidad['entidad']
+                l['value'] = round((e['total']/e['pob'])*100000,1)
+                totalH = totalH + e['total']
+                data.append(l)
+        s4['data'] = data
+        s3.append(s4)
+        
+        s4 = {}
+        data = []
+        for ae in orden_entidades_cve_ent:
+            obj_cubo_nac = getCuboNac_Entidad_TotalPoblacion_porAnioSexoEntidad(b, ID_SEXO_MUJER, ae, indicador)
+            for e in obj_cubo_nac:
+                l = {}
+                obj_entidad = getCatEntidades_IsoEntidadAbreviatura(e['cve_ent'])
+                l['name'] = obj_entidad['entidad']
+                l['value'] = round((e['total']/e['pob'])*100000,1)
+                totalM = totalM + e['total']
+                data.append(l)
+        s4['data'] = data
+        s3.append(s4)
+
+        s4 = {}
+        data = []
+        l = {}
+        l['name'] = "Hombres"
+        l['value'] = totalH
+        data.append(l)
+        l = {}
+        l['name'] = "Mujeres"
+        l['value'] = totalM
+        data.append(l)
+
+        s4['data'] = data
+        s3.append(s4)
+
+        s['series'] = s3
+        optionsT.append(s)
+    
+
+    # GRAFICA BARRAS - TASA POR EDADES NACIONAL --------------------------------------------------
+    # - Todas las entidades, todos los años         { 1: Hombres, 2: Mujeres }
+    #   - Hombres
+    g_barras_tasa_edad_hombres = []
+    i_min = 0
+    flag_gb_cn = True
+    while flag_gb_cn:
+        i_max = i_min+9
+        if i_max == 89:
+            i_max = edad_max
+        
+        t_pob = 0
+        t_total = 0
+        obj_cubo_nac = getCuboNac_Anio_TotalPoblacion_porSexoEdades(ID_SEXO_HOMBRE, i_min, i_max, indicador)
+        for ocn in obj_cubo_nac:
+            t_pob = t_pob + ocn['pob']
+            t_total = t_total + ocn['total']
+
+        if t_pob == 0:
+            tasa = 0
+        else:
+            tasa = round((t_total/t_pob)*100000,1)
+        g_barras_tasa_edad_hombres.append(t_total) #tasa
+
+        i_min = i_min + 10
+        if i_min == 90:
+            flag_gb_cn = False
+
+    #   - Mujeres
+    g_barras_tasa_edad_mujeres = []
+    i_min = 0
+    flag_gb_cn = True
+    while flag_gb_cn:
+        i_max = i_min+9
+        if i_max == 89:
+            i_max = edad_max
+        
+        t_pob = 0
+        t_total = 0
+        obj_cubo_nac = getCuboNac_Anio_TotalPoblacion_porSexoEdades(ID_SEXO_MUJER, i_min, i_max, indicador)
+        for ocn in obj_cubo_nac:
+            t_pob = t_pob + ocn['pob']
+            t_total = t_total + ocn['total']
+
+        if t_pob == 0:
+            tasa = 0
+        else:
+            tasa = round((t_total/t_pob)*100000,1)
+        g_barras_tasa_edad_mujeres.append(t_total) #tasa
+
+        i_min = i_min + 10
+        if i_min == 90:
+            flag_gb_cn = False
+    print("Mortalidad")
+
+
+    # GRAFICA PIE - TASA POR TIPO NACIONAL --------------------------------------------------
+    # - Todas las entidades, todos los años, hombres y mujeres         { 1: Hombres, 2: Mujeres }
+    g_pie_tasa_tipo = []
+    if (indicador == "suicidios"):
+        t_suic1 = 0
+        t_suic2 = 0
+        t_suic3 = 0
+        t_suic4 = 0
+        t_suic5 = 0
+        obj_cubo_nac = CuboIndNac.objects.filter(sexo=3).values('anio').annotate(m1=Sum('total_suic_medio1'),m2=Sum('total_suic_medio2'),m3=Sum('total_suic_medio3'),m4=Sum('total_suic_medio4'),m5=Sum('total_suic_medio5'))
+        for ocn in obj_cubo_nac:
+            t_suic1 = t_suic1 + ocn['m1']
+            t_suic2 = t_suic2 + ocn['m2']
+            t_suic3 = t_suic3 + ocn['m3']
+            t_suic4 = t_suic4 + ocn['m4']
+            t_suic5 = t_suic5 + ocn['m5']
+        
+        m1 = {}
+        m1['value'] = t_suic1
+        m1['name'] = "Envenenamiento"
+        g_pie_tasa_tipo.append(m1)
+        
+        m2 = {}
+        m2['value'] = t_suic2
+        m2['name'] = "Ahorcamiento"
+        g_pie_tasa_tipo.append(m2)
+        
+        m3 = {}
+        m3['value'] = t_suic3
+        m3['name'] = "Ahogamiento"
+        g_pie_tasa_tipo.append(m3)
+
+        m4 = {}
+        m4['value'] = t_suic4
+        m4['name'] = "Arma de fuego"
+        g_pie_tasa_tipo.append(m4)
+        
+        m5 = {}
+        m5['value'] = t_suic5
+        m5['name'] = "Otro medio"
+        g_pie_tasa_tipo.append(m5)
+
+    if (indicador == "trastornos"):
+        t1 = 0
+        t2 = 0
+        t3 = 0
+        obj_cubo_nac = CuboIndNac.objects.filter(sexo=ID_SEXO_TOTAL).values('anio').annotate(alcohol=Sum('total_uso_sust'),drogas=Sum('total_uso_sust_noleg'),oh=Sum('total_uso_sus_oh'))
+        for ocn in obj_cubo_nac:
+            t1 = t1 + ocn['alcohol']
+            t2 = t2 + ocn['drogas']
+            t3 = t3 + ocn['oh']
+        
+        m1 = {}
+        m1['value'] = t1
+        m1['name'] = "Alcohol"
+        g_pie_tasa_tipo.append(m1)
+        
+        m2 = {}
+        m2['value'] = t2
+        m2['name'] = "Drogas"
+        g_pie_tasa_tipo.append(m2)
+        
+        m3 = {}
+        m3['value'] = t3
+        m3['name'] = "Oh"
+        g_pie_tasa_tipo.append(m3)
+
+
+    # DISTRIBUCIÓN GEOGRÁFICA DE DATOS (Tabla final)
+    obj_cubo_nac = getCuboNac_AnioEntidad_Total_porSexo(ID_SEXO_TOTAL, indicador)
+
+
+    contexto = {
+        "indicador": indicador,
+        "sexo": getCatSexo(),
+        "entidades": list(getCatEntidades()),
+        # MAPA NACIONAL
+        "anio_cubo_nac": anio_cubo_nac,
+        "anios_array": anios_array,
+        "edad_cubo_nac": edad_cubo_nac,
+        "edad_min": edad_min,
+        "edad_max": edad_max,
+        "mapa": mapa,
+        "mapa_max": max,
+        # MAPA MUNICIPAL
+        "regiones": getCatRegion(),
+        "anio_cubo_mun": anio_cubo_mun,
+        "edad_min_mun": edad_min_mun,
+        "edad_max_mun": edad_max_mun,
+        # DISTRIBUCION POR ENTIDAD
+        "distribucion_parametros": distribucion_parametros,
+        "distribucion_orden_estados_registros": orden_estados_registros,
+        "distribucion_data_registros": options,
+        "distribucion_orden_estados_tasas": orden_estados_tasas,
+        "distribucion_data_tasas": optionsT,
+        # GRAFICA DE BARRAS
+        "g_barras_tasa_edad_hombres": g_barras_tasa_edad_hombres,
+        "g_barras_tasa_edad_mujeres": g_barras_tasa_edad_mujeres,
+        # GRAFICA DE PASTEL
+        "g_pie_tasa_tipo": g_pie_tasa_tipo,
+        # DISTRIBUCIÓN GEOGRÁFICA DE DATOS
+        "tb_distribucion": list(obj_cubo_nac),
+    }
+    #print(contexto)
+    return render(request, 'explotacion_datos/td_suicidios.html', contexto)
+
 
 def td_accidentes(request):
     contexto = dict()
@@ -77,16 +468,9 @@ def td_accidentes(request):
 
 def td_suicidios(request):
     contexto = dict()
-    data_distribucion = dict()
-
-    #Sexo
-    obj_sexo = CatSexo.objects.filter(~Q(idcatsexo=-1)).values('idcatsexo','descripcion').order_by('-descripcion')
-    # Años
-    anio_cubo_nac = CuboIndNac.objects.filter().values('anio').order_by('anio').distinct()
+    anio_cubo_nac = getCuboNacYears()
     anio_init = anio_cubo_nac.first()['anio']
     anio_final = anio_cubo_nac.last()['anio']
-    # Entidades
-    entidades = CatEntidades.objects.filter().values('cve_ent','entidad','noment').order_by('cve_ent')
 
 
     # MAPA NACIONAL --------------------------------------------------------------------
@@ -406,8 +790,8 @@ def td_suicidios(request):
 
 
     contexto = {
-        "sexo": obj_sexo,
-        "entidades": list(entidades),
+        "sexo": getCatSexo(),
+        "entidades": list(getCatEntidades()),
         # MAPA NACIONAL
         "anio_cubo_nac": anio_cubo_nac,
         "anios_array": anios_array,
