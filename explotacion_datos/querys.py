@@ -185,6 +185,21 @@ def getCuboNac_AnioEntidad_Total_porSexo(sexo, indicador):
     return CuboIndNac.objects.filter(sexo=sexo).values('anio','cve_ent').annotate(total=Sum(getCampoTotalIndicador(indicador))).order_by('anio')
 
 
+'''
+@param anio: int 
+@param sexo: int CatSexo.idcatsexo
+@param index_min: int Edad mínima del rango a buscar
+@param index_max: int Edad máxima del rango a buscar
+@param indicador: string
+@return <QuerySet: ['cve_ent' : int, 'total' : int]>
+@description: Obtiene la suma de los totales para el indicador recibido por sexo y por grupo de edad del Cubo de Indicadores Nacional
+'''
+def getCuboNac_Entidad_Total_porAnioSexoRangoEdad(anio, sexo, index_min, index_max, indicador):
+    if anio == 0:
+        return CuboIndNac.objects.filter(sexo=sexo, edad__gte=index_min, edad__lte=index_max).values('cve_ent').annotate(total=Sum(getCampoTotalIndicador(indicador)))
+    else:
+        return CuboIndNac.objects.filter(anio=anio, sexo=sexo, edad__gte=index_min, edad__lte=index_max).values('cve_ent').annotate(total=Sum(getCampoTotalIndicador(indicador)))
+
 
 # CUBO MUNICIPAL QUINQUENIOS
 '''

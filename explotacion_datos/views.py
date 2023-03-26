@@ -156,8 +156,6 @@ def mortalidad(request, indicador):
 
         s['series'] = s3
         options.append(s)
-    print("options")
-    print(options)
 
     # TASA: : Consulta por año y orden respecto a Hombres
     # - Obtener orden del primer año
@@ -300,8 +298,6 @@ def mortalidad(request, indicador):
         i_min = i_min + 10
         if i_min == 90:
             flag_gb_cn = False
-    print("Mortalidad")
-
 
     # GRAFICA PIE - TASA POR TIPO NACIONAL --------------------------------------------------
     # - Todas las entidades, todos los años, hombres y mujeres         { 1: Hombres, 2: Mujeres }
@@ -349,7 +345,7 @@ def mortalidad(request, indicador):
         t1 = 0
         t2 = 0
         t3 = 0
-        obj_cubo_nac = CuboIndNac.objects.filter(sexo=ID_SEXO_TOTAL).values('anio').annotate(alcohol=Sum('total_uso_sust'),drogas=Sum('total_uso_sust_noleg'),oh=Sum('total_uso_sus_oh'))
+        obj_cubo_nac = CuboIndNac.objects.filter(sexo=ID_SEXO_TOTAL).values('anio').annotate(alcohol=Sum('total_uso_sust'),drogas=Sum('total_uso_sust_noleg'),oh=Sum('total_uso_sust_oh'))
         for ocn in obj_cubo_nac:
             t1 = t1 + ocn['alcohol']
             t2 = t2 + ocn['drogas']
@@ -374,9 +370,10 @@ def mortalidad(request, indicador):
     # DISTRIBUCIÓN GEOGRÁFICA DE DATOS (Tabla final)
     obj_cubo_nac = getCuboNac_AnioEntidad_Total_porSexo(ID_SEXO_TOTAL, indicador)
 
-
+    print("Finish get data")
     contexto = {
         "indicador": indicador,
+        "nombre_indicador": getTagIndicador(indicador),
         "sexo": getCatSexo(),
         "entidades": list(getCatEntidades()),
         # MAPA NACIONAL
@@ -1170,20 +1167,18 @@ class UpdateMapaNacionalViewSet(APIView):
         sexo = request.data['sexo']
         edadi = request.data['edadi']
         edadf = request.data['edadf']
-        data = update_mapa_nacional(anyo,sexo,edadi,edadf)
+        indicador = request.data['indicador']
+        data = update_mapa_nacional(anyo,sexo,edadi,edadf,indicador)
         return Response(data,status=status.HTTP_200_OK)
 
 
-def update_mapa_nacional(anyo,sexo,edadi, edadf):
+def update_mapa_nacional(anyo,sexo,edadi, edadf, indicador):
     contexto = dict()
     mapa = []
     max = 0
     # Query principal
     mapa.append(['Entidad', 'Registros'])
-    if anyo == 0:
-        obj_cubo_nac = CuboIndNac.objects.filter(sexo=sexo, edad__gte=edadi, edad__lte=edadf).values('cve_ent').annotate(suic=Sum('total_suic'))
-    else:
-        obj_cubo_nac = CuboIndNac.objects.filter(anio=anyo, sexo=sexo, edad__gte=edadi, edad__lte=edadf).values('cve_ent').annotate(suic=Sum('total_suic'))
+    obj_cubo_nac = getCuboNac_Entidad_Total_porAnioSexoRangoEdad(anyo, sexo, edadi, edadf, indicador)
     for cn in obj_cubo_nac:
         cve_ent = cn['cve_ent']
         obj_entidad = CatEntidades.objects.filter(cve_ent=cve_ent).values('iso3166','entidad').first()
@@ -1192,9 +1187,9 @@ def update_mapa_nacional(anyo,sexo,edadi, edadf):
         m['v'] = obj_entidad['iso3166']
         m['f'] = obj_entidad['entidad']
         m_elem.append(m)        
-        m_elem.append(cn['suic'])
-        if cn['suic'] > max:
-            max = cn['suic']
+        m_elem.append(cn['total'])
+        if cn['total'] > max:
+            max = cn['total']
         mapa.append(m_elem)
     contexto = {
         "mapa": mapa,
