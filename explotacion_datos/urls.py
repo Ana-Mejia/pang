@@ -8,6 +8,7 @@ from explotacion_datos.views import *
 
 app_name = 'explotacion_datos'
 urlpatterns = [
+    path('mortalidad/<str:indicador>/', mortalidad, name="mortalidad"),
     path('td_accidentes/',td_accidentes, name='td_accidentes'),
     path('td_suicidios/', td_suicidios, name="td_suicidios"),
     path('td_trastornos/', td_trastornos, name="td_trastornos"),

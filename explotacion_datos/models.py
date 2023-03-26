@@ -506,4 +506,4 @@ class CatMunicipioKML(models.Model):
 
     #En esta clase se definen la tabla a la que apunta el model y el nombre plural en el admin
     class Meta:
-        db_table = 'CAT_MUNICIPIO_KML'
+        db_table = 'CAT_MUNICIPIOS_KML'

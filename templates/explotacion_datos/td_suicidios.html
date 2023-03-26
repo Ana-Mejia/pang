@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="x_content" id="descarga_ficha">
                                         <div id="titleWrapper" class="titleSection">
-                                            <h5 id="indicadorTitle">Tasa de mortalidad por suicidios</h5>
+                                            <h5 id="indicadorTitle"></h5>
                                         </div>
                                         <hr/>
                                         <div id="importanceWrapper" class="description-step1">
@@ -166,7 +166,7 @@ Proyecciones Municipales 2015-2021<br/>
                                         </div>
                                     </div>
                                     <div class="x_title">
-                                        <h5 id="graph1Title">Registros de defunciones por suicidio en México</h5>&nbsp;
+                                        <h5 id="graph1Title"></h5>&nbsp;
                                         <div class="row">
                                             <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 guiamapa-step1">
                                                 <label>Año de registro*</label>
@@ -227,7 +227,7 @@ Proyecciones Municipales 2015-2021<br/>
                                         </div>
                                     </div>
                                     <div class="x_title">
-                                        <h5 id="mainGraphData">Tasa de mortalidad por suicidio, por entidad federativa y sexo México, 2000 a 2020</h5>
+                                        <h5 id="mainGraphData"></h5>
                                         <div class="custom-control custom-switch guiamapagrafica-step1">
                                             <div class="form-check form-switch">
                                                 <input id="dist_entidad" type="checkbox" data-toggle="toggle" data-size="sm" data-width="125" data-onstyle="success" data-on="Tasa" data-off="Registros"  data-offstyle="warning"  data-style="ios">
@@ -287,7 +287,7 @@ Proyecciones Municipales 2015-2021<br/>
                                 <section class="consultarSection">
                                     <div class="x_panel">
                                         <div class="x_title">
-                                            <h5 id="secondGraphtitle">Defunciones por medio de suicido</h5>
+                                            <h5 id="secondGraphtitle2"></h5>
                                         </div>
                                         <div class="x_content">
                                             <div class="row">
@@ -804,6 +804,13 @@ const indicador = 'td_suicidios';
             /* ******************************************************************************** */
             /* INICIAL */
             /* Controles */
+            let indicador = "{{ indicador }}";
+            let nombreIndicador = "{{ nombre_indicador }}";
+            $("#indicadorTitle").text("Tasas de mortalidad por "+indicador)
+            $("#graph1Title").text("Registros de mortalidad por "+indicador+" en México")
+            $("#secondGraphtitle").text("Defunciones por "+nombreIndicador+" por edades") 
+            $("#secondGraphtitle2").text("Defunciones por medio de "+nombreIndicador)
+
             let regiones = "{{ regiones | safe }}";
             let sexo = "{{ sexo }}";
             anio = "{{ anio_cubo_nac }}";
@@ -832,6 +839,8 @@ const indicador = 'td_suicidios';
             let anyos_line = distribucion_parametros['anyos_line'];
             let anyo_init = distribucion_parametros['value_init'];
             let anyo_final = distribucion_parametros['value_final'];
+            let titulo_registros = distribucion_parametros['titulo_registros'];
+            let titulo_tasas = distribucion_parametros['titulo_tasas'];
             let entidades_timeline = distribucion_orden_estados_registros;
             let entidades_timeline_tasas = distribucion_orden_estados_tasas;
 
@@ -852,7 +861,7 @@ const indicador = 'td_suicidios';
                 localStorage.setItem('nac_anyo',anyo);
                 var sexo = localStorage.getItem('nac_sexo');
                 var edad = localStorage.getItem('nac_edad');
-                update_mapa_nacional(anyo,sexo,edad);
+                update_mapa_nacional(anyo,sexo,edad,indicador);
             });
             /* - Al cambiar sexo */
             $("#sexoregistroselector").change(function() {
@@ -860,7 +869,7 @@ const indicador = 'td_suicidios';
                 localStorage.setItem('nac_sexo',sexo);
                 var anyo = localStorage.getItem('nac_anyo');
                 var edad = localStorage.getItem('nac_edad');
-                update_mapa_nacional(anyo,sexo,edad);
+                update_mapa_nacional(anyo,sexo,edad,indicador);
             });
             /* - Al cambiar edad */
             $("#ctrl_edad2").change(function() {
@@ -868,7 +877,7 @@ const indicador = 'td_suicidios';
                 localStorage.setItem('nac_edad',edad2);
                 var anyo = localStorage.getItem('nac_anyo');
                 var sexo = localStorage.getItem('nac_sexo');
-                update_mapa_nacional(anyo,sexo,edad);
+                update_mapa_nacional(anyo,sexo,edad,indicador);
             });
 
             /* ******************************************************************************** */
@@ -934,7 +943,7 @@ const indicador = 'td_suicidios';
                 var sexo = $("#sexoTabla").val();
                 var edad = $("#ctrl_edad3").val();
                 var medio = $("#medioTabla").val();
-                console.log(sexo+" - "+edad+" - "+medio);
+                //console.log(sexo+" - "+edad+" - "+medio);
                 update_table(sexo,edad,medio);
             });
             
@@ -1277,7 +1286,8 @@ const indicador = 'td_suicidios';
         }
 
         /* MAPA NACIONAL */
-        function update_mapa_nacional(anyo,sexo,edad){
+        function update_mapa_nacional(anyo,sexo,edad,indicador){
+            console.log(" update_mapa_nacional")
             var separador = edad.indexOf(',');
             var size = edad.length;
 
@@ -1292,7 +1302,8 @@ const indicador = 'td_suicidios';
                     "anyo": parseInt(anyo,10),
                     "sexo": parseInt(sexo,10),
                     "edadi": parseInt(edad.substring(0,separador),10),
-                    "edadf": parseInt(edad.substring(separador+1,size),10)
+                    "edadf": parseInt(edad.substring(separador+1,size),10),
+                    "indicador": indicador
                 }),
             };
 

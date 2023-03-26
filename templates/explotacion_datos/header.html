@@ -23,25 +23,16 @@
                             <div class="sublink2">Mortalidad
                                 <div class="minisubmenu2">
                                     <div class="minisubmenuitem">
-                                        <a href="{% url 'explotacion_datos:td_trastornos' %}">Trastornos por uso de substancias</a>
+                                        <a href="{% url 'explotacion_datos:mortalidad' indicador='trastornos' %}">Trastornos mentales y uso de sustancias</a>
                                     </div>
                                     <div class="minisubmenuitem">
-                                        <a href="{% url 'explotacion_datos:td_alcohol' %}">Alcohol</a>
+                                        <a href="{% url 'explotacion_datos:mortalidad' indicador='homicidios' %}">Homicidio</a>
                                     </div>
                                     <div class="minisubmenuitem">
-                                        <a href="{% url 'explotacion_datos:td_drogas' %}">Drogas</a>
+                                        <a href="{% url 'explotacion_datos:mortalidad' indicador='accidentes' %}">Accidentes de tránsito</a>
                                     </div>
                                     <div class="minisubmenuitem">
-                                        <a href="{% url 'explotacion_datos:td_homicidio' %}">Homicidio</a>
-                                    </div>
-                                    <div class="minisubmenuitem">
-                                        <a href="{% url 'explotacion_datos:td_lesiones' %}">Lesiones autoinfligidas</a>
-                                    </div>
-                                    <div class="minisubmenuitem">
-                                        <a href="{% url 'explotacion_datos:td_accidente' %}">Accidentes de tránsito</a>
-                                    </div>
-                                    <div class="minisubmenuitem">
-                                        <a href="{% url 'explotacion_datos:td_suicidios' %}">Suicidios</a>
+                                        <a href="{% url 'explotacion_datos:mortalidad' indicador='suicidios' %}">Suicidios</a>
                                     </div>
                                 </div>
                             </div>
@@ -135,13 +126,10 @@
                         <li class="submenulist">
                             <a href="#">Mortalidad</a>
                             <ul class="submenulist2">
-                                <li class="submenulist3"><a href="{% url 'explotacion_datos:td_trastornos' %}">Trastornos mentales y uso de sustancias</a></li>
-                                <li class="submenulist3"><a href="{% url 'explotacion_datos:td_alcohol' %}">Alcohol</a></li>
-                                <li class="submenulist3"><a href="{% url 'explotacion_datos:td_drogas' %}">Drogas</a></li>
-                                <li class="submenulist3"><a href="{% url 'explotacion_datos:td_homicidio' %}">Homicidio</a></li>
-                                <li class="submenulist3"><a href="{% url 'explotacion_datos:td_lesiones' %}">Lesiones autoinfligidas</a></li>
-                                <li class="submenulist3"><a href="{% url 'explotacion_datos:td_accidente' %}">Accidente de tránsito</a></li>
-                                <li class="submenulist3"><a href="{% url 'explotacion_datos:td_suicidios' %}">Suicidios</a></li>
+                                <li class="submenulist3"><a href="{% url 'explotacion_datos:mortalidad' indicador='trastornos' %}">Trastornos mentales y uso de sustancias</a></li>
+                                <li class="submenulist3"><a href="{% url 'explotacion_datos:mortalidad' indicador='homicidios' %}">Homicidio</a></li>
+                                <li class="submenulist3"><a href="{% url 'explotacion_datos:mortalidad' indicador='accidentes' %}">Accidentes de tránsito</a></li>
+                                <li class="submenulist3"><a href="{% url 'explotacion_datos:mortalidad' indicador='suicidios' %}">Suicidios</a></li>
                             </ul>
                         </li>
                         <li class="submenulist">
